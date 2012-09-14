@@ -9,7 +9,8 @@
 	
 
 	
-   
+   <!-- indicarle al controlador como gestionar recursos estaticos -->
+ 	<mvc:resources location="WEB-INF/resources/" mapping="/resources/**"/>
     <context:annotation-config />
  	
  	 <!-- configuramos el modelo de programacion @Controller -->
