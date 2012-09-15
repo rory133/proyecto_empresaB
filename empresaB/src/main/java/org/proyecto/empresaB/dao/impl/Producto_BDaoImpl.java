@@ -6,6 +6,7 @@ import org.proyecto.empresaB.util.CustomHibernateDaoSupport;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
@@ -16,7 +17,9 @@ import org.springframework.stereotype.Repository;
 //de Hibernate con la anotacion @Autowired
 @Repository("producto_BDao")
 public class Producto_BDaoImpl extends CustomHibernateDaoSupport implements Producto_BDao {
-
+/*	@Autowired
+	private Producto_B producto_B;*/
+	
 	public void save(Producto_B producto_B) {
 		getHibernateTemplate().save(producto_B);
 	
@@ -50,8 +53,9 @@ public class Producto_BDaoImpl extends CustomHibernateDaoSupport implements Prod
 
 	@SuppressWarnings("unchecked")
 	public List<Producto_B> findAll (){
-		List <Producto_B> list = getHibernateTemplate().find("from Producto_B");
-		return list;
+		System.out.println("en findAll de Producto_BDaoImpl ");
+		List <Producto_B> list = getHibernateTemplate().find("from org.proyecto.empresaB.model.Producto_B");
+		return list;  
 	}
 
 }

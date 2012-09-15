@@ -8,13 +8,14 @@ import org.proyecto.empresaB.model.Producto_B;
 import org.proyecto.empresaB.util.CustomHibernateDaoSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
-@Service("producto_BBo")//le decimos a Spring que tiene que manejar este bean
+@Repository("producto_BBo")//le decimos a Spring que tiene que manejar este bean
 public class Producto_BBoImpl implements Producto_BBo{
 	
 	@Autowired
@@ -51,6 +52,7 @@ public class Producto_BBoImpl implements Producto_BBo{
 	}
 	
 	public List<Producto_B> findAll (){
+		System.out.println("enfindAll de Producto_BBoImpl ");
 		return producto_BDao.findAll();
 	}
 

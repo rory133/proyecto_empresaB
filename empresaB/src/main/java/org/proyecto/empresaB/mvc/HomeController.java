@@ -1,4 +1,4 @@
-package com.proyecto.empresaB.mvc;
+package org.proyecto.empresaB.mvc;
 
 import java.util.Date;
 

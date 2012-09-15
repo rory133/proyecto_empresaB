@@ -9,20 +9,17 @@
    
 
    
-<!--     <context-param>
+    <context-param>
      <param-name>contextConfigLocation</param-name>
-      <param-value>
-     
-      /WEB-INF/spring/applicationContext-resources.xml,
-       /WEB-INF/spring/applicationContext-datasources.xml
-      </param-value>
-
-    </context-param> -->
+      <param-value>/WEB-INF/empresaB-servlet.xml </param-value>
+    </context-param>
+    
+    
 <!--    <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>/WEB-INF/spring/applicationContext-resources.xml</param-value>
     </init-param> -->
-        <context-param>
+    <context-param>
             <param-name>log4jConfigLocation</param-name>
             <param-value>/WEB-INF/resources/log4j.properties</param-value>
     </context-param>
@@ -32,8 +29,13 @@
     </listener>
   <servlet>
     <servlet-name>empresaB</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet
-	</servlet-class>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    	<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/applicationContext.xml
+			</param-value>
+		</init-param>
 
     <load-on-startup>1</load-on-startup>
   </servlet>
