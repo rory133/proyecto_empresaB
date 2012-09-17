@@ -5,26 +5,46 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>home</title>
+<title>lista de productos</title>
 </head>
 <body>
 
 <h1> lista de productos</h1>
 
+<c:if  test="${!empty productos}">
+<table class="table">
+<tr>
+    <th>CODIGO</th>
+    <th>Diametro</th>
+    <th>longitud</th>
+    <th>precio</th>
+    <th>Existencias</th>
+  
+</tr>
+
 <c:forEach items="${productos}" var="producto">
     <tr>
-        <td>
-<%--             <a href="edit${pilot.id}.html"/>Edit</a>
-            <a href="delete${pilot.id}.html"/>Delete</a> --%>
-        </td>
+
         <td>
                 ${producto.nombre_productoB}
+        </td>
+        <td>
+                ${producto.diametro_b}
+        </td>
+        <td>
+                ${producto.longitud_b}
+        </td>
+        <td>
+                ${producto.precio_b}
         </td>
         <td>
                 ${producto.cantidad_existencias}
         </td>
     </tr>
 </c:forEach>
+</table>
+</c:if>
+
 
 </body>
 </html>
