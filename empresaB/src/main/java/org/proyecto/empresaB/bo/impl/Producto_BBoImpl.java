@@ -57,7 +57,6 @@ public class Producto_BBoImpl implements Producto_BBo{
 	}
 
 	public List<Producto_B> findAll (){
-		System.out.println("enfindAll de Producto_BBoImpl ");
 		return producto_BDao.findAll();
 	}
 

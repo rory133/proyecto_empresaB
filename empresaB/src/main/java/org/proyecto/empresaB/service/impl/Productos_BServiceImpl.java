@@ -18,30 +18,17 @@ import org.springframework.transaction.annotation.Propagation;
 
 
 
-/*@Service("productoService")*/
 
-/*public class Productos_BServiceImpl implements Productos_BService{*/
 @Service("productoService")
 @Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
 public class Productos_BServiceImpl implements Productos_BService{
-/*	@Autowired
+	@Autowired
 	private Producto_BBo producto_BBo;
 	@Transactional
 	public List<Producto_B> getProductos_B(){
-		System.out.println("en get producos_B de Productos_BServiceImpl ");
 		List <Producto_B> list=producto_BBo.findAll();
 		return list;
 		
-	}*/
-	
-	
-	@Autowired
-	private Producto_BDao producto_BDao;
-	@Transactional
-	public List<Producto_B> getProductos_B(){
-		System.out.println("en get producos_B de Productos_BServiceImpl ");
-		List <Producto_B> list=producto_BDao.findAll();
-		return list;
-		
 	}
+	
 }

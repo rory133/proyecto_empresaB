@@ -19,7 +19,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 
-//@Repository("Producto_BDao")
 
 
 // le decimos a Spring que es una clase DAO y que se inyectará el objeto SessionFactory
@@ -65,39 +64,9 @@ public class Producto_BDaoImpl extends CustomHibernateDaoSupport implements Prod
 
 	@SuppressWarnings("unchecked")
 	public List<Producto_B> findAll (){
-		
-	
-	/*	System.out.println("en findAll de Producto_BDaoImpl ");
-		List <Producto_B> list = getHibernateTemplate().find("from "+ Producto_B.class.getName());
-		System.out.println("en findAll de Producto_BDaoImpl tamaño: "+list.size());*/
-/*		System.out.println("SessionFactory en findAll" + sessionFactory.getClass().getName());
-		Session session=sessionFactory.getCurrentSession();
-		System.out.println("despues de getCurrentSession()" );
 
-		session.beginTransaction();
-		List <Producto_B> list=null;
-		try{
-			list=session.createQuery("from Producto_B").list();
-			session.getTransaction().commit();
-		}catch (HibernateException e){
-			session.getTransaction().rollback();
-		}
-		System.out.println("en findAll de Producto_BDaoImpl tamaño: "+list.size());
-		
-		return list; */
-		
-		System.out.println("Nombre de SessionFactory en findAll : " +this.getSessionFactory().toString());
 		  return (List<Producto_B>) this.getSessionFactory().getCurrentSession().createCriteria (Producto_B.class ).list();
-		
-	
-		 
-/*		Session session=getSessionFactory().getCurrentSession();
-		Criteria criteria= getSessionFactory().getCurrentSession().createCriteria("pakito");*/
-		
-		
-		
-	       
-	       
+   
 		
 	}
 
