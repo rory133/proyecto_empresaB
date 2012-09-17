@@ -11,11 +11,9 @@ public abstract class CustomHibernateDaoSupport extends HibernateDaoSupport
     public void anyMethodName(SessionFactory sessionFactory)
     {
     	
-    	/*if(!getSessionFactory().isClosed())
-    		getSessionFactory().getCurrentSession();
-    	else*/
+    	System.out.println("nyMethodName(SessionFactory sessionFactory)");
         setSessionFactory(sessionFactory);
-    	
-    	
+        System.out.println("SessionFactory" + sessionFactory.getClass().getName());
     }
+    
 }

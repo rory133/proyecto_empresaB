@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -67,7 +68,7 @@ public class Producto_BController {
 		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
 		logger.info("en listadoProductos_B2*");
 		
-		logger.info("proucto"+lista.get(545).getNombre_productoB());
+		logger.info("tamaño proddddducto: "+lista.size());
 	
        // String message="en listado productos";
         return new ModelAndView("listaProductos","productos", lista);

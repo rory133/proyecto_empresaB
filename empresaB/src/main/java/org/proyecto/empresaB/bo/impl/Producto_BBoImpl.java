@@ -2,6 +2,7 @@ package org.proyecto.empresaB.bo.impl;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.proyecto.empresaB.bo.Producto_BBo;
 import org.proyecto.empresaB.dao.Producto_BDao;
 import org.proyecto.empresaB.model.Producto_B;
@@ -16,11 +17,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Repository("producto_BBo")//le decimos a Spring que tiene que manejar este bean
+
 public class Producto_BBoImpl implements Producto_BBo{
 	
 	@Autowired
 	Producto_BDao producto_BDao;
 
+	 @Autowired
+	 private SessionFactory sessionFactory;
+	
 	public void setProducto_BDao(Producto_BDao producto_BDao) {
 		this.producto_BDao = producto_BDao;
 	}
@@ -50,7 +55,7 @@ public class Producto_BBoImpl implements Producto_BBo{
 		
 		return producto_BDao.findByProducto_B_nombre(producto_B_nombre);
 	}
-	
+
 	public List<Producto_B> findAll (){
 		System.out.println("enfindAll de Producto_BBoImpl ");
 		return producto_BDao.findAll();
