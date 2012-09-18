@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,8 +45,14 @@ public class Producto_BController {
 		
 		logger.info("tamaño proddddducto: "+lista.size());
 	    return new ModelAndView("listaProductos","productos", lista);
-
-		
 	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public ModelAndView addContact() {
+	 
+		return new ModelAndView("crearProducto_B", "producto_b",new Producto_B());
+	 
+	     
+	    }
 
 }
