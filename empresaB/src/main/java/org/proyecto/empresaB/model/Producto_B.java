@@ -11,6 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+
 
 
 
@@ -26,13 +29,15 @@ public class Producto_B implements Serializable{
 	  @GeneratedValue
 	  private Integer idproductob;
 	  
+	  
+	  @Size(min = 7, max = 45, message= "el tamaño tinene que ser entre uno y 45")
 	  @Column(name = "NOMBRE_PRODUCTOB")
 	  private String nombre_productoB;
 	  
 	  @Column (name = "CANTIDAD_EXISTENCIAS_B")
 	  private Integer cantidad_existencias;
 	  
-	  
+	  @Size(min=1,  message=	"tamaño minimo 1.")
 	  @Column (name = "LONGITUD_B")
 	  private String longitud_b;
 	  
@@ -50,7 +55,7 @@ public class Producto_B implements Serializable{
 
 
 	public Producto_B() {
-
+		//this.nombre_productoB = "pakitin";
 	}
 
 

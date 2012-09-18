@@ -4,6 +4,10 @@ package org.proyecto.empresaB.mvc;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.Validator;
+
+
 import org.proyecto.empresaB.service.Productos_BService;
 import org.proyecto.empresaB.service.impl.Productos_BServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +36,8 @@ public class Producto_BController {
 	@Autowired
 	private Productos_BServiceImpl productos_BServiceImpl;
 	
+
+	
 	protected static Logger logger = Logger.getLogger("*en Producto_BController*");
 		
 	
@@ -44,15 +51,40 @@ public class Producto_BController {
 		logger.info("en listadoProductos_B2*");
 		
 		logger.info("tamaño proddddducto: "+lista.size());
-	    return new ModelAndView("listaProductos","productos", lista);
+	    return new ModelAndView("producto_b/listaProductos","productos", lista);
 	}
 	
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/add", method = RequestMethod.GET)*/
+	@RequestMapping(method = RequestMethod.GET, params="new")
 	public ModelAndView addContact() {
-	 
-		return new ModelAndView("crearProducto_B", "producto_b",new Producto_B());
+		logger.info("metodo get --new-- ");
+		return new ModelAndView("producto_b/edit", "producto_b",new Producto_B());
 	 
 	     
+	    }
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView addProducto_B_form(@Valid Producto_B producto_b, BindingResult result) {
+
+		
+		
+		if(result.hasErrors()) {
+		logger.info("addProducto_B_form ------tiene errores----");
+			return new ModelAndView("producto_b/edit", "producto_b",new Producto_B());
+			
+			  }
+		else{
+			
+			logger.info("addProducto_B_form ------NO tiene errores----");
+		logger.info("nombre producto a añadir "+ producto_b.getNombre_productoB());
+		productos_BServiceImpl.save(producto_b);
+		logger.info("addProducto_B_form ");
+		
+/*		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();		
+		return new ModelAndView("listaProductos","productos", lista);*/
+		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		return new ModelAndView("producto_b/listaProductos","productos", lista);
+		}
+		
 	    }
 
 }

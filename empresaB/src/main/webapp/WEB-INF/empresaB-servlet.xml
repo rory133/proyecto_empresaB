@@ -110,6 +110,9 @@
 	</aop:config>
 	
 	
+	
+	
+	
     
 	
 	<!-- <bean id="producto_BBo" class="org.proyecto.empresaB.bo.impl.Producto_BBoImpl"/> -->

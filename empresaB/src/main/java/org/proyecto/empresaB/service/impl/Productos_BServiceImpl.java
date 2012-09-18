@@ -20,15 +20,24 @@ import org.springframework.transaction.annotation.Propagation;
 
 
 @Service("productoService")
-@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+/*@Transactional(propagation=Propagation.SUPPORTS, readOnly=false)*/
+/*@Transactional(propagation=Propagation.SUPPORTS)*/
+
 public class Productos_BServiceImpl implements Productos_BService{
 	@Autowired
 	private Producto_BBo producto_BBo;
+	
+	
+	
 	@Transactional
 	public List<Producto_B> getProductos_B(){
 		List <Producto_B> list=producto_BBo.findAll();
 		return list;
 		
+	}
+	@Transactional
+	public void save(Producto_B producto_B) {
+		producto_BBo.save(producto_B);
 	}
 	
 }

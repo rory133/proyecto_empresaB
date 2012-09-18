@@ -58,4 +58,10 @@ background: #EEE;color: #79B30B;
 .table tr:hover{
 	background-color:#706790;
 	color:#FFFFFF;
+	
 }
+
+.error {
+	color : red;
+
+	}

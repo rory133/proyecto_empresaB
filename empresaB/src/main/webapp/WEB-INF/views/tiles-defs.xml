@@ -15,15 +15,16 @@
 		 <put-attribute name="title" value="home"/>
 		 <put-attribute name="body" value="/WEB-INF/views/home.jsp"/>
 	 </definition>	 
-	 <definition name="listaProductos" extends="base.definition">
+	 
+	 <definition name="producto_b/listaProductos" extends="base.definition">
 		 <put-attribute name="title" value="listaProductos"/>
-		 <put-attribute name="body" value="/WEB-INF/views/listaProductos.jsp"/>
+		 <put-attribute name="body" value="/WEB-INF/views/producto_b/listaProductos.jsp"/>
     
      </definition>
     	 
-	  <definition name="crearProducto_B" extends="base.definition">
+	  <definition name="producto_b/edit" extends="base.definition">
 		 <put-attribute name="title" value="crearProducto_B"/>
-		 <put-attribute name="body" value="/WEB-INF/views/crearProducto_B.jsp"/>
+		 <put-attribute name="body" value="/WEB-INF/views/producto_b/edit.jsp"/>
       </definition>
       
       

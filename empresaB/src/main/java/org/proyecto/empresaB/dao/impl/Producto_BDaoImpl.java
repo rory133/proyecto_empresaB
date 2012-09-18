@@ -32,7 +32,10 @@ public class Producto_BDaoImpl extends CustomHibernateDaoSupport implements Prod
 	
 	
 	public void save(Producto_B producto_B) {
-		getHibernateTemplate().save(producto_B);
+		//getHibernateTemplate().save(producto_B);
+		//this.getSessionFactory().getCurrentSession().save(Producto_B.class);
+		//this.getSessionFactory().getCurrentSession().save(producto_B);
+		this.sessionFactory.getCurrentSession().save(producto_B);
 	
 	}
 
