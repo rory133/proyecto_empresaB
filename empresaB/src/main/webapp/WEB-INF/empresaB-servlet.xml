@@ -111,9 +111,16 @@
 	
 	
 	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	 
+	 
+	 
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 	
-	
-    
+<!-- 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    	<property name="basenames" value="ValidationMessages"/>
+	</bean>
+     -->
 	
 	<!-- <bean id="producto_BBo" class="org.proyecto.empresaB.bo.impl.Producto_BBoImpl"/> -->
 

@@ -1,6 +1,7 @@
 package org.proyecto.empresaB.mvc;
 
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.apache.log4j.Logger;
 import org.proyecto.empresaB.bo.Producto_BBo;
@@ -61,13 +64,36 @@ public class Producto_BController {
 		return new ModelAndView("producto_b/edit", "producto_b",new Producto_B());
 	  }
 	
-	
-	
-	
+
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView addProducto_B_form(@Valid Producto_B producto_b, BindingResult result) {
+
+	public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b,  BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image){
+
 
 		
+		if(result.hasErrors()) {
+		logger.info("addProducto_B_form ------tiene errores----"+result.toString());
+			return new ModelAndView("producto_b/edit", "producto_b",new Producto_B()).addAllObjects(result.getModel());
+			/*.addAllObjects(result.getModel()*/
+			/*.addObject(result.getAllErrors())*/
+			  }
+		else{
+			
+			logger.info("addProducto_B_form ------NO tiene errores----");
+		logger.info("nombre producto a añadir "+ producto_b.getNombre_productoB());
+		productos_BServiceImpl.save(producto_b);
+		logger.info("addProducto_B_form ");
+		
+		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		return new ModelAndView("producto_b/listaProductos","productos", lista);
+		}
+		
+}
+	
+/*	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView addProducto_B_form(@Valid Producto_B producto_b, BindingResult result) {
+
+
 		
 		if(result.hasErrors()) {
 		logger.info("addProducto_B_form ------tiene errores----");
@@ -85,7 +111,7 @@ public class Producto_BController {
 		return new ModelAndView("producto_b/listaProductos","productos", lista);
 		}
 		
-	    }
+	    }*/
 	
 /*	@RequestMapping(method = RequestMethod.POST)
 	public String addProducto_B_form(@Valid Producto_B producto_b, BindingResult result) {

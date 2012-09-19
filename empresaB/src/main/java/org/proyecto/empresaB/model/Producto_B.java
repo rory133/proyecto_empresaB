@@ -25,12 +25,13 @@ public class Producto_B implements Serializable{
 	
 	  @Id
 	//  @Column(name = "IDPRODUCTOB")
-	  @Column(name = "IDPRODUCTOB", unique = true, nullable = false)
+	  @Column(name = "IDPRODUCTOB", unique = true, nullable = false)	 
 	  @GeneratedValue
 	  private Integer idproductob;
 	  
 	  
-	  @Size(min = 7, max = 45, message= "el tamaño tinene que ser entre uno y 45")
+	  @Size(min = 4, max = 45, message= "el tamaño tinene que ser entre uno y 45")
+	  @NotNull( message= "el codigo no puede ser nulo")
 	  @Column(name = "NOMBRE_PRODUCTOB")
 	  private String nombre_productoB;
 	  
