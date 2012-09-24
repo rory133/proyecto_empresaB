@@ -39,5 +39,8 @@ public class Productos_BServiceImpl implements Productos_BService{
 	public void save(Producto_B producto_B) {
 		producto_BBo.save(producto_B);
 	}
+	public Producto_B findByProducto_BIdProducto_b(String Producto_BIdProducto_b){
+		return producto_BBo.findByProducto_BIdProducto_b(Producto_BIdProducto_b);
+	}
 	
 }

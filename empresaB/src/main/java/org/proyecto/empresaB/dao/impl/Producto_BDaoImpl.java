@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 
 import org.proyecto.empresaB.dao.Producto_BDao;
@@ -52,10 +53,15 @@ public class Producto_BDaoImpl extends CustomHibernateDaoSupport implements Prod
 	}
 	@SuppressWarnings("unchecked")
 	public Producto_B findByProducto_BIdProducto_b(String producto_BIdProducto_b) {
+		 
+/*		List<Producto_B> list = getHibernateTemplate().find(
+				"from Producto_B where IDPRODUCTOB = ?",Integer.parseInt(producto_BIdProducto_b)); 
+		return (Producto_B)list.get(0);*/
 		
-		List<Producto_B> list = getHibernateTemplate().find(
-                     "from Producto_B where IDPRODUCTOB = ?",Integer.parseInt(producto_BIdProducto_b));
+		List<Producto_B> list = this.getSessionFactory().getCurrentSession().createCriteria (Producto_B.class ).add(Restrictions.eq("idproductob",producto_BIdProducto_b)).list();
 		return (Producto_B)list.get(0);
+		
+		
 	}
 	
 	@SuppressWarnings("unchecked")

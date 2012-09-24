@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -48,10 +49,21 @@ public class Producto_B implements Serializable{
 	  @Column (name = "PRECIO_B")
 	  private BigDecimal precio_b;
 	  
+	  @Lob
+	  @Column (name = "IMAGEN_B")
+	  private byte[] imagen_b;
+	  
 	//  private Producto_BSeleccionado pruducto_BSeleccionado;
 	  
 	  
 	  
+
+
+
+
+
+
+
 
 
 
@@ -184,6 +196,23 @@ public class Producto_B implements Serializable{
 	public void setPrecio_b(BigDecimal precio_b) {
 		this.precio_b = precio_b;
 	}
+	
+	
+	
+	public byte[] getImagen_b() {
+		return imagen_b;
+	}
+
+
+
+
+
+
+
+	public void setImagen_b(byte[] imagen_b) {
+		this.imagen_b = imagen_b;
+	}
+
 	
 /*	@OneToOne(fetch = FetchType.LAZY, mappedBy = "producto_b", cascade = CascadeType.ALL)
 	public Producto_BSeleccionado getPruducto_BSeleccionado() {

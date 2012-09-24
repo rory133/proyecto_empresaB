@@ -9,5 +9,6 @@ public interface Productos_BService {
 	
 	public List<Producto_B> getProductos_B();
 	public void save(Producto_B producto_B);
+	public Producto_B findByProducto_BIdProducto_b(String Producto_BIdProducto_b);
 
 }
