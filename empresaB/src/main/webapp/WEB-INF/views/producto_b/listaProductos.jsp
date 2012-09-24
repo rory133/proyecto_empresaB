@@ -30,10 +30,10 @@
 
 <c:forEach items="${productos}" var="producto">
     <tr>
-    
+<%--     
     	<td>
                 ${producto.idproductob}
-        </td>
+        </td> --%>
     
         <td>  
               
@@ -96,6 +96,11 @@
         <td>
                 ${producto.cantidad_existencias}
         </td>
+        <td>
+        	<c:url var="editUrl" value="/productos/edit" />
+			<a href="${editUrl}?id=${producto.idproductob}">	Edit  </a>
+			
+		</td>
     </tr>
 </c:forEach>
 </table>

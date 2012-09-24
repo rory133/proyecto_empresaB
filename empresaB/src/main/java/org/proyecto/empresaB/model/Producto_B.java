@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -31,27 +30,31 @@ public class Producto_B implements Serializable{
 	  private Integer idproductob;
 	  
 	  
-	  @Size(min = 4, max = 45, message= "el tamaño tinene que ser entre uno y 45")
+	  @Size(min = 3, max = 45, message= "el codio de producto tinene que contener entre 3 y 45 caracteres")
 	  @NotNull( message= "el codigo no puede ser nulo")
 	  @Column(name = "NOMBRE_PRODUCTOB")
 	  private String nombre_productoB;
 	  
+	  
+	  
+	  @Digits(fraction = 0, integer = 10, message= "la cantidad de existencias tiene que ser un numero entero")
 	  @Column (name = "CANTIDAD_EXISTENCIAS_B")
 	  private Integer cantidad_existencias;
 	  
-	  @Size(min=1,  message=	"tamaño minimo 1.")
+	  @Digits(integer=10, fraction=2,  message= "el la longitud es un numero con dos decimales")
 	  @Column (name = "LONGITUD_B")
-	  private String longitud_b;
+	  private BigDecimal longitud_b;
 	  
+	  
+	  @Digits(integer=10, fraction=2,  message= "el diametro es un numero con dos decimales")
 	  @Column (name = "DIAMETRO_B")
-	  private String diametro_b;
+	  private BigDecimal diametro_b;
 	  
+	  @Digits(integer=10, fraction=2,  message= "el precion es un numero con dos decimales")
 	  @Column (name = "PRECIO_B")
 	  private BigDecimal precio_b;
 	  
-	  @Lob
-	  @Column (name = "IMAGEN_B")
-	  private byte[] imagen_b;
+
 	  
 	//  private Producto_BSeleccionado pruducto_BSeleccionado;
 	  
@@ -78,7 +81,7 @@ public class Producto_B implements Serializable{
 
 
 	public Producto_B(String nombre_productoB, Integer cantidad_existencias,
-			String longitud_b, String diametro_b, BigDecimal precio_b) {
+			BigDecimal longitud_b, BigDecimal diametro_b, BigDecimal precio_b) {
 		super();
 		this.nombre_productoB = nombre_productoB;
 		this.cantidad_existencias = cantidad_existencias;
@@ -138,12 +141,7 @@ public class Producto_B implements Serializable{
 	}
 
 
-
-
-
-
-
-	public String getLongitud_b() {
+	public BigDecimal getLongitud_b() {
 		return longitud_b;
 	}
 
@@ -153,7 +151,7 @@ public class Producto_B implements Serializable{
 
 
 
-	public void setLongitud_b(String longitud_b) {
+	public void setLongitud_b(BigDecimal longitud_b) {
 		this.longitud_b = longitud_b;
 	}
 
@@ -163,7 +161,7 @@ public class Producto_B implements Serializable{
 
 
 
-	public String getDiametro_b() {
+	public BigDecimal getDiametro_b() {
 		return diametro_b;
 	}
 
@@ -173,7 +171,7 @@ public class Producto_B implements Serializable{
 
 
 
-	public void setDiametro_b(String diametro_b) {
+	public void setDiametro_b(BigDecimal diametro_b) {
 		this.diametro_b = diametro_b;
 	}
 
@@ -199,19 +197,7 @@ public class Producto_B implements Serializable{
 	
 	
 	
-	public byte[] getImagen_b() {
-		return imagen_b;
-	}
 
-
-
-
-
-
-
-	public void setImagen_b(byte[] imagen_b) {
-		this.imagen_b = imagen_b;
-	}
 
 	
 /*	@OneToOne(fetch = FetchType.LAZY, mappedBy = "producto_b", cascade = CascadeType.ALL)

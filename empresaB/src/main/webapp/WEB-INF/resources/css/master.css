@@ -40,11 +40,13 @@ p{line-height:1.4}
 	Text-align : left;
 	Border-width : 0px 1px 1px 0px;
 	Border-style : solid;
-	Border-spacing : 0px;
+	Border-spacing : 7px;
 	Border-color : #000000;
+	border: 1px solid black;
+	cellspacing="30";
 }
 .table tr td, table tr th {
-	Border-width : 1px 0px 0px 1px;
+	Border-width : 1px 1px 1px 1px;
 	Border-style : solid;
 	Margin : 0px 0px 0px 0px;
 	Padding : 4px 4px 4px 4px;

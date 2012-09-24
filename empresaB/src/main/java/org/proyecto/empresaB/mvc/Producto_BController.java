@@ -98,7 +98,7 @@ public class Producto_BController {
 			return new ModelAndView("producto_b/edit", "producto_b",new Producto_B()).addAllObjects(result.getModel());
 
 			  }
-		else{
+
 			
 		logger.info("addProducto_B_form ------NO tiene errores----");
 		logger.info("nombre producto a añadir "+ producto_b.getNombre_productoB());
@@ -106,10 +106,15 @@ public class Producto_BController {
 		logger.info("addProducto_B_form ");
 		String nombre =producto_b.getNombre_productoB();
 		try {
+		logger.info("el nombre insertado en try antes de cambio"+nombre);
 		nombre =new String (producto_b.getNombre_productoB().getBytes("ISO-8859-1"),"UTF-8");
+		
+		logger.info("el nombre insertado en try despue de cambio"+nombre);
 		} catch(UnsupportedEncodingException uee) {
 		    uee.printStackTrace();
 		}
+		
+		logger.info("el nombre insertado fuera try"+nombre);
 		producto_b.setNombre_productoB(nombre);
 		productos_BServiceImpl.save(producto_b);
 		
@@ -141,19 +146,49 @@ public class Producto_BController {
 		
 		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
 		return new ModelAndView("producto_b/listaProductos","productos", lista);
-		}
-		
-		
-		
-		
-		
-		
-		
-		
+	
+	
 }
+	
+	
+	
 	
 
 
+	@RequestMapping(value="/edit",method=RequestMethod.GET)
+	public ModelAndView delProducto_B_form(String id){
+
+
+		Producto_B productob=new Producto_B();
+		productob=	productos_BServiceImpl.findByProducto_BIdProducto_b(id);
+		
+		logger.info("producto pasado a edit"+productob.getNombre_productoB());
+		
+		
+		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		//return new ModelAndView("producto_b/listaProductos","productos", lista);
+		return new ModelAndView("producto_b/modificar", "producto_b",productob);
+	
+}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
    private void saveImage(String filename, MultipartFile image)throws RuntimeException{
 	

@@ -8,30 +8,35 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-<title>Crear producto</title>
+<title>editar Borrar producto</title>
 
 
 </head>
 <body>
 
-<h2>Introducir Producto_B</h2>
+<h2>Modificar Producto_B</h2>
+<c:if  test="${!empty producto_b}">
 <%-- <form:form method="POST" commandName="producto_b"> --%>
 <form:form method="POST" modelAttribute="producto_b" id="producto_b" type="producto_b" enctype="multipart/form-data">
 <%-- <form:form method="POST" modelAttribute="producto_b"> --%>
 	<fieldset>
 	
 	  <table cellspacing="0">
+	  
+	  
 	     <tr>
 			
 	     	<th><label for="nombre_productoB">Codigo producto:</label></th>
-			<td><form:input path="nombre_productoB" maxlength="15"  id="nombre_productoB"/>
+			<td><form:input path="nombre_productoB" maxlength="15"  id="nombre_productoB" value= "${producto_b.nombre_productoB}"/>
 				<form:errors path="nombre_productoB" cssClass="error" />
 				
 			</td>
 		</tr>
+		
+		
 		<tr>
 				<th><label for="longitud_b">Longitud :</label></th>
-				<td><form:input path="longitud_b" maxlength="15" id="longitud_b"/>
+				<td><form:input path="longitud_b" maxlength="15" id="longitud_b" />
 					<form:errors path="longitud_b" cssClass="error" />
 				</td>
 		</tr>
@@ -73,13 +78,13 @@
 		</tr>
 	     <tr>
     	  
-    	     <td><input name="producto_b" type="submit" value="I accept. Create my account." /></td>
+    	     <td><input name="producto_b" type="submit" value="modificar producto." /></td>
   	   </tr>
 
 	</table>	
 
 	</fieldset>
 </form:form>
-
+</c:if>
 </body>
 </html>
