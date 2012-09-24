@@ -47,16 +47,32 @@
              
              
              
-             <c:url var="imageUrl" value="C:\\imagenes\\empresaB\\" />
+     <%--         <c:url var="imageUrl" value="C:\\imagenes\\empresaB\\" /> --%>
              
              <%-- <c:out value="${imageUrl}" /> --%>
              
              
-            <c:set var="variable" value="${imageUrl}${producto.idproductob}.jpg"/>
+         <%--    <c:set var="variable" value="${imageUrl}${producto.idproductob}.jpg"/> --%>
           <%--    <c:out value="${variable}" /> --%>
-             
-             
+             <%-- 
+              <c:out value="${variable}" />
+              
               <img  src="${variable}"width="100" height="100" /> 
+              
+              <c:set var="variable" value="/empresaB/imagen/${producto.idproductob}.jpg" />              
+              <img  src="${variable}"width="100" height="100" /> 
+               <c:out value="${variable}" />
+                --%>
+
+              <c:set var="variable" value="${pageContext.request.contextPath}/imagen/${producto.idproductob}.jpg" />              
+              <img  src="${variable}"width="100" height="100" /> 
+              
+              
+              
+             <%--   <c:out value="${variable}" /> --%>
+             
+               
+               
              <%--  <img  src="${producto.imagen_b}" width="200" height="200" />  --%>
               
 
