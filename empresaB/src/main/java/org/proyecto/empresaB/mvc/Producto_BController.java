@@ -3,6 +3,7 @@ package org.proyecto.empresaB.mvc;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 
@@ -103,6 +104,13 @@ public class Producto_BController {
 		logger.info("nombre producto a añadir "+ producto_b.getNombre_productoB());
 		//productos_BServiceImpl.save(producto_b);
 		logger.info("addProducto_B_form ");
+		String nombre =producto_b.getNombre_productoB();
+		try {
+		nombre =new String (producto_b.getNombre_productoB().getBytes("ISO-8859-1"),"UTF-8");
+		} catch(UnsupportedEncodingException uee) {
+		    uee.printStackTrace();
+		}
+		producto_b.setNombre_productoB(nombre);
 		productos_BServiceImpl.save(producto_b);
 		
 		try{
