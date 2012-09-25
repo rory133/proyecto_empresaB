@@ -71,7 +71,7 @@ public class Producto_BController {
 		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
 		logger.info("en listadoProductos_B2*");
 		
-		logger.info("tamaño proddddducto: "+lista.size());
+		logger.info("tamaño lista en listado: "+lista.size());
 		
 
 	   return new ModelAndView("producto_b/listaProductos","productos", lista);
@@ -87,23 +87,25 @@ public class Producto_BController {
 		return new ModelAndView("producto_b/edit", "producto_b",new Producto_B());
 	  }
 	
+	
+	
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b,  BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image, HttpServletRequest request){
+	//@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value="/modificarProductoB", method = RequestMethod.POST)
+	public ModelAndView modProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b,  BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image, HttpServletRequest request){
 
 
 		
 		if(result.hasErrors()) {
-		logger.info("addProducto_B_form ------tiene errores----"+result.toString());
-			return new ModelAndView("producto_b/edit", "producto_b",new Producto_B()).addAllObjects(result.getModel());
-
-			  }
+		logger.info("modificarProducto_B_form ------tiene errores----"+result.toString());
+			return new ModelAndView("producto_b/modificar", "producto_b",producto_b).addAllObjects(result.getModel());
+		}
 
 			
-		logger.info("addProducto_B_form ------NO tiene errores----");
+		logger.info("modificarProducto_B_form ------NO tiene errores----");
 		logger.info("nombre producto a añadir "+ producto_b.getNombre_productoB());
 		//productos_BServiceImpl.save(producto_b);
-		logger.info("addProducto_B_form ");
+		logger.info("modificarProducto_B_form ");
 		String nombre =producto_b.getNombre_productoB();
 		try {
 		logger.info("el nombre insertado en try antes de cambio"+nombre);
@@ -114,9 +116,92 @@ public class Producto_BController {
 		    uee.printStackTrace();
 		}
 		
-		logger.info("el nombre insertado fuera try"+nombre);
+		logger.info("el nombre modificado-update fuera try"+nombre);
 		producto_b.setNombre_productoB(nombre);
+			productos_BServiceImpl.update(producto_b);
+		try{
+			if(!image.isEmpty()){
+				
+				//byte[] bFile = new byte[image.getBytes().length];
+				saveImage(producto_b.getIdproductob()+".jpg",image);
+				//producto_b.setImagen_b(bFile);
+				logger.info("request.getparametrermap"+request.getParameterMap().toString());
+
+				logger.info("request.getPathInfo()"+ request.getPathInfo());
+				logger.info("request.getPathTranslated()" + request.getPathTranslated());
+				
+				logger.info("salvando imagen "+ producto_b.getIdproductob() +"en try ");
+			}
+			
+		}catch (Exception e){
+			result.reject(e.getMessage());
+		   return new ModelAndView("producto_b/modificar", "producto_b", producto_b).addAllObjects(result.getModel());
+		}
+		
+
+		
+		logger.info("udpdateProducto_B_form ");
+		
+		
+		
+		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		return new ModelAndView("producto_b/listaProductos","productos", lista);
+	
+	
+}
+	
+	
+	@RequestMapping(value="/edit",method=RequestMethod.GET)
+	public ModelAndView delProducto_B_form(String id){
+
+
+		Producto_B productob=new Producto_B();
+		productob=	productos_BServiceImpl.findByProducto_BIdProducto_b(id);
+		
+		logger.info("producto pasado a edit-modificar: "+productob.getNombre_productoB());
+		
+		
+		//List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		//return new ModelAndView("producto_b/listaProductos","productos", lista);
+		return new ModelAndView("producto_b/modificar", "producto_b",productob);
+	
+}
+	
+	
+	//@RequestMapping(value="/crearProductoB", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b, BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image, HttpServletRequest request){
+
+
+		logger.info("inicio de addProducto_B_form");
+		if(result.hasErrors()) {
+		logger.info("addProducto_B_form ------tiene errores----"+result.toString());
+	
+			return new ModelAndView("producto_b/edit", "producto_b",new Producto_B()).addAllObjects(result.getModel());
+
+		}
+
+			
+		logger.info("addProducto_B_form ------NO tiene errores----");
+		logger.info("nombre producto a añadir "+ producto_b.getNombre_productoB());
+		//productos_BServiceImpl.save(producto_b);
+		logger.info("addProducto_B_form ");
+		
+		
+		String nombre =producto_b.getNombre_productoB();
+		try {
+		logger.info("el nombre insertado en try antes de cambio"+nombre);
+		nombre =new String (producto_b.getNombre_productoB().getBytes("ISO-8859-1"),"UTF-8");
+		
+		logger.info("el nombre insertado en try despue de cambio"+nombre);
+		} catch(UnsupportedEncodingException uee) {
+		    uee.printStackTrace();
+		}
+		logger.info("el nombre insertado en add-save fuera try"+nombre);
+		producto_b.setNombre_productoB(nombre);
+		
 		productos_BServiceImpl.save(producto_b);
+
 		
 		try{
 			if(!image.isEmpty()){
@@ -135,7 +220,7 @@ public class Producto_BController {
 		}catch (Exception e){
 			result.reject(e.getMessage());
 			return new ModelAndView("producto_b/edit", "producto_b",new Producto_B()).addAllObjects(result.getModel());
-			
+
 		}
 		
 
@@ -150,44 +235,7 @@ public class Producto_BController {
 	
 }
 	
-	
-	
-	
 
-
-	@RequestMapping(value="/edit",method=RequestMethod.GET)
-	public ModelAndView delProducto_B_form(String id){
-
-
-		Producto_B productob=new Producto_B();
-		productob=	productos_BServiceImpl.findByProducto_BIdProducto_b(id);
-		
-		logger.info("producto pasado a edit"+productob.getNombre_productoB());
-		
-		
-		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
-		//return new ModelAndView("producto_b/listaProductos","productos", lista);
-		return new ModelAndView("producto_b/modificar", "producto_b",productob);
-	
-}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
    private void saveImage(String filename, MultipartFile image)throws RuntimeException{

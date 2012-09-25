@@ -17,11 +17,20 @@
 <h2>Modificar Producto_B</h2>
 <c:if  test="${!empty producto_b}">
 <%-- <form:form method="POST" commandName="producto_b"> --%>
-<form:form method="POST" modelAttribute="producto_b" id="producto_b" type="producto_b" enctype="multipart/form-data">
-<%-- <form:form method="POST" modelAttribute="producto_b"> --%>
+<form:form method="POST" modelAttribute="producto_b" id="producto_b" type="producto_b" action="modificarProductoB" enctype="multipart/form-data">
+<%--  <form:form action="/productos/modificarProductoB" method="POST"> --%> 
 	<fieldset>
 	
 	  <table cellspacing="0">
+	  
+	  	     <tr>
+			
+	     	<th><label for="idproductob">idproductob</label></th>
+			<td><form:input path="idproductob" maxlength="15"  id="idproductob" value= "${producto_b.idproductob}"/>
+				<form:errors path="idproductob" cssClass="error" />
+				
+			</td>
+		</tr>
 	  
 	  
 	     <tr>
@@ -36,26 +45,26 @@
 		
 		<tr>
 				<th><label for="longitud_b">Longitud :</label></th>
-				<td><form:input path="longitud_b" maxlength="15" id="longitud_b" />
+				<td><form:input path="longitud_b" maxlength="15" id="longitud_b" value= "${producto_b.longitud_b}" />
 					<form:errors path="longitud_b" cssClass="error" />
 				</td>
 		</tr>
 		
 		<tr>
 				<th><label for="diametro_b">Diametro :</label></th>
-				<td><form:input path="diametro_b" maxlength="15" id="diametro_b"/>
+				<td><form:input path="diametro_b" maxlength="15" id="diametro_b" value= "${producto_b.diametro_b}"/>
 					<form:errors path="diametro_b" cssClass="error" />
 				</td>
 		</tr>
 		<tr>
 				<th><label for="cantidad_existencias">Cantidad de existencias :</label></th>
-				<td><form:input path="cantidad_existencias" maxlength="15" id="cantidad_existencias"/>
+				<td><form:input path="cantidad_existencias" maxlength="15" id="cantidad_existencias" value= "${producto_b.cantidad_existencias}"/>
 					<form:errors path="cantidad_existencias" cssClass="error" />
 				</td>
 		</tr>
 		<tr>
 				<th><label for="precio_b">Precio :</label></th>
-				<td><form:input path="precio_b" maxlength="15" id="precio_b"/>
+				<td><form:input path="precio_b" maxlength="15" id="precio_b" value= "${producto_b.precio_b}"/>
 					<form:errors path="precio_b" cssClass="error" />
 				</td>
 		</tr>
@@ -79,8 +88,9 @@
 	     <tr>
     	  
     	     <td><input name="producto_b" type="submit" value="modificar producto." /></td>
+    	     
   	   </tr>
-
+	
 	</table>	
 
 	</fieldset>

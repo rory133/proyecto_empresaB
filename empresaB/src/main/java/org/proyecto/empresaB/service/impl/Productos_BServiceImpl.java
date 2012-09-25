@@ -36,6 +36,10 @@ public class Productos_BServiceImpl implements Productos_BService{
 		
 	}
 	@Transactional
+	public void update(Producto_B producto_B) {
+		producto_BBo.update(producto_B);
+	}
+	@Transactional
 	public void save(Producto_B producto_B) {
 		producto_BBo.save(producto_B);
 	}

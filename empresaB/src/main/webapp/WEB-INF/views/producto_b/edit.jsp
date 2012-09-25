@@ -16,11 +16,12 @@
 
 <h2>Introducir Producto_B</h2>
 <%-- <form:form method="POST" commandName="producto_b"> --%>
+<%-- <form:form method="POST" modelAttribute="producto_b" id="producto_b" type="producto_b" action="crearProductoB" enctype="multipart/form-data"> --%>
 <form:form method="POST" modelAttribute="producto_b" id="producto_b" type="producto_b" enctype="multipart/form-data">
 <%-- <form:form method="POST" modelAttribute="producto_b"> --%>
 	<fieldset>
-	
-	  <table cellspacing="0">
+	 
+	  <table>
 	     <tr>
 			
 	     	<th><label for="nombre_productoB">Codigo producto:</label></th>
@@ -70,10 +71,10 @@
 			<%-- <td><form:input path="nombre_productoB"></form:input></td>   --%> 
 			<%-- <form:input path="nombre_productoB" id="nombre_productoB"/> --%>
 			<%--<td><form:input path="nombre_productoB" size="33"/></td> --%>
-		</tr>
+		
 	     <tr>
     	  
-    	     <td><input name="producto_b" type="submit" value="I accept. Create my account." /></td>
+    	     <td><input name="producto_b" type="submit" value="Crear Producto" /></td>
   	   </tr>
 
 	</table>	

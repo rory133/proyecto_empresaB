@@ -36,6 +36,7 @@ public class Producto_BDaoImpl extends CustomHibernateDaoSupport implements Prod
 		//getHibernateTemplate().save(producto_B);
 		//this.getSessionFactory().getCurrentSession().save(Producto_B.class);
 		//this.getSessionFactory().getCurrentSession().save(producto_B);
+		System.out.println("en save productoB");
 		this.sessionFactory.getCurrentSession().save(producto_B);
 	
 	}
@@ -44,7 +45,10 @@ public class Producto_BDaoImpl extends CustomHibernateDaoSupport implements Prod
 
 	public void update(Producto_B producto_B) {
 		getHibernateTemplate().update(producto_B);
-		
+		System.out.println("en update productoB");
+		System.out.println("nombre productoB productoB: "+ producto_B.getNombre_productoB());
+		//this.sessionFactory.getCurrentSession().update(producto_B);
+		//this.getSessionFactory().getCurrentSession().update(producto_B);
 	}
 
 	public void delete(Producto_B producto_B) {
