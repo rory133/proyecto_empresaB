@@ -101,24 +101,33 @@ public class Producto_BController {
 			return new ModelAndView("producto_b/modificar", "producto_b",producto_b).addAllObjects(result.getModel());
 		}
 
-			
+	/*		CODIGO DE CUANDO NO MOSTRABA Ñss
 		logger.info("modificarProducto_B_form ------NO tiene errores----");
 		logger.info("nombre producto a añadir "+ producto_b.getNombre_productoB());
 		//productos_BServiceImpl.save(producto_b);
 		logger.info("modificarProducto_B_form ");
 		String nombre =producto_b.getNombre_productoB();
+		//String nombre =new String();
 		try {
-		logger.info("el nombre insertado en try antes de cambio"+nombre);
+		logger.info("el nombre insertado en try antes de cambio: "+nombre);
 		nombre =new String (producto_b.getNombre_productoB().getBytes("ISO-8859-1"),"UTF-8");
+		//nombre =new String (producto_b.getNombre_productoB().getBytes("UTF-8"),"ISO-8859-1");
+		//nombre =new String (nombre1.getBytes("ISO-8859-1"),"UTF-8");
 		
-		logger.info("el nombre insertado en try despue de cambio"+nombre);
+		logger.info("el nombre insertado en try despue de cambio: "+nombre);
 		} catch(UnsupportedEncodingException uee) {
 		    uee.printStackTrace();
 		}
 		
-		logger.info("el nombre modificado-update fuera try"+nombre);
+		
+		logger.info("el nombre modificado-update fuera try: "+nombre);
 		producto_b.setNombre_productoB(nombre);
+		
+		*/
+		
 			productos_BServiceImpl.update(producto_b);
+			
+			
 		try{
 			if(!image.isEmpty()){
 				
@@ -181,7 +190,7 @@ public class Producto_BController {
 
 		}
 
-			
+		/*				CODIGO DE CUANDO NO MOSTRABA LAS Ñs---
 		logger.info("addProducto_B_form ------NO tiene errores----");
 		logger.info("nombre producto a añadir "+ producto_b.getNombre_productoB());
 		//productos_BServiceImpl.save(producto_b);
@@ -199,8 +208,10 @@ public class Producto_BController {
 		}
 		logger.info("el nombre insertado en add-save fuera try"+nombre);
 		producto_b.setNombre_productoB(nombre);
-		
+		*/
 		productos_BServiceImpl.save(producto_b);
+		
+		
 
 		
 		try{

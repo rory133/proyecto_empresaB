@@ -1,6 +1,6 @@
 <%@ page session="true"%>
-<%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"    pageEncoding="ISO-8859-1"%> --%>
-<%@page language="java" contentType="text/html;  charset=UTF-8"   pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"    pageEncoding="ISO-8859-1"%>
+<%-- <%@page language="java" contentType="text/html;  charset=UTF-8"   pageEncoding="UTF-8" %> --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -68,9 +68,15 @@
 					<form:errors path="precio_b" cssClass="error" />
 				</td>
 		</tr>
-		
+		<tr>      
+		      <th><label for="precio_b">imagen producto :</label></th>
+		      <td><c:set var="variable" value="${pageContext.request.contextPath}/imagen/${producto_b.idproductob}.jpg" />              
+              <img  src="${variable}"width="100" height="100" />
+              
+       		</td>
+		</tr>       
 		<tr>
-				<th><label for="image">Imagen :</label></th>
+				<th><label for="image">Cambiar Imagen :</label></th>
 				<td><input name="image" type="file"/>
 					
 				</td>

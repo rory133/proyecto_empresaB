@@ -102,8 +102,8 @@
     <tx:advice id="txAdvice">
     <tx:attributes>
         <tx:method name="*" propagation="REQUIRED" />
-        <tx:method name="insertObject*"/>
-		<tx:method name="updateObject*"/>
+<!--         <tx:method name="insertObject*"/>
+		<tx:method name="updateObject*"/> -->
     </tx:attributes>
 	</tx:advice>
 	
