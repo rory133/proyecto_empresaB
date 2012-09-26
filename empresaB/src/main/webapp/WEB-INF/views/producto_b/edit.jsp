@@ -19,6 +19,8 @@
 <%-- <form:form method="POST" modelAttribute="producto_b" id="producto_b" type="producto_b" action="crearProductoB" enctype="multipart/form-data"> --%>
 <form:form method="POST" modelAttribute="producto_b" id="producto_b" type="producto_b" enctype="multipart/form-data">
 <%-- <form:form method="POST" modelAttribute="producto_b"> --%>
+
+			
 	<fieldset>
 	 
 	  <table>
@@ -34,6 +36,7 @@
 				<th><label for="longitud_b">Longitud :</label></th>
 				<td><form:input path="longitud_b" maxlength="15" id="longitud_b"/>
 					<form:errors path="longitud_b" cssClass="error" />
+					<h2>${exception.customMsg}</h2>
 				</td>
 		</tr>
 		
@@ -59,7 +62,7 @@
 		<tr>
 				<th><label for="image">Imagen :</label></th>
 				<td><input name="image" type="file"/>
-					
+				 <h2>${exception.customMsg}</h2>
 				</td>
 		</tr>
 				
@@ -80,6 +83,15 @@
 	</table>	
 
 	</fieldset>
+	
+	Message: ${pageContext.exception.message}
+	<c:forEach var="trace" 
+         items="${pageContext.exception.stackTrace}"> 
+         
+		<p>${trace}</p>
+	</c:forEach>
+	<h2>${exception.customMsg}</h2>
+	
 </form:form>
 
 </body>

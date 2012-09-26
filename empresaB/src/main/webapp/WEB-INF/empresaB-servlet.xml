@@ -119,11 +119,38 @@
 	 
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 	
+	
+	
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.proyecto.empresaB.exception.GenericException">
+					GenericExceptionPage
+		        </prop>
+				<prop key="java.lang.Exception">error</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 <!-- 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
     	<property name="basenames" value="ValidationMessages"/>
 	</bean>
      -->
 	
 	<!-- <bean id="producto_BBo" class="org.proyecto.empresaB.bo.impl.Producto_BBoImpl"/> -->
+	
+	
+	
 
 </beans>

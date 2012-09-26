@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.Validator;
 
-
+import org.proyecto.empresaB.exception.GenericException;
 import org.proyecto.empresaB.service.Productos_BService;
 import org.proyecto.empresaB.service.impl.Productos_BServiceImpl;
 import org.proyecto.empresaB.util.UtilidadesImagen;
@@ -92,8 +92,8 @@ public class Producto_BController {
 
 	//@RequestMapping(method = RequestMethod.POST)
 	@RequestMapping(value="/modificarProductoB", method = RequestMethod.POST)
-	public ModelAndView modProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b,  BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image, HttpServletRequest request){
-
+	//public ModelAndView modProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b,  BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image, HttpServletRequest request){
+	public ModelAndView modProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b,  BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image){
 
 		
 		if(result.hasErrors()) {
@@ -124,7 +124,7 @@ public class Producto_BController {
 		producto_b.setNombre_productoB(nombre);
 		
 		*/
-		
+			if(image.isEmpty())
 			productos_BServiceImpl.update(producto_b);
 			
 			
@@ -132,13 +132,16 @@ public class Producto_BController {
 			if(!image.isEmpty()){
 				
 				//byte[] bFile = new byte[image.getBytes().length];
+				logger.info("en try antes de validar imagen en modificar ");
 				validarImagen (image);
+				logger.info("en try despues de validar imagen en modificar ");
 				saveImage(producto_b.getIdproductob()+".jpg",image);
+				productos_BServiceImpl.update(producto_b);
 				//producto_b.setImagen_b(bFile);
-				logger.info("request.getparametrermap"+request.getParameterMap().toString());
+/*				logger.info("request.getparametrermap"+request.getParameterMap().toString());
 
 				logger.info("request.getPathInfo()"+ request.getPathInfo());
-				logger.info("request.getPathTranslated()" + request.getPathTranslated());
+				logger.info("request.getPathTranslated()" + request.getPathTranslated());*/
 				
 				logger.info("salvando imagen "+ producto_b.getIdproductob() +"en try ");
 			}
@@ -181,7 +184,8 @@ public class Producto_BController {
 	
 	//@RequestMapping(value="/crearProductoB", method = RequestMethod.POST)
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b, BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image, HttpServletRequest request){
+	//public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b, BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image, HttpServletRequest request){
+	public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b, BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image) {
 
 
 		logger.info("inicio de addProducto_B_form");
@@ -211,6 +215,8 @@ public class Producto_BController {
 		logger.info("el nombre insertado en add-save fuera try"+nombre);
 		producto_b.setNombre_productoB(nombre);
 		*/
+		
+		if(image.isEmpty())
 		productos_BServiceImpl.save(producto_b);
 		
 		
@@ -220,13 +226,17 @@ public class Producto_BController {
 			if(!image.isEmpty()){
 				
 				//byte[] bFile = new byte[image.getBytes().length];
+				logger.info("antes de validar imagen en addProducto_B_form");
 				validarImagen (image);
+				logger.info("despues de validar imagen en addProducto_B_form");
+				logger.info("salvando imagen "+ producto_b.getIdproductob() +"en try ");
 				saveImage(producto_b.getIdproductob()+".jpg",image);
+				productos_BServiceImpl.save(producto_b);
 				//producto_b.setImagen_b(bFile);
-				logger.info("request.getparametrermap"+request.getParameterMap().toString());
+/*				logger.info("request.getparametrermap"+request.getParameterMap().toString());
 
 				logger.info("request.getPathInfo()"+ request.getPathInfo());
-				logger.info("request.getPathTranslated()" + request.getPathTranslated());
+				logger.info("request.getPathTranslated()" + request.getPathTranslated());*/
 				
 				logger.info("salvando imagen "+ producto_b.getIdproductob() +"en try ");
 			}
@@ -243,9 +253,11 @@ public class Producto_BController {
 		
 		
 		
-		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
-		return new ModelAndView("producto_b/listaProductos","productos", lista);
-	
+/*		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		return new ModelAndView("producto_b/listaProductos","productos", lista);*/
+		return new ModelAndView("redirect:listado");
+		
+		
 	
 }
 	
@@ -267,7 +279,8 @@ public class Producto_BController {
 }
 	
 
-   private void saveImage(String filename, MultipartFile image)throws RuntimeException{
+   //private void saveImage(String filename, MultipartFile image)throws RuntimeException{
+	private void saveImage(String filename, MultipartFile image)throws GenericException{
 	
 	try{
 		
@@ -282,16 +295,26 @@ public class Producto_BController {
 		FileUtils.writeByteArrayToFile(file,image.getBytes());
 		logger.info("salvando imagen en trye de saveimage "+ file.getName() +"en try ");
 	}catch (IOException e){
-		throw new RuntimeException ("no se puede cargar la imagen");
+		//throw new RuntimeException ("no se puede cargar la imagen");
+		throw new GenericException("Oppss...System error, please visit it later");
 		}
 	}
    
-   private void validarImagen (MultipartFile imagen){
-	   if(!imagen.getContentType().equals("imagen/jpeg")){
-		   throw new  RuntimeException("solo se admiten imagenes jpg");
+	
+	
+	
+   private void validarImagen (MultipartFile image){
+	   if((image.getContentType().equals("image/jpeg"))||(image.getContentType().equals("image/pjpeg"))
+			   ||(image.getContentType().equals("image/jpg"))||(image.getContentType().equals("image/x-png"))){
+		   logger.info("tipo imagen :"+ image.getContentType());
+	   }
+	   else{
+		   logger.info("tipo imagen :"+ image.getContentType());
+		   throw new GenericException("la imagen no es jpg");
+		   
 	   }
 	   
-	   
-   }
+	 }
+
 	
 }
