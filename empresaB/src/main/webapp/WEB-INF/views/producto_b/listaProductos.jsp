@@ -2,8 +2,8 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> 
 
-
-
+<link type="text/css" rel="stylesheet"  href="${pageContext.request.contextPath}/resources/css/master.css" />
+<!-- <link type="text/css" rel="stylesheet"  href="../resources/css/master.css" /> -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,9 +12,9 @@
 
 
 </head>
-<body>
+<body class="body">
 
-
+<!-- <style type="text/css">body{background-color:red;}</style> -->
 
 <h1> lista de productos</h1>
 

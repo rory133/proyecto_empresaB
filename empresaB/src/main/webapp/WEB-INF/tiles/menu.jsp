@@ -4,9 +4,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<link type="text/css" rel="stylesheet"  href="../resources/css/menu.css" />
+
+
+
 </head>
-<body>
-<p>Menudo menu</p>
+<body class="menu">
+
+<ul>
+<li> <a href="#">Home</a></li>
+<li><a href="#">Products</a></li>
+<li><a href="#">Services</a></li>
+<li><a href="#">About</a></li> 
+<li><a href="#">Contact</a></li>
+<!-- <li><a style="background-image: none;" href="#">Contact</a></li> -->
+</ul>
+   
 </body>
 </html>
