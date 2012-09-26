@@ -132,6 +132,7 @@ public class Producto_BController {
 			if(!image.isEmpty()){
 				
 				//byte[] bFile = new byte[image.getBytes().length];
+				validarImagen (image);
 				saveImage(producto_b.getIdproductob()+".jpg",image);
 				//producto_b.setImagen_b(bFile);
 				logger.info("request.getparametrermap"+request.getParameterMap().toString());
@@ -219,6 +220,7 @@ public class Producto_BController {
 			if(!image.isEmpty()){
 				
 				//byte[] bFile = new byte[image.getBytes().length];
+				validarImagen (image);
 				saveImage(producto_b.getIdproductob()+".jpg",image);
 				//producto_b.setImagen_b(bFile);
 				logger.info("request.getparametrermap"+request.getParameterMap().toString());
@@ -283,5 +285,13 @@ public class Producto_BController {
 		throw new RuntimeException ("no se puede cargar la imagen");
 		}
 	}
+   
+   private void validarImagen (MultipartFile imagen){
+	   if(!imagen.getContentType().equals("imagen/jpeg")){
+		   throw new  RuntimeException("solo se admiten imagenes jpg");
+	   }
+	   
+	   
+   }
 	
 }
