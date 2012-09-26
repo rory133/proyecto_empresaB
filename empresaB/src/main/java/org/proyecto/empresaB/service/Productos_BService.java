@@ -11,5 +11,6 @@ public interface Productos_BService {
 	public void save(Producto_B producto_B);
 	public Producto_B findByProducto_BIdProducto_b(String Producto_BIdProducto_b);
 	public void update(Producto_B producto_B);
+	void delete(Producto_B producto_B);
 
 }

@@ -153,15 +153,16 @@ public class Producto_BController {
 		
 		
 		
-		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
-		return new ModelAndView("producto_b/listaProductos","productos", lista);
+		//List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		//return new ModelAndView("producto_b/listaProductos","productos", lista);
+		return new ModelAndView("redirect:listado");
 	
 	
 }
 	
 	
 	@RequestMapping(value="/edit",method=RequestMethod.GET)
-	public ModelAndView delProducto_B_form(String id){
+	public ModelAndView editProducto_B_form(String id){
 
 
 		Producto_B productob=new Producto_B();
@@ -246,7 +247,22 @@ public class Producto_BController {
 	
 }
 	
+	@RequestMapping(value="/borrar",method=RequestMethod.GET)
+	public ModelAndView delProducto_B_form(String id){
 
+		logger.info("en borrar producto con id: "+id);
+		Producto_B productob=new Producto_B();
+		productob=	productos_BServiceImpl.findByProducto_BIdProducto_b(id);
+		
+		logger.info("borrando producto : "+productob.getNombre_productoB());
+		productos_BServiceImpl.delete(productob);
+		
+		//List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		//return new ModelAndView("producto_b/listaProductos","productos", lista);
+		return new ModelAndView("redirect:listado");
+		//return new ModelAndView("producto_b/modificar", "producto_b",productob);
+	
+}
 	
 
    private void saveImage(String filename, MultipartFile image)throws RuntimeException{

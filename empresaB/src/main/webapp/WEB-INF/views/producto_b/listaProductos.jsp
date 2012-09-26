@@ -3,13 +3,18 @@
  <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> 
 
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>lista de productos</title>
+
+
 </head>
 <body>
+
+
 
 <h1> lista de productos</h1>
 
@@ -98,9 +103,17 @@
         </td>
         <td>
         	<c:url var="editUrl" value="/productos/edit" />
-			<a href="${editUrl}?id=${producto.idproductob}">	Edit  </a>
+			<a href="${editUrl}?id=${producto.idproductob}"   onclick="return confirm('¿Quieres cambiar datos de este producto?')"> <img border=0 src="../resources/imagenes/modificar.jpg" height=68 width=53> </a>
 			
 		</td>
+		
+		<td>
+
+        	<c:url var="editUrl" value="/productos/borrar" />
+			<a href="${editUrl}?id=${producto.idproductob}"   onclick="return confirm('¿Quieres borrar este producto?')"> <img border=0 src="../resources/imagenes/borrar.jpg" height=68 width=53> </a>
+			
+		</td>
+	
     </tr>
 </c:forEach>
 </table>
