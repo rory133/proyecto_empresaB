@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
-
+import javax.validation.constraints.Pattern;
 
 
 
@@ -36,8 +36,9 @@ public class Producto_B implements Serializable{
 	  private String nombre_productoB;
 	  
 	  
-	  
-	  @Digits(fraction = 0, integer = 10, message= "la cantidad de existencias tiene que ser un numero entero")
+	  //@Pattern(regexp ="^[0-9]+" ,  message= "el la longitud es un numero con dos decimales")
+	//  @Pattern(regexp = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$|^(\\d{3})[\\.](\\d{3})[\\.](\\d{4})$"  ,  message= "el la longitud es un numero con dos decimales")
+	  @Digits(integer=5, fraction=0, message= "la cantidad de existencias tiene que ser un numero entero")
 	  @Column (name = "CANTIDAD_EXISTENCIAS_B")
 	  private Integer cantidad_existencias;
 	  

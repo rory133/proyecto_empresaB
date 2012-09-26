@@ -191,8 +191,8 @@ public class Producto_BController {
 		logger.info("inicio de addProducto_B_form");
 		if(result.hasErrors()) {
 		logger.info("addProducto_B_form ------tiene errores----"+result.toString());
-	
-			return new ModelAndView("producto_b/edit", "producto_b",new Producto_B()).addAllObjects(result.getModel());
+		logger.info("errores: "+result.toString());
+		 return new ModelAndView("producto_b/edit", "producto_b",new Producto_B()).addAllObjects(result.getModel());
 
 		}
 
@@ -242,7 +242,7 @@ public class Producto_BController {
 			}
 			
 		}catch (Exception e){
-			result.reject(e.getMessage());
+			result.reject(e.getMessage()+"aqui");
 			return new ModelAndView("producto_b/edit", "producto_b",new Producto_B()).addAllObjects(result.getModel());
 
 		}

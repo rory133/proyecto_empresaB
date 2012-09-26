@@ -32,5 +32,9 @@
 		 <put-attribute name="body" value="/WEB-INF/views/producto_b/modificar.jsp"/>
       </definition>
       
+            <definition name="error" extends="base.definition">
+		 <put-attribute name="title" value="errores"/>
+		 <put-attribute name="body" value="/WEB-INF/spring/GenericExceptionPage.jsp"/>
+      </definition>
       
 </tiles-definitions>
