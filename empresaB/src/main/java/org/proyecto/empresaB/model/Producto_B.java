@@ -14,6 +14,9 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
+
 
 
 
@@ -30,28 +33,37 @@ public class Producto_B implements Serializable{
 	  private Integer idproductob;
 	  
 	  
-	  @Size(min = 3, max = 45, message= "el codio de producto tinene que contener entre 3 y 45 caracteres")
-	  @NotNull( message= "el codigo no puede ser nulo")
+
+	  
+	  @Size(min = 1, max = 45, message= "hay que indicar un codigo de producto")
+	  @NotNull(message = "Whoooops")
 	  @Column(name = "NOMBRE_PRODUCTOB")
 	  private String nombre_productoB;
 	  
 	  
-	  //@Pattern(regexp ="^[0-9]+" ,  message= "el la longitud es un numero con dos decimales")
-	//  @Pattern(regexp = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$|^(\\d{3})[\\.](\\d{3})[\\.](\\d{4})$"  ,  message= "el la longitud es un numero con dos decimales")
-	  @Digits(integer=5, fraction=0, message= "la cantidad de existencias tiene que ser un numero entero")
+	 
+
+	 
+	
+	  @NotNull(message = "hay que indicar una cantidad de existencias")
 	  @Column (name = "CANTIDAD_EXISTENCIAS_B")
 	  private Integer cantidad_existencias;
 	  
-	  @Digits(integer=10, fraction=2,  message= "el la longitud es un numero con dos decimales")
+ 
+	  @NotNull(message = "hay que indicar una longitud")
+	  @Digits(integer=10, fraction=2,  message= "la longitud es un numero con dos decimales")
 	  @Column (name = "LONGITUD_B")
 	  private BigDecimal longitud_b;
 	  
-	  
+
+	  @NotNull(message = "hay que indicar un diametro")
 	  @Digits(integer=10, fraction=2,  message= "el diametro es un numero con dos decimales")
-	  @Column (name = "DIAMETRO_B")
+	  @Column (name = "DIAMETRO_B")	 
 	  private BigDecimal diametro_b;
 	  
-	  @Digits(integer=10, fraction=2,  message= "el precion es un numero con dos decimales")
+	  @NotNull(message = "hay que indicar un precio")
+	  @Digits(integer=10, fraction=2,  message= "el precio es un numero con dos decimales")
+	  @NumberFormat(style=Style.CURRENCY)
 	  @Column (name = "PRECIO_B")
 	  private BigDecimal precio_b;
 	  
@@ -72,7 +84,7 @@ public class Producto_B implements Serializable{
 
 
 	public Producto_B() {
-		//this.nombre_productoB = "pakitin";
+		
 	}
 
 

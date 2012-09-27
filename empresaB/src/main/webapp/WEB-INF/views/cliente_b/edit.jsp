@@ -26,14 +26,14 @@
 	     <tr>
 			
 	     	<th><label for="nombre_b">Nombre :</label></th>
-			<td><form:input path="nombre_b" maxlength="15"  id="nombre_b"/>
+			<td><form:input path="nombre_b" maxlength="55"  id="nombre_b"/>
 				<form:errors path="nombre_b" cssClass="error" />
 				
 			</td>
 		</tr>
 		<tr>
 				<th><label for="apellidos_b">Apellidos :</label></th>
-				<td><form:input path="apellidos_b" maxlength="15" id="apellidos_b"/>
+				<td><form:input path="apellidos_b" maxlength="55" id="apellidos_b"/>
 					<form:errors path="apellidos_b" cssClass="error" />
 					
 				</td>
@@ -55,7 +55,7 @@
 				<th><label for="login_usuario_b">Login :</label></th>
 				<td><form:input path="login_usuario_b" maxlength="15" id="login_usuario_b"/>
 					<form:errors path="login_usuario_b" cssClass="error" />
-					<small>login de usuario</small>
+					<small>de 4 a 15 caracteres</small>
 				</td>
 		</tr>
 		<tr>

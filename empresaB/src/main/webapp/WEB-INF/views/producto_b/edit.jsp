@@ -62,7 +62,7 @@
 		<tr>
 				<th><label for="image">Imagen :</label></th>
 				<td><input name="image" type="file"/>
-				 <h2>${exception.customMsg}</h2>
+				
 				</td>
 		</tr>
 				

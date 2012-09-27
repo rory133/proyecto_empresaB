@@ -7,7 +7,10 @@ import org.proyecto.empresaB.util.CustomHibernateDaoSupport;
 
 import java.util.List;
 
+import javax.validation.Validator;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
@@ -19,6 +22,8 @@ import org.springframework.stereotype.Repository;
 @Repository("cliente_BDao")
 public class Cliente_BDaoImpl extends CustomHibernateDaoSupport implements Cliente_BDao {
 	
+	
+
 
 
 	public void save(Cliente_B cliente_B) {

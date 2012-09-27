@@ -61,7 +61,7 @@ public class ClienteController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView addProducto_B_form(@Valid @ModelAttribute("cliente_b")Cliente_B cliente_b, BindingResult  result) {
+	public ModelAndView addProducto_B_form(@Valid @ModelAttribute("cliente_b")Cliente_B cliente_b, BindingResult  result)throws Exception {
 
 		
 		logger.info("inicio de addCliente_B_form");
@@ -114,7 +114,7 @@ public class ClienteController {
 	
 }
 	@RequestMapping(value="/modificarCliente_B", method = RequestMethod.POST)
-	public ModelAndView modCliente_B_form(@Valid @ModelAttribute("cliente_b")Cliente_B cliente_b, BindingResult  result) {
+	public ModelAndView modCliente_B_form(@Valid @ModelAttribute("cliente_b")Cliente_B cliente_b, BindingResult  result) throws Exception{
 
 		
 		logger.info("inicio de modCliente_B_form");
@@ -162,10 +162,11 @@ public class ClienteController {
 	}
 	@RequestMapping(value="/borrar",method=RequestMethod.GET)
 	public ModelAndView delCliente_B_form(String id){
-
-		logger.info("en borrar producto con id: "+id);
+		logger.info(" en borrrar cliente ");
+		logger.info("en borrar con ide con id: "+id);
 		Cliente_B cliente_b= new Cliente_B();
 		cliente_b= cliente_BServiceImpl.findByCliente_BIdCliente_b(id);
+		logger.info(" con cliente : "+cliente_b.getNombre_b());
 		cliente_BServiceImpl.delete(cliente_b);
 		
 		logger.info("borrando cliente : "+cliente_b.getNombre_b());

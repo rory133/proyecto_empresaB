@@ -8,6 +8,7 @@ import org.proyecto.empresaB.service.Cliente_BService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.Validator;
 
 
 
@@ -16,6 +17,8 @@ public class Cliente_BServiceImpl implements Cliente_BService{
 	
 	@Autowired
 	Cliente_BDao cliente_BDao;
+	
+
 
 	public void setCliente_BDao(Cliente_BDao cliente_BDao) {
 		this.cliente_BDao = cliente_BDao;

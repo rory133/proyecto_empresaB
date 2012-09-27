@@ -16,6 +16,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
 
+import org.hibernate.validator.constraints.Email;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
+
 
 /*@Entity
 @Table(name = "usuario_b")*/
@@ -39,31 +43,37 @@ import javax.validation.constraints.*;
   private Integer idusuarios_b;
   
   
-  @NotNull  
+  @Pattern(regexp="[0-9]{8}[A-Za-z]?", message="formato incorrecto del DNI o NIF") 
   @Column(name = "DNI_NIF_B")
   private String dni_nif_b;
   
   
   
   @NotNull
+  @Size(min = 4, max = 15, message= "el login tiene que tener entre 4 y 15 caracteres")
   @Column(name = "LOGIN_USUARIO_B")
   private String login_usuario_b;
   
   
   @NotNull
+  @Size(min = 4, max = 15, message= "el password tiene que tener entre 4 y 10 caracteres")
   @Column(name = "PASSWORD_B")
   private String password_b;
   
-  
-  @NotNull
+  @Size(min = 2, max = 45, message= "el nombre tiene que tener al menos dos caracteres")
+  @NotNull ( message= "el nombre de cliente no puede estar vacio")
   @Column(name = "NOMBRE_B")
   private String nombre_b;
   
+  @Size(min = 2, max = 45, message= "el apellido tiene que tener al menos dos caracteres")
+  @NotNull ( message= "el apellido no puede estar vacio")
   @Column(name = "APELLIDOS_B")
   private String apellidos_b;
   
   
   @NotNull
+  @Size(min = 5, max = 45, message= "se debe incluir un email")
+  @Email (message="formato de email invalido")
   @Column(name = "EMAIL_B")
   private String email_b;
 

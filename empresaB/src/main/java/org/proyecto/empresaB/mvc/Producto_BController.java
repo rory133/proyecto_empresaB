@@ -95,7 +95,7 @@ public class Producto_BController {
 	
 	//public ModelAndView modProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b,  BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image, HttpServletRequest request){
 	@RequestMapping(value="/modificarProductoB", method = RequestMethod.POST)
-	public ModelAndView modProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b,  BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image){
+	public ModelAndView modProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b,  BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image)throws Exception{
 
 		
 		if(result.hasErrors()) {
@@ -188,7 +188,7 @@ public class Producto_BController {
 	
 	//public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b, BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image, HttpServletRequest request){
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b, BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image) {
+	public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b, BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image) throws Exception{
 
 
 		logger.info("inicio de addProducto_B_form");
@@ -227,14 +227,14 @@ public class Producto_BController {
 		
 		try{
 			if(!image.isEmpty()){
-				
+				productos_BServiceImpl.save(producto_b);
 				//byte[] bFile = new byte[image.getBytes().length];
 				logger.info("antes de validar imagen en addProducto_B_form");
 				validarImagen (image);
 				logger.info("despues de validar imagen en addProducto_B_form");
 				logger.info("salvando imagen "+ producto_b.getIdproductob() +"en try ");
 				saveImage(producto_b.getIdproductob()+".jpg",image);
-				productos_BServiceImpl.save(producto_b);
+				
 				//producto_b.setImagen_b(bFile);
 /*				logger.info("request.getparametrermap"+request.getParameterMap().toString());
 

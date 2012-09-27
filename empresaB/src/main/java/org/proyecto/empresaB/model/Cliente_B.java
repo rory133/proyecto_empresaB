@@ -25,13 +25,14 @@ public class Cliente_B  extends Usuario_B implements Serializable {
 	private Date fecha_alta_b;
 	 
 	
-	
+	@Size(min = 2, max = 15, message= "tienes que introducir una direccion")
 	@Column(name = "DIRECCION_B")
 	private String direccion_b;
 	
 	@Column(name = "PROVINCIA_B")
 	private String provincia_b;
 	
+	@Pattern(regexp="[0-9]{5}", message="el codigo postal corresponde a 5 numeros") 
 	@Column(name = "CODIGOPOSTAL_B")
 	private String codigopostal_b;
 	
