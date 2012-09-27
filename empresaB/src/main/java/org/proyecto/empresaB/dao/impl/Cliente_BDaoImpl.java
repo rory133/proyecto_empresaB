@@ -1,10 +1,13 @@
 package org.proyecto.empresaB.dao.impl;
 
+import org.hibernate.SessionFactory;
 import org.proyecto.empresaB.dao.Cliente_BDao;
 import org.proyecto.empresaB.model.Cliente_B;
 import org.proyecto.empresaB.util.CustomHibernateDaoSupport;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
@@ -15,6 +18,9 @@ import org.springframework.stereotype.Repository;
 //de Hibernate con la anotacion @Autowired
 @Repository("cliente_BDao")
 public class Cliente_BDaoImpl extends CustomHibernateDaoSupport implements Cliente_BDao {
+	
+	 @Autowired
+	 private SessionFactory sessionFactory;
 
 	public void save(Cliente_B cliente_B) {
 		getHibernateTemplate().save(cliente_B);
@@ -24,6 +30,8 @@ public class Cliente_BDaoImpl extends CustomHibernateDaoSupport implements Clien
 
 
 	public void update(Cliente_B cliente_B) {
+		
+		System.out.println("en update cliente_B");
 		getHibernateTemplate().update(cliente_B);
 		
 	}

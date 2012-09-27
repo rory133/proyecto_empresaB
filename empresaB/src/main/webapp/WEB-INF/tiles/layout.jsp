@@ -27,7 +27,9 @@
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <title><tiles:getAsString name="title"/></title> 
 <%-- <link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/master.css" />  --%>
+<%-- <link type="text/css" rel="stylesheet"  title="EstiloBase" href="${pageContext.request.contextPath}/resources/css/master.css" /> --%>
 <link type="text/css" rel="stylesheet"  href="${pageContext.request.contextPath}/resources/css/master.css" />
+
 </head> 
 <body> 
 

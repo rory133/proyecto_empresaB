@@ -14,7 +14,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+import javax.validation.constraints.*;
 
 
 /*@Entity
@@ -38,21 +38,32 @@ import javax.persistence.Table;
   @GeneratedValue
   private Integer idusuarios_b;
   
+  
+  @NotNull  
   @Column(name = "DNI_NIF_B")
   private String dni_nif_b;
   
-  @Column(name = "CLAVE_USUARIO_B")
-  private String clave_usuario_b;
   
+  
+  @NotNull
+  @Column(name = "LOGIN_USUARIO_B")
+  private String login_usuario_b;
+  
+  
+  @NotNull
   @Column(name = "PASSWORD_B")
   private String password_b;
   
+  
+  @NotNull
   @Column(name = "NOMBRE_B")
   private String nombre_b;
   
   @Column(name = "APELLIDOS_B")
   private String apellidos_b;
   
+  
+  @NotNull
   @Column(name = "EMAIL_B")
   private String email_b;
 
@@ -80,14 +91,16 @@ import javax.persistence.Table;
 		this.dni_nif_b = dni_nif_b;
 	}
 	
-	public String getClave_usuario_b() {
-		return clave_usuario_b;
+
+	
+	public String getLogin_usuario_b() {
+		return login_usuario_b;
 	}
 
-	public void setClave_usuario_b(String clave_usuario_b) {
-		this.clave_usuario_b = clave_usuario_b;
+	public void setLogin_usuario_b(String login_usuario_b) {
+		this.login_usuario_b = login_usuario_b;
 	}
-	
+
 	public String getPassword_b() {
 		return password_b;
 	}

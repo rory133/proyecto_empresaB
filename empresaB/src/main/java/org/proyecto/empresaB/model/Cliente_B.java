@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
+import javax.validation.constraints.*;
 
 
 import javax.persistence.Column;
@@ -24,6 +24,16 @@ public class Cliente_B  extends Usuario_B implements Serializable {
 	@Column(name = "FECHA_ALTA_B")
 	private Date fecha_alta_b;
 	 
+	
+	
+	@Column(name = "DIRECCION_B")
+	private String direccion_b;
+	
+	@Column(name = "PROVINCIA_B")
+	private String provincia_b;
+	
+	@Column(name = "CODIGOPOSTAL_B")
+	private String codigopostal_b;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente_b")
 	private Set<Carro_B> carro_b = new HashSet<Carro_B>(0);
@@ -47,6 +57,50 @@ public class Cliente_B  extends Usuario_B implements Serializable {
 	}
 	
 	
+	
+	
+	public String getDireccion_b() {
+		return direccion_b;
+	}
+
+
+
+
+	public void setDireccion_b(String direccion_b) {
+		this.direccion_b = direccion_b;
+	}
+
+
+
+
+	public String getProvincia_b() {
+		return provincia_b;
+	}
+
+
+
+
+	public void setProvincia_b(String provincia_b) {
+		this.provincia_b = provincia_b;
+	}
+
+
+
+
+	public String getCodigopostal_b() {
+		return codigopostal_b;
+	}
+
+
+
+
+	public void setCodigopostal_b(String codigopostal_b) {
+		this.codigopostal_b = codigopostal_b;
+	}
+
+
+
+
 	public Set<Carro_B> getCarro_b() {
 		return carro_b;
 	}

@@ -91,8 +91,10 @@ public class Producto_BController {
 	
 
 	//@RequestMapping(method = RequestMethod.POST)
-	@RequestMapping(value="/modificarProductoB", method = RequestMethod.POST)
+	
+	
 	//public ModelAndView modProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b,  BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image, HttpServletRequest request){
+	@RequestMapping(value="/modificarProductoB", method = RequestMethod.POST)
 	public ModelAndView modProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b,  BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image){
 
 		
@@ -183,8 +185,9 @@ public class Producto_BController {
 	
 	
 	//@RequestMapping(value="/crearProductoB", method = RequestMethod.POST)
-	@RequestMapping(method = RequestMethod.POST)
+	
 	//public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b, BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image, HttpServletRequest request){
+	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b, BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image) {
 
 

@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link type="text/css" rel="stylesheet"  href="../resources/css/menu.css" />
-
+<%-- <link type="text/css" rel="stylesheet"  href="WEB-INF/resources/css/menu.css" />--%>
+<link type="text/css" rel="stylesheet"  href="${pageContext.request.contextPath}/resources/css/menu.css" /> 
 
 
 </head>
-<body class="menu">
+<body  >
 
 <ul>
 <li> <a href="#">Home</a></li>
@@ -19,6 +19,6 @@
 <li><a href="#">Contact</a></li>
 <!-- <li><a style="background-image: none;" href="#">Contact</a></li> -->
 </ul>
-   
+  
 </body>
 </html>
