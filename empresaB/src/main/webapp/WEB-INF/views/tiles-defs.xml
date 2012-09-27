@@ -51,6 +51,5 @@
 		 <put-attribute name="body" value="/WEB-INF/views/cliente_b/modificar.jsp"/>
       </definition>
     
-     
-      
+           
 </tiles-definitions>

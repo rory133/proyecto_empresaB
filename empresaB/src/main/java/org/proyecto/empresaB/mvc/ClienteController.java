@@ -160,7 +160,19 @@ public class ClienteController {
 	
 	
 	}
-	
+	@RequestMapping(value="/borrar",method=RequestMethod.GET)
+	public ModelAndView delCliente_B_form(String id){
+
+		logger.info("en borrar producto con id: "+id);
+		Cliente_B cliente_b= new Cliente_B();
+		cliente_b= cliente_BServiceImpl.findByCliente_BIdCliente_b(id);
+		cliente_BServiceImpl.delete(cliente_b);
+		
+		logger.info("borrando cliente : "+cliente_b.getNombre_b());
+
+		return new ModelAndView("redirect:listado");
+
+}
 	
 
 }

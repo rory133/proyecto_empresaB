@@ -25,8 +25,8 @@
 	  
 	  	     <tr>
 			
-	     	<th><label for="idproductob">idproductob</label></th>
-			<td><form:input path="idproductob" maxlength="15"  id="idproductob" value= "${producto_b.idproductob}"/>
+	     	<!-- <th><label for="idproductob">idproductob</label></th> -->
+			<td><form:hidden path="idproductob" maxlength="15"  id="idproductob" value= "${producto_b.idproductob}"/>
 				<form:errors path="idproductob" cssClass="error" />
 				
 			</td>

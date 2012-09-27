@@ -27,8 +27,8 @@
 	  
 	  	     <tr>
 			
-	     	<th><label for="nombre_b">idusuarios_b :</label></th>
-			<td><form:input path="idusuarios_b" maxlength="15"  id="nombre_b" value= "${cliente_b.idusuarios_b}"/>
+	     	<!-- <th><label for="nombre_b">idusuarios_b :</label></th> -->
+			<td><form:hidden path="idusuarios_b" maxlength="15"  id="nombre_b" value= "${cliente_b.idusuarios_b}" />
 				<form:errors path="idusuarios_b" cssClass="error" />
 				
 			</td>
