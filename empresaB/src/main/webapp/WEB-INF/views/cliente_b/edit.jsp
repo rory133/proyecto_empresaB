@@ -152,7 +152,7 @@
 		
 	     <tr>
     	  
-    	     <td><input name="producto_b" type="submit" value="Crear Cuenta" /></td>
+    	     <td><input name="cliente_b" type="submit" value="Crear Cuenta" /></td>
   	   </tr>
 
 	</table>	

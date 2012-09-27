@@ -51,5 +51,19 @@
 		 <put-attribute name="body" value="/WEB-INF/views/cliente_b/modificar.jsp"/>
       </definition>
     
+    
+      <definition name="administrador_b/edit" extends="base.definition">
+		 <put-attribute name="title" value="crearAdministrador_B"/>
+		 <put-attribute name="body" value="/WEB-INF/views/administrador_b/edit.jsp"/>
+      </definition>
+      	 <definition name="administrador_b/listaAdministradores" extends="base.definition">
+		 <put-attribute name="title" value="listaAdministradores"/>
+		 <put-attribute name="body" value="/WEB-INF/views/administrador_b/listaAdministradores.jsp"/>
+	 </definition>
+		 
+	  <definition name="administrador_b/modificar" extends="base.definition">
+		 <put-attribute name="title" value="Modificar administrador_b"/>
+		 <put-attribute name="body" value="/WEB-INF/views/administrador_b/modificar.jsp"/>
+      </definition>
            
 </tiles-definitions>

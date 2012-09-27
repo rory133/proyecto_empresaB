@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
-import org.proyecto.empresaB.model.Cliente_B;
+import org.proyecto.empresaB.model.Administrador_B;
 import org.proyecto.empresaB.model.Producto_B;
-import org.proyecto.empresaB.service.impl.Cliente_BServiceImpl;
+import org.proyecto.empresaB.service.impl.Administrador_BServiceImpl;
 import org.proyecto.empresaB.service.impl.Productos_BServiceImpl;
 import org.proyecto.empresaB.util.ListaProvincias;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +31,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("/clientes")
-public class ClienteController {
+@RequestMapping("/administradores")
+public class AdministradorController {
 	
 	@Autowired
-	private Cliente_BServiceImpl cliente_BServiceImpl;
+	private Administrador_BServiceImpl administrador_BServiceImpl;
 	
 	
 	@Autowired
@@ -45,7 +45,7 @@ public class ClienteController {
 
 
 	
-	protected static Logger logger = Logger.getLogger("*en Cliente_B_BController*");
+	protected static Logger logger = Logger.getLogger("*en Administrador_B_BController*");
 	
 	
 	
@@ -53,7 +53,7 @@ public class ClienteController {
 	@RequestMapping(method = RequestMethod.GET, params="new")
 	public ModelAndView addContact() {
 		logger.info("metodo get --new-- ");
-		return new ModelAndView("cliente_b/edit", "cliente_b",new Cliente_B()  );
+		return new ModelAndView("administrador_b/edit", "administrador_b",new Administrador_B()  );
 
 	  }
 	
@@ -61,21 +61,21 @@ public class ClienteController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView addCliente_B_form(@Valid @ModelAttribute("cliente_b")Cliente_B cliente_b, BindingResult  result)throws Exception {
+	public ModelAndView addAdministrador_B_form(@Valid @ModelAttribute("administrador_b")Administrador_B administrador_b, BindingResult  result)throws Exception {
 
 		
-		logger.info("inicio de addCliente_B_form");
+		logger.info("inicio de addAdministrador_B_form");
 		if(result.hasErrors()) {
-		logger.info("addCliente_B_form ------tiene errores----"+result.toString());
+		logger.info("addAdministrador_B_form ------tiene errores----"+result.toString());
 		logger.info("errores: "+result.toString());
-		 return new ModelAndView("cliente_b/edit", "cliente_b",new Cliente_B()).addAllObjects(result.getModel());
+		 return new ModelAndView("administrador_b/edit", "administrador_b",new Administrador_B()).addAllObjects(result.getModel());
 
 		}
 	
-		logger.info("addCliente_B_form ");
-		cliente_b.setFecha_alta_b(new Date());
-		cliente_b.setTipo("CLIENTE");
-		cliente_BServiceImpl.save(cliente_b);
+		logger.info("addAdministrador_B_form ");
+	
+		administrador_b.setTipo("ADMIN");
+		administrador_BServiceImpl.save(administrador_b);
 
 		return new ModelAndView("redirect:listado");
 }
@@ -86,42 +86,42 @@ public class ClienteController {
 	
 	
 	@RequestMapping(value="/listado",method=RequestMethod.GET)
-	public ModelAndView listadoClientes_B(){
-		List<Cliente_B> lista =cliente_BServiceImpl.findAll();
+	public ModelAndView listadoAdministrador_B(){
+		List<Administrador_B> lista =administrador_BServiceImpl.findAll();
 		logger.info("en listadoProductos_B2*");
 		
 		logger.info("tamaño lista en listado: "+lista.size());
 		
 
-	   return new ModelAndView("cliente_b/listaClientes","clientes", lista);
+	   return new ModelAndView("administrador_b/listaAdministradores","administradores", lista);
 	}
 	
 	
 	@RequestMapping(value="/edit",method=RequestMethod.GET)
-	public ModelAndView editCliente_B_form(String id){
+	public ModelAndView editAdministrador_B_form(String id){
 
 
 	
-		Cliente_B cliente_b= new Cliente_B();
-		cliente_b= cliente_BServiceImpl.findByCliente_BIdCliente_b(id);
+		Administrador_B administrador_b= new Administrador_B();
+		administrador_b= administrador_BServiceImpl.findByAdministrador_BIdAdministrador_b(id);
 					
-		logger.info("producto pasado a edit-modificar: "+cliente_b.getNombre_b());
+		logger.info("producto pasado a edit-modificar: "+administrador_b.getNombre_b());
 		
 		
 		//List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
 		//return new ModelAndView("producto_b/listaProductos","productos", lista);
-		return new ModelAndView("cliente_b/modificar", "cliente_b",cliente_b);
+		return new ModelAndView("administrador_b/modificar", "administrador_b",administrador_b);
 	
 }
-	@RequestMapping(value="/modificarCliente_B", method = RequestMethod.POST)
-	public ModelAndView modCliente_B_form(@Valid @ModelAttribute("cliente_b")Cliente_B cliente_b, BindingResult  result) throws Exception{
+	@RequestMapping(value="/modificarAdministrador_B", method = RequestMethod.POST)
+	public ModelAndView modAdministrador_B_form(@Valid @ModelAttribute("administrador_b")Administrador_B administrador_b, BindingResult  result) throws Exception{
 
 		
-		logger.info("inicio de modCliente_B_form");
+		logger.info("inicio de modAdministrador_B_form");
 		if(result.hasErrors()) {
-		logger.info("modCliente_B_form ------tiene errores----"+result.toString());
+		logger.info("modAdministrador_B_form ------tiene errores----"+result.toString());
 		logger.info("errores: "+result.toString());
-		 return new ModelAndView("cliente_b/edit", "cliente_b",new Cliente_B()).addAllObjects(result.getModel());
+		 return new ModelAndView("administrador_b/edit", "administrador_b",new Administrador_B()).addAllObjects(result.getModel());
 
 		}
 	
@@ -150,10 +150,10 @@ public class ClienteController {
 		
 		*/
 
-		logger.info("modCliente_B_form ");
-		cliente_b.setFecha_alta_b(new Date());
-		cliente_b.setTipo("CLIENTE");
-		cliente_BServiceImpl.update(cliente_b);
+		logger.info("modAdministrador_B_form ");
+		
+		administrador_b.setTipo("ADMIN");
+		administrador_BServiceImpl.update(administrador_b);
 
 		return new ModelAndView("redirect:listado");
 		
@@ -161,15 +161,15 @@ public class ClienteController {
 	
 	}
 	@RequestMapping(value="/borrar",method=RequestMethod.GET)
-	public ModelAndView delCliente_B_form(String id){
-		logger.info(" en borrrar cliente ");
+	public ModelAndView delAdministrador_B_form(String id){
+		logger.info(" en borrrar administrador ");
 		logger.info("en borrar con ide con id: "+id);
-		Cliente_B cliente_b= new Cliente_B();
-		cliente_b= cliente_BServiceImpl.findByCliente_BIdCliente_b(id);
-		logger.info(" con cliente : "+cliente_b.getNombre_b());
-		cliente_BServiceImpl.delete(cliente_b);
+		Administrador_B administrador_b= new Administrador_B();
+		administrador_b= administrador_BServiceImpl.findByAdministrador_BIdAdministrador_b(id);
+		logger.info(" con administrador : "+administrador_b.getNombre_b());
+		administrador_BServiceImpl.delete(administrador_b);
 		
-		logger.info("borrando cliente : "+cliente_b.getNombre_b());
+		logger.info("borrando administrador : "+administrador_b.getNombre_b());
 
 		return new ModelAndView("redirect:listado");
 

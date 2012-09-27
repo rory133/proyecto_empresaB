@@ -84,13 +84,7 @@
 
 	</fieldset>
 	
-	Message: ${pageContext.exception.message}
-	<c:forEach var="trace" 
-         items="${pageContext.exception.stackTrace}"> 
-         
-		<p>${trace}</p>
-	</c:forEach>
-	<h2>${exception.customMsg}</h2>
+
 	
 </form:form>
 

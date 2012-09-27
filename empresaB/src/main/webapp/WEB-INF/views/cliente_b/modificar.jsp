@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-<title>Crear cliente</title>
+<title>Modificar cliente</title>
 
 
 </head>
@@ -155,7 +155,7 @@
 		
 	     <tr>
     	  
-    	     <td><input name="producto_b" type="submit" value="Gruardar cambios" /></td>
+    	     <td><input name="cliente_b" type="submit" value="Gruardar cambios" /></td>
   	   </tr>
 
 	</table>	
