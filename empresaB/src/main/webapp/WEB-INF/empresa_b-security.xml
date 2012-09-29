@@ -12,7 +12,7 @@
 
   <http auto-config="true"> 
 
-    	<intercept-url pattern="/**" access="ROLE_ADMIN" />
+    	<intercept-url pattern="/**" access="ROLE_CLIENTE" />
     
     
     
@@ -34,22 +34,29 @@
 
 	
 </http>
-
+<!-- 
      <authentication-manager>
 	  <authentication-provider>
 	    <user-service>
-		<user name="mkyong" password="123456" authorities="ROLE_ADMIN" />
+		<user name="mkyong" password="123456" authorities="ROLE_CLIENTE" />
 	    </user-service>
 	  </authentication-provider>
 	</authentication-manager>
 
-
-<!-- 
- <jdbc-user-service id="userService" 
+ -->
+	<authentication-manager>
+	   <authentication-provider>
+ 		<jdbc-user-service id="userService" 
             data-source-ref="dataSource"
-            users-by-username-query="SELECT login_usuario_b, password, true FROM usuario_b WHERE login_usuario_b=?"
-            authorities-by-username-query="SELECT login_usuario_b, tipo FROM usuario_b WHERE login_usuario_b=?" />
+            users-by-username-query="
+            	select login_usuario_b, password_b, enabled 
+            	from usuario_b where login_usuario_b=?"
+            authorities-by-username-query="
+            	select u.login_usuario_b, u.authority FROM usuario_b u 
+            	where u.login_usuario_b=? " 
+           />
             
-   -->          
+ 		</authentication-provider>
+	</authentication-manager>         
  
 </beans:beans>

@@ -78,11 +78,16 @@ import org.springframework.format.annotation.NumberFormat.Style;
   private String email_b;
 
   
-  @Column(name = "TIPO")
-  private String tipo;
+  @Column(name = "AUTHORITY")
+  private String AUTHORITY;
   
- 
   
+  
+  @Column(name = "ENABLED")
+  private Boolean ENABLED;
+  
+
+
 
 
 	public Integer getIdusuarios_b() {
@@ -141,14 +146,25 @@ import org.springframework.format.annotation.NumberFormat.Style;
 	
 	public void setEmail_b(String email_b) {
 		this.email_b = email_b;
+	
 	}
-	public String getTipo() {
-	return tipo;
+	
+	public String getAUTHORITY() {
+	return AUTHORITY;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setAUTHORITY(String aUTHORITY) {
+		AUTHORITY = aUTHORITY;
 	}
+
+	public Boolean getENABLED() {
+		return ENABLED;
+	}
+
+	public void setENABLED(Boolean eNABLED) {
+		ENABLED = eNABLED;
+	}
+
 
 }
 

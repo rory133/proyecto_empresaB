@@ -74,7 +74,8 @@ public class AdministradorController {
 	
 		logger.info("addAdministrador_B_form ");
 	
-		administrador_b.setTipo("ADMIN");
+		administrador_b.setAUTHORITY("ROLE_ADMIN");
+		administrador_b.setENABLED(true);
 		administrador_BServiceImpl.save(administrador_b);
 
 		return new ModelAndView("redirect:listado");
@@ -152,7 +153,8 @@ public class AdministradorController {
 
 		logger.info("modAdministrador_B_form ");
 		
-		administrador_b.setTipo("ADMIN");
+		administrador_b.setAUTHORITY("ROLE_ADMIN");
+		administrador_b.setENABLED(true);
 		administrador_BServiceImpl.update(administrador_b);
 
 		return new ModelAndView("redirect:listado");

@@ -74,7 +74,9 @@ public class ClienteController {
 	
 		logger.info("addCliente_B_form ");
 		cliente_b.setFecha_alta_b(new Date());
-		cliente_b.setTipo("CLIENTE");
+		cliente_b.setAUTHORITY("ROLE_CLIENTE");
+		cliente_b.setENABLED(true);
+		
 		cliente_BServiceImpl.save(cliente_b);
 
 		return new ModelAndView("redirect:listado");
@@ -152,7 +154,8 @@ public class ClienteController {
 
 		logger.info("modCliente_B_form ");
 		cliente_b.setFecha_alta_b(new Date());
-		cliente_b.setTipo("CLIENTE");
+		cliente_b.setAUTHORITY("ROLE_CLIENTE");
+		cliente_b.setENABLED(true);
 		cliente_BServiceImpl.update(cliente_b);
 
 		return new ModelAndView("redirect:listado");
