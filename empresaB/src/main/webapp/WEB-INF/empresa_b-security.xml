@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+        
+
+
+  <http auto-config="true"> 
+
+    	<intercept-url pattern="/**" access="ROLE_ADMIN" />
+    
+    
+    
+    
+<!--         <intercept-url pattern="/login*"   filters="none" />
+        <intercept-url pattern="/logout*"  filters="none" />
+        <intercept-url pattern="/js/**"    filters="none" />
+        <intercept-url pattern="/img/**"   filters="none" />
+        <intercept-url pattern="/css/**"   filters="none" />
+        <intercept-url pattern="/admin/**" access="ADMIN" />
+        <intercept-url pattern="/**"       access="CLIENTE" />
+        
+        
+	  <form-login login-page="${security.loginPage}" 
+                    default-target-url="${security.default-target-url}" 
+                    always-use-default-target="true"
+                    authentication-failure-url="${security.authentication-failure-url}" /> -->
+                    
+
+	
+</http>
+
+     <authentication-manager>
+	  <authentication-provider>
+	    <user-service>
+		<user name="mkyong" password="123456" authorities="ROLE_ADMIN" />
+	    </user-service>
+	  </authentication-provider>
+	</authentication-manager>
+
+
+<!-- 
+ <jdbc-user-service id="userService" 
+            data-source-ref="dataSource"
+            users-by-username-query="SELECT login_usuario_b, password, true FROM usuario_b WHERE login_usuario_b=?"
+            authorities-by-username-query="SELECT login_usuario_b, tipo FROM usuario_b WHERE login_usuario_b=?" />
+            
+   -->          
+ 
+</beans:beans>
