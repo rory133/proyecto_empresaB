@@ -98,7 +98,7 @@ public class Producto_BController {
 	}
 	
 	/*@RequestMapping(value = "/add", method = RequestMethod.GET)*/
-	@RequestMapping(method = RequestMethod.GET, params="new")
+	@RequestMapping(value="/admin/" ,method = RequestMethod.GET, params="new")
 	public ModelAndView addContact() {
 		logger.info("metodo get --new-- ");
 		return new ModelAndView("producto_b/edit", "producto_b",new Producto_B());
@@ -111,7 +111,7 @@ public class Producto_BController {
 	
 	
 	//public ModelAndView modProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b,  BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image, HttpServletRequest request){
-	@RequestMapping(value="/modificarProductoB", method = RequestMethod.POST)
+	@RequestMapping(value="/admin/modificarProductoB", method = RequestMethod.POST)
 	public ModelAndView modProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b,  BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image)throws Exception{
 
 		
@@ -173,18 +173,18 @@ public class Producto_BController {
 
 		
 		logger.info("udpdateProducto_B_form ");
-		
-		
-		
-		//List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
-		//return new ModelAndView("producto_b/listaProductos","productos", lista);
-		return new ModelAndView("redirect:listado");
+		/*
+		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		return new ModelAndView("producto_b/listaProductos","productos", lista);
+		*/
+
+		return new ModelAndView("redirect:../listado");
 	
 	
 }
 	
 	
-	@RequestMapping(value="/edit",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/edit",method=RequestMethod.GET)
 	public ModelAndView editProducto_B_form(String id){
 
 
@@ -204,7 +204,7 @@ public class Producto_BController {
 	//@RequestMapping(value="/crearProductoB", method = RequestMethod.POST)
 	
 	//public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b, BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image, HttpServletRequest request){
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value="/admin/crearProductoB",method = RequestMethod.POST)
 	public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b, BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image) throws Exception{
 
 
@@ -275,13 +275,13 @@ public class Producto_BController {
 		
 /*		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
 		return new ModelAndView("producto_b/listaProductos","productos", lista);*/
-		return new ModelAndView("redirect:listado");
+		return new ModelAndView("redirect:../listado");
 		
 		
 	
 }
 	
-	@RequestMapping(value="/borrar",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/borrar",method=RequestMethod.GET)
 	public ModelAndView delProducto_B_form(String id){
 
 		logger.info("en borrar producto con id: "+id);
@@ -291,9 +291,9 @@ public class Producto_BController {
 		logger.info("borrando producto : "+productob.getNombre_productoB());
 		productos_BServiceImpl.delete(productob);
 		
-		//List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
-		//return new ModelAndView("producto_b/listaProductos","productos", lista);
-		return new ModelAndView("redirect:listado");
+/*		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		return new ModelAndView("producto_b/listaProductos","productos", lista);*/
+		return new ModelAndView("redirect:../listado");
 		//return new ModelAndView("producto_b/modificar", "producto_b",productob);
 	
 }

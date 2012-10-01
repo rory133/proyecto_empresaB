@@ -21,7 +21,7 @@
 		<!-- <intercept-url pattern="/productos/listado" access="hasRole ('ROLE_CLIENTE') or hasRole('ROLE_ADMIN')" /> -->
 		<intercept-url pattern="/productos/listado" access="permitAll" /> 
 		<intercept-url pattern="/aa" access="hasRole ('ROLE_CLIENTE') or hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/productos" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/productos/admin/" access="hasRole('ROLE_ADMIN')" />
     	<!-- <intercept-url pattern="/**" access="denyAll" /> -->
 <!--     <form-login login-page="/login" default-target-url="/welcome" -->
     <form-login login-page="/login" default-target-url="/productos/listado"

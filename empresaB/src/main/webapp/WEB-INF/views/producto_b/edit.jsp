@@ -17,7 +17,7 @@
 <h2>Introducir Producto_B</h2>
 <%-- <form:form method="POST" commandName="producto_b"> --%>
 <%-- <form:form method="POST" modelAttribute="producto_b" id="producto_b" type="producto_b" action="crearProductoB" enctype="multipart/form-data"> --%>
-<form:form method="POST" modelAttribute="producto_b" id="producto_b" type="producto_b" enctype="multipart/form-data">
+<form:form method="POST" modelAttribute="producto_b" id="producto_b" type="producto_b" action="crearProductoB" enctype="multipart/form-data">
 <%-- <form:form method="POST" modelAttribute="producto_b"> --%>
 
 			
