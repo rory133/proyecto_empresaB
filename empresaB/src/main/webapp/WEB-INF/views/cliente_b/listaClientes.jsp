@@ -54,14 +54,14 @@
                 ${cliente.codigopostal_b}
         </td>
         <td>
-        	<c:url var="editUrl" value="/clientes/edit" />
+        	<c:url var="editUrl" value="/clientes/cliente/edit" />
 			<a href="${editUrl}?id=${cliente.idusuarios_b}"   onclick="return confirm('¿Quieres cambiar datos de este cliente?')"> <img border=0 src="../resources/imagenes/modificar.jpg" height=68 width=53> </a>
 			
 		</td>
 		
 		<td>
 
-        	<c:url var="editUrl" value="/clientes/borrar" />
+        	<c:url var="editUrl" value="/clientes/admin/borrar" />
 			<a href="${editUrl}?id=${cliente.idusuarios_b}"   onclick="return confirm('¿Quieres borrar este cliente?')"> <img border=0 src="../resources/imagenes/borrar.jpg" height=68 width=53> </a>
 			
 		</td>

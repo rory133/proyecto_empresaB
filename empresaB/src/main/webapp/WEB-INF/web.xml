@@ -20,8 +20,14 @@
             30
         </session-timeout>
     </session-config> -->
-   
-
+    
+    
+   <!-- 
+	<welcome-file-list>  
+        <welcome-file>inicio.htm</welcome-file>  
+	</welcome-file-list>  
+	 -->
+	
    
     <context-param>
      <param-name>contextConfigLocation</param-name>

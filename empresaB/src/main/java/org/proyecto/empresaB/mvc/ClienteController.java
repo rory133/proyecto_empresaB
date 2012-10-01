@@ -37,6 +37,9 @@ public class ClienteController {
 	@Autowired
 	private Cliente_BServiceImpl cliente_BServiceImpl;
 	
+	@Autowired
+	private Productos_BServiceImpl productos_BServiceImpl;
+	
 	
 	@Autowired
 	ServletContext context;
@@ -76,10 +79,16 @@ public class ClienteController {
 		cliente_b.setFecha_alta_b(new Date());
 		cliente_b.setAUTHORITY("ROLE_CLIENTE");
 		cliente_b.setENABLED(true);
-		
+		logger.info("se ha sumado cliente "+cliente_b.getNombre_b());
 		cliente_BServiceImpl.save(cliente_b);
 
-		return new ModelAndView("redirect:listado");
+		//return new ModelAndView("redirect:listado");
+		/*return new ModelAndView("home");*/
+		
+		/*return new ModelAndView("producto_b/listaProductos");*/
+		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		return new ModelAndView("producto_b/listaProductos","productos", lista);
+		
 }
 	
 	
@@ -87,7 +96,7 @@ public class ClienteController {
 	
 	
 	
-	@RequestMapping(value="/listado",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/listado",method=RequestMethod.GET)
 	public ModelAndView listadoClientes_B(){
 		List<Cliente_B> lista =cliente_BServiceImpl.findAll();
 		logger.info("en listadoProductos_B2*");
@@ -99,7 +108,7 @@ public class ClienteController {
 	}
 	
 	
-	@RequestMapping(value="/edit",method=RequestMethod.GET)
+	@RequestMapping(value="/cliente/edit",method=RequestMethod.GET)
 	public ModelAndView editCliente_B_form(String id){
 
 
@@ -115,7 +124,7 @@ public class ClienteController {
 		return new ModelAndView("cliente_b/modificar", "cliente_b",cliente_b);
 	
 }
-	@RequestMapping(value="/modificarCliente_B", method = RequestMethod.POST)
+	@RequestMapping(value="/cliente/modificarCliente_B", method = RequestMethod.POST)
 	public ModelAndView modCliente_B_form(@Valid @ModelAttribute("cliente_b")Cliente_B cliente_b, BindingResult  result) throws Exception{
 
 		
@@ -163,7 +172,7 @@ public class ClienteController {
 	
 	
 	}
-	@RequestMapping(value="/borrar",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/borrar",method=RequestMethod.GET)
 	public ModelAndView delCliente_B_form(String id){
 		logger.info(" en borrrar cliente ");
 		logger.info("en borrar con ide con id: "+id);

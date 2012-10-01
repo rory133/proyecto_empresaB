@@ -78,7 +78,24 @@ public class Producto_BController {
 	}
 	
 	
-	
+	@RequestMapping(value="/listado2",method=RequestMethod.GET)
+	public ModelAndView listado2Productos_B(){
+		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		logger.info("en listadoProductos_B2*");
+		
+		logger.info("tamaño lista en listado: "+lista.size());
+		
+		ModelAndView mav= new ModelAndView("producto_b/listaProductos");
+		String bienvenida1="Bienvenido a la pagina de empreaB ";
+		String bienvenida2="para realizar compras deberias estar logado ";
+		String bienvenida3="estos son los productos de que disponemos:";
+		mav.addObject("bienvenida1", bienvenida1);
+		mav.addObject("bienvenida2", bienvenida2);
+		mav.addObject("bienvenida3", bienvenida3);
+		mav.addObject("productos", lista);
+		return mav;
+	   //return new ModelAndView("producto_b/listaProductos","productos", lista);
+	}
 	
 	/*@RequestMapping(value = "/add", method = RequestMethod.GET)*/
 	@RequestMapping(method = RequestMethod.GET, params="new")

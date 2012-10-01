@@ -17,13 +17,13 @@ public class HomeController {
 	
 	protected static Logger logger = Logger.getLogger("*en homeController*");
 	
-	@RequestMapping(value="/aa", method = RequestMethod.GET)
+	@RequestMapping(value="inicio.htm", method = RequestMethod.GET)
     public ModelAndView home() {
 		//PropertyConfigurator.configure();
 		
 		logger.info("en requestMapping home**");
-        String message=new Date().toString();
-        return new ModelAndView("home","message", message);
+ 
+        return new ModelAndView("home");
 	}
 	
 /*	@RequestMapping(value="/aa.htm", method = RequestMethod.GET)

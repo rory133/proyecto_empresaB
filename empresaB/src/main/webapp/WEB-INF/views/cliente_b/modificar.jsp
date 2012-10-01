@@ -17,7 +17,7 @@
 
 <c:if  test="${!empty cliente_b}">
 
-<form:form method="POST" modelAttribute="cliente_b" id="cliente_b" type="cliente_b" action="modificarCliente_B" enctype="multipart/form-data">
+<form:form method="POST" modelAttribute="cliente_b" id="cliente_b" type="cliente_b" action="cliente/modificarCliente_B" enctype="multipart/form-data">
 
 
 			
