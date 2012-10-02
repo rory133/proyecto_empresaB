@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import org.proyecto.empresaB.model.Producto_BSeleccionado;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +26,8 @@ import javax.persistence.JoinTable;
 
 
 @Entity
+@Component
+@Scope("session")
 @Table(name = "carro_b")
 public class Carro_B implements Serializable{
 	
