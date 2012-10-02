@@ -1,8 +1,11 @@
 package org.proyecto.empresaB.dao.impl;
 
 
+import org.hibernate.criterion.Restrictions;
 import org.proyecto.empresaB.dao.Cliente_BDao;
 import org.proyecto.empresaB.model.Cliente_B;
+import org.proyecto.empresaB.model.Producto_B;
+import org.proyecto.empresaB.model.Usuario_B;
 import org.proyecto.empresaB.util.CustomHibernateDaoSupport;
 
 import java.util.List;
@@ -36,7 +39,8 @@ public class Cliente_BDaoImpl extends CustomHibernateDaoSupport implements Clien
 	public void update(Cliente_B cliente_B) {
 		
 		
-		getHibernateTemplate().update(cliente_B);
+		//getHibernateTemplate().update(cliente_B);
+		getHibernateTemplate().merge(cliente_B);
 		
 	}
 
@@ -53,10 +57,24 @@ public class Cliente_BDaoImpl extends CustomHibernateDaoSupport implements Clien
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Cliente_B findByCliente_B_dni_nif_b(String cliente_B_dni_nif_b) {
-		List <Cliente_B> list = getHibernateTemplate().find(
-                "from Cliente_B where dni_nif_b = ?",cliente_B_dni_nif_b);
-		return (Cliente_B)list.get(0);
+	public Usuario_B findByCliente_B_login_usuario_b(String cliente_B_login_usuario_b) {
+		System.out.println("login usuario pasado: "+cliente_B_login_usuario_b);
+		
+		//List<Cliente_B> list = this.getSessionFactory().getCurrentSession().createCriteria (Cliente_B.class ).add(Restrictions.eq("login_usuario_b",cliente_B_login_usuario_b)).list();
+		//return (Producto_B)list.get(0);
+		
+		//List<Cliente_B> list = this.getSessionFactory().getCurrentSession().createCriteria (Cliente_B.class ).add(Restrictions.eq("login_usuario_b",cliente_B_login_usuario_b)).list();
+		
+		/*List <Cliente_B> list = getHibernateTemplate().find(
+               "from Cliente_B where login_usuario_b = ?",cliente_B_login_usuario_b);*/
+		
+		List <Usuario_B> list= getHibernateTemplate().find(
+	 				"from Usuario_B  where login_usuario_b = ?",cliente_B_login_usuario_b);
+		System.out.println("tamaño lista encontrada: "+list.size());
+		if(list.isEmpty())
+			return null;
+		return (Usuario_B)list.get(0);
+		
 	}
 
 	@SuppressWarnings("unchecked")

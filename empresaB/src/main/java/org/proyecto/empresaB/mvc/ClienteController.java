@@ -14,12 +14,14 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.proyecto.empresaB.model.Cliente_B;
 import org.proyecto.empresaB.model.Producto_B;
+import org.proyecto.empresaB.model.Usuario_B;
 import org.proyecto.empresaB.service.impl.Cliente_BServiceImpl;
 import org.proyecto.empresaB.service.impl.Productos_BServiceImpl;
 import org.proyecto.empresaB.util.ListaProvincias;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -68,9 +70,13 @@ public class ClienteController {
 
 		
 		logger.info("inicio de addCliente_B_form");
+		if (null !=cliente_BServiceImpl.findByCliente_B_login_usuario_b(cliente_b.getLogin_usuario_b()))
+		result.addError(new ObjectError("loginInvalido", "Este usuario ya existe"));
+		//	result.addError(new ObjectError(result.getObjectName(), "este usuario ya existe!"));
 		if(result.hasErrors()) {
 		logger.info("addCliente_B_form ------tiene errores----"+result.toString());
 		logger.info("errores: "+result.toString());
+	
 		 return new ModelAndView("cliente_b/edit", "cliente_b",new Cliente_B()).addAllObjects(result.getModel());
 
 		}
@@ -112,11 +118,11 @@ public class ClienteController {
 	public ModelAndView editCliente_B_form(String id){
 
 
-	
+		logger.info("id cliente pasado a edit-modificar: "+id);
 		Cliente_B cliente_b= new Cliente_B();
 		cliente_b= cliente_BServiceImpl.findByCliente_BIdCliente_b(id);
 					
-		logger.info("producto pasado a edit-modificar: "+cliente_b.getNombre_b());
+		logger.info("cliente pasado a edit-modificar: "+cliente_b.getNombre_b());
 		
 		
 		//List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
@@ -129,6 +135,26 @@ public class ClienteController {
 
 		
 		logger.info("inicio de modCliente_B_form");
+		Usuario_B usuarioBuscado=cliente_BServiceImpl.findByCliente_B_login_usuario_b(cliente_b.getLogin_usuario_b());
+		Integer idusuarioBuscado=null;
+		if (null!=usuarioBuscado){
+		idusuarioBuscado=usuarioBuscado.getIdusuarios_b();
+		}
+		Integer idcliente_b=cliente_b.getIdusuarios_b();
+
+				
+		logger.info("inicio de modCliente_B_form idusuarioBuscado "+idusuarioBuscado);
+		logger.info("inicio de modCliente_B_form idcliente_b "+idcliente_b);
+		
+		
+		logger.info("inicio de modCliente_B_form id usuarioBuscado "+usuarioBuscado.getIdusuarios_b());
+		logger.info("inicio de modCliente_B_form id cliente_B "+cliente_b.getIdusuarios_b());
+		if ((null !=usuarioBuscado)&& (idusuarioBuscado==idcliente_b)){
+			result.addError(new ObjectError("loginInvalido", "Este usuario ya existe"));
+			logger.info("null !=usuarioBuscado"+(null !=usuarioBuscado));
+			logger.info("((usuarioBuscado.getIdusuarios_b())!=(cliente_b.getIdusuarios_b()))"+((usuarioBuscado.getIdusuarios_b())!=(cliente_b.getIdusuarios_b())));
+			
+		}
 		if(result.hasErrors()) {
 		logger.info("modCliente_B_form ------tiene errores----"+result.toString());
 		logger.info("errores: "+result.toString());
@@ -167,11 +193,30 @@ public class ClienteController {
 		cliente_b.setENABLED(true);
 		cliente_BServiceImpl.update(cliente_b);
 
-		return new ModelAndView("redirect:../admin/listado");
-		
+		//return new ModelAndView("redirect:../admin/listado");
+		return new ModelAndView("redirect:../../productos/listado");
 	
 	
 	}
+	
+	
+	@RequestMapping(value="/cliente/modificarMiCuenta_B/", method = RequestMethod.GET)
+	public ModelAndView modMiCuenta_B_form(@RequestParam(value="login")String  login) throws Exception{
+		
+		
+		Integer id=cliente_BServiceImpl.findByCliente_B_login_usuario_b(login).getIdusuarios_b();
+		
+		//http://localhost:8080/empresaB/clientes/cliente/edit?id=id
+
+		logger.info(" en modMiCuenta_B_form " +String.valueOf(id));
+
+		return new ModelAndView("redirect:../edit?id="+String.valueOf(id));
+		//return new ModelAndView("redirect:../edit?"+id);
+	
+	
+	}
+	
+	
 	@RequestMapping(value="/admin/borrar",method=RequestMethod.GET)
 	public ModelAndView delCliente_B_form(String id){
 		logger.info(" en borrrar cliente ");

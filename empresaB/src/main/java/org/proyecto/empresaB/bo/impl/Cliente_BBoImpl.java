@@ -5,6 +5,7 @@ import java.util.List;
 import org.proyecto.empresaB.bo.Cliente_BBo;
 import org.proyecto.empresaB.dao.Cliente_BDao;
 import org.proyecto.empresaB.model.Cliente_B;
+import org.proyecto.empresaB.model.Usuario_B;
 import org.proyecto.empresaB.util.CustomHibernateDaoSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +46,9 @@ public class Cliente_BBoImpl implements Cliente_BBo{
 		return cliente_BDao.findByCliente_BIdCliente_b(Cliente_BIdCliente_b);
 	}
 
-	public Cliente_B findByCliente_B_dni_nif_b(String cliente_B_dni_nif_b) {
+	public Usuario_B findByCliente_B_login_usuario_b(String cliente_B_login_usuario_b) {
 		
-		return cliente_BDao.findByCliente_B_dni_nif_b(cliente_B_dni_nif_b);
+		return cliente_BDao.findByCliente_B_login_usuario_b(cliente_B_login_usuario_b);
 	}
 	
 	public List<Cliente_B> findAll (){

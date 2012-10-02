@@ -15,7 +15,7 @@
 	<http auto-config="true" use-expressions="true">
 
 		<intercept-url pattern="/index.jsp" access="permitAll" />		
-		<intercept-url pattern="/clientes/cliente" access="hasRole ('ROLE_CLIENTE') or hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/clientes/cliente/**" access="hasRole ('ROLE_CLIENTE') or hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/clientes/admin/**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/clientes/" access="permitAll" />
 		<!-- <intercept-url pattern="/productos/listado" access="hasRole ('ROLE_CLIENTE') or hasRole('ROLE_ADMIN')" /> -->

@@ -65,6 +65,7 @@
 				<th><label for="login_usuario_b">Login :</label></th>
 				<td><form:input path="login_usuario_b" maxlength="15" id="login_usuario_b" value= "${cliente_b.login_usuario_b}"/>
 					<form:errors path="login_usuario_b" cssClass="error" />
+					<form:errors cssClass="error" element="loginInvalido"/>
 					<small>login de usuario</small>
 				</td>
 		</tr>

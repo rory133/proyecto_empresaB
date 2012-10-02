@@ -3,6 +3,7 @@ package org.proyecto.empresaB.dao;
 import java.util.List;
 
 import org.proyecto.empresaB.model.Cliente_B;
+import org.proyecto.empresaB.model.Usuario_B;
 
 public interface Cliente_BDao {
 	void save(Cliente_B cliente_B);
@@ -13,7 +14,7 @@ public interface Cliente_BDao {
 	
 	Cliente_B findByCliente_BIdCliente_b(String Cliente_BIdCliente_b);
 	
-	Cliente_B findByCliente_B_dni_nif_b(String cliente_B_dni_nif_b);
+	Usuario_B findByCliente_B_login_usuario_b(String cliente_B_login_usuario_b);
 	
 	List<Cliente_B> findAll ();
 }

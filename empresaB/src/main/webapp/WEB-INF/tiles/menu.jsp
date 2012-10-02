@@ -176,7 +176,7 @@ height: 16px;
 			<li><a href="#">Submenu 3</a></li>
 		</ul> -->
 	</li>
- 	<li><a href="#">MI CUENTA</a>
+ 	<li><a href="${pageContext.request.contextPath}/clientes/cliente/modificarMiCuenta_B/?login=${pageContext.request.userPrincipal.name}">MI CUENTA</a>
 	<!--	<ul class="submenu">
 			<li><a href="#">Submenu 1</a></li>
 			<li><a href="#">Submenu 2</a></li>

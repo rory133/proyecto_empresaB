@@ -2,6 +2,7 @@ package org.proyecto.empresaB.dao.impl;
 
 import org.proyecto.empresaB.dao.Administrador_BDao;
 import org.proyecto.empresaB.model.Administrador_B;
+import org.proyecto.empresaB.model.Usuario_B;
 import org.proyecto.empresaB.util.CustomHibernateDaoSupport;
 
 import java.util.List;
@@ -42,10 +43,17 @@ public class Administrador_BDaoImpl extends CustomHibernateDaoSupport implements
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Administrador_B findByAdministrador_B_dni_nif_b(String administrador_B_dni_nif_b) {
-		List <Administrador_B> list = getHibernateTemplate().find(
-                "from Administrador_B where dni_nif_b = ?",administrador_B_dni_nif_b);
-		return (Administrador_B)list.get(0);
+	public Usuario_B findByAdministrador_B_login_usuario_b(String administrador_B_login_usuario_b) {
+/*		List <Administrador_B> list = getHibernateTemplate().find(
+                "from Administrador_B where login_usuario_b = ?",administrador_B_login_usuario_b);
+		return (Administrador_B)list.get(0);*/
+		
+		List <Usuario_B> list= getHibernateTemplate().find(
+ 				"from Usuario_B  where login_usuario_b = ?",administrador_B_login_usuario_b);
+		System.out.println("tamaño lista encontrada: "+list.size());
+		if(list.isEmpty())
+			return null;
+		return (Usuario_B)list.get(0);
 	}
 
 	@SuppressWarnings("unchecked")

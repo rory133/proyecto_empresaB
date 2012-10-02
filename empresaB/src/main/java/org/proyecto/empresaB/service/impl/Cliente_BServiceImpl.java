@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.proyecto.empresaB.dao.Cliente_BDao;
 import org.proyecto.empresaB.model.Cliente_B;
+import org.proyecto.empresaB.model.Usuario_B;
 import org.proyecto.empresaB.service.Cliente_BService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,11 +46,13 @@ public class Cliente_BServiceImpl implements Cliente_BService{
 		
 		return cliente_BDao.findByCliente_BIdCliente_b(Cliente_BIdCliente_b);
 	}
-
-/*	public Cliente_B findByCliente_B_dni_nif_b(String cliente_B_dni_nif_b) {
+	
+	
+	@Transactional
+	public Usuario_B findByCliente_B_login_usuario_b(String cliente_B_login_usuario_b) {
 		
-		return cliente_BDao.findByCliente_B_dni_nif_b(cliente_B_dni_nif_b);
-	}*/
+		return cliente_BDao.findByCliente_B_login_usuario_b(cliente_B_login_usuario_b);
+	}
 	
 	@Transactional
 	public List<Cliente_B> findAll (){

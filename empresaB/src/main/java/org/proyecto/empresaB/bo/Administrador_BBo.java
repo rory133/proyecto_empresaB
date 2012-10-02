@@ -3,6 +3,7 @@ package org.proyecto.empresaB.bo;
 import java.util.List;
 
 import org.proyecto.empresaB.model.Administrador_B;
+import org.proyecto.empresaB.model.Usuario_B;
 
 public interface Administrador_BBo {
 	
@@ -14,7 +15,7 @@ public interface Administrador_BBo {
 	
 	Administrador_B findByAdministrador_BIdAdministrador_b(String Administrador_BIdAdministrador_b);
 	
-	Administrador_B findByAdministrador_B_dni_nif_b(String administrador_B_dni_nif_b);
+	Usuario_B findByAdministrador_B_login_usuario_b(String administrador_B_login_usuario_b);
 	
 	List<Administrador_B> findAll ();
 
