@@ -2,8 +2,8 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> 
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
  
-
 <%-- <link type="text/css" rel="stylesheet"  href="${pageContext.request.contextPath}/resources/css/master.css" /> --%>
 <!-- <link type="text/css" rel="stylesheet"  href="../resources/css/master.css" /> -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,6 +11,34 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>LISTA DE PRODUCTOS</title>
+
+
+<script language="javascript">
+function comprobarCampos() 
+{
+
+var form=document.forms[0];
+var campo=form.elements[0];
+var texto=campo.value;
+if (texto==''){
+alert("la cantidad no puede estar vacia");
+}
+var numero=parseInt(texto);
+if (isNaN(numero)){
+	alert("la cantidad tiene que ser un numero");
+	}
+document.forms[0].elements[0].value=numero;
+}
+</script>
+
+<!-- <script language="javascript">
+function comprobarCampos()
+{
+form1.campo1.value="hola";
+form1.campo2.select();
+alert("este campo no está vacío");
+}
+</script> -->
 
 
 </head>
@@ -119,6 +147,21 @@
         <td>
                 ${producto.cantidad_existencias}
         </td>
+        
+        
+        <td>	
+			<form id="form1" name="form1" method="GET" action="${pageContext.request.contextPath}/carro/sumaProducto/" >
+			<label >Cantidad deseada:</label>
+			<input name="cantidad" type="text" id="cantidad" onblur="comprobarCampos()" >
+			<input type= "hidden" name="idProducto" id="idProducto" value= "${producto.idproductob}"/>
+			<input  type="submit" value="Sumar a Carro" />
+			<c:out value="valor producto ${producto.idproductob}"/>
+			</form>	
+				
+			
+		</td>
+        
+        
         <sec:authorize access="hasRole('ROLE_ADMIN')">
         <td>
         	<c:url var="editUrl" value="/productos/admin/edit" />
@@ -129,10 +172,22 @@
 		<td>
 
         	<c:url var="editUrl" value="/productos/admin/borrar" />
-			<a href="${editUrl}?id=${producto.idproductob}"   onclick="return confirm('¿Quieres borrar este producto?')" onmouseover="window.status = 'Pulse para Borrar Producto'; return true" onmouseout="window.status=''"> <span title='Pulse para Borrar Producto'> <img border=0 src="../resources/imagenes/borrar.jpg" height=68 width=53> </a>
+			<a href="${editUrl}?id=${producto.idproductob}"    onclick="return confirm('¿Quieres borrar este producto?')" onmouseover="window.status = 'Pulse para Borrar Producto'; return true" onmouseout="window.status=''"> <span title='Pulse para Borrar Producto'> <img border=0 src="../resources/imagenes/borrar.jpg" height=68 width=53> </a>
 			
 		</td>
 		</sec:authorize>
+		
+		
+		
+				
+<%-- 				<input type="text" name="cantidad">
+				<c:url var="canti" value="cantidad" />
+				<c:out value="${cantidad}"/>
+			<c:url var="editUrl" value="/carro/sumaProducto/" />
+			<a href="${editUrl}?,idProducto=${producto.idproductob}"   onclick="return confirm('¿Quieres añadir este producto?')" onmouseover="window.status = 'Pulse para Añadir Producto'; return true" onmouseout="window.status=''"> <span title='Pulse para Borrar Producto'> <img border=0 src="../resources/imagenes/borrar.jpg" height=68 width=53> </a>
+			
+				<form:errors cssClass="error" element="productoSeleecionadoErroneo"/> --%>
+
 	
     </tr>
 </c:forEach>
