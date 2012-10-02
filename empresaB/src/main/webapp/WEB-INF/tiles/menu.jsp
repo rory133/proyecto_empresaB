@@ -139,7 +139,7 @@ height: 16px;
 			<li><a href="#">Submenu 3</a></li>
 		</ul> -->
 	</li>
-	<li><a href="${pageContext.request.contextPath}/clientes/admin/listado">ADMINS</a>
+	<li><a href="${pageContext.request.contextPath}/administradores/listado">ADMINS</a>
 <!-- 		<ul class="submenu">
 			<li><a href="#">Submenu 1</a></li>
 			<li><a href="#">Submenu 2</a></li>

@@ -33,7 +33,7 @@
         <sec:authorize access="hasRole('ROLE_ADMIN')">
         <td>
         	<c:url var="editUrl" value="/productos/admin/?new" />
-			<a href="${editUrl}"   onclick="return confirm('¿Quieres añdir un nuevo producto?')" onmouseover="window.status = 'Pulse para añadir un producto'; return true" onmouseout="window.status=''"> <span title='Pulse para Añadir un Producto'> <img border=0 src="../resources/imagenes/modificar.jpg" height=68 width=53> </a>
+			<a href="${editUrl}"   onclick="return confirm('¿Quieres añdir un nuevo producto?')" onmouseover="window.status = 'Pulse para añadir un producto'; return true" onmouseout="window.status=''"> <span title='Pulse para Añadir un Producto'> <img border=0 src="../resources/imagenes/nuevo.jpg" height=68 width=53> </a>
 			
 		</td>
 		</sec:authorize>

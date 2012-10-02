@@ -14,12 +14,14 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.proyecto.empresaB.model.Administrador_B;
 import org.proyecto.empresaB.model.Producto_B;
+import org.proyecto.empresaB.model.Usuario_B;
 import org.proyecto.empresaB.service.impl.Administrador_BServiceImpl;
 import org.proyecto.empresaB.service.impl.Productos_BServiceImpl;
 import org.proyecto.empresaB.util.ListaProvincias;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -117,6 +119,23 @@ public class AdministradorController {
 	@RequestMapping(value="/modificarAdministrador_B", method = RequestMethod.POST)
 	public ModelAndView modAdministrador_B_form(@Valid @ModelAttribute("administrador_b")Administrador_B administrador_b, BindingResult  result) throws Exception{
 
+		Usuario_B usuarioBuscado=administrador_BServiceImpl.findByAdministrador_B_login_usuario_b(administrador_b.getLogin_usuario_b());
+		Integer idusuarioBuscado=null;
+		if (null!=usuarioBuscado){
+		idusuarioBuscado=usuarioBuscado.getIdusuarios_b();
+		}
+		Integer idadministrador_b=administrador_b.getIdusuarios_b();
+		
+	
+		//if (null !=usuarioBuscado){
+			
+		if ((null !=usuarioBuscado)&& (idusuarioBuscado==idadministrador_b)){
+			result.addError(new ObjectError("loginInvalido", "Este usuario ya existe"));
+			logger.info("null !=usuarioBuscado"+(null !=usuarioBuscado));
+
+			
+		}
+		
 		
 		logger.info("inicio de modAdministrador_B_form");
 		if(result.hasErrors()) {

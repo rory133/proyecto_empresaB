@@ -55,6 +55,7 @@
 				<th><label for="login_usuario_b">Login :</label></th>
 				<td><form:input path="login_usuario_b" maxlength="45" id="login_usuario_b"/>
 					<form:errors path="login_usuario_b" cssClass="error" />
+					<form:errors cssClass="error" element="loginInvalido"/>
 					<small>de 4 a 15 caracteres</small>
 				</td>
 		</tr>

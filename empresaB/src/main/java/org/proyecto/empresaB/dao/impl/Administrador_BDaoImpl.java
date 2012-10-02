@@ -26,7 +26,8 @@ public class Administrador_BDaoImpl extends CustomHibernateDaoSupport implements
 
 
 	public void update(Administrador_B administrador_B) {
-		getHibernateTemplate().update(administrador_B);
+		//getHibernateTemplate().update(administrador_B);
+		getHibernateTemplate().merge(administrador_B);
 		
 	}
 

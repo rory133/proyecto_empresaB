@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,6 +9,14 @@
 <title>Lista Administradores</title>
 </head>
 <body>
+
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <td>
+        	<c:url var="editUrl" value="/administradores/?new" />
+			<a href="${editUrl}"   onclick="return confirm('¿Quieres añdir un nuevo producto?')" onmouseover="window.status = 'Pulse para añadir otro administrador'; return true" onmouseout="window.status=''"> <span title='Pulse para Añadir otro administrador'> <img border=0 src="../resources/imagenes/nuevo.jpg" height=68 width=53> </a>
+			
+		</td>
+		</sec:authorize>
 <c:if  test="${!empty administradores}">
 
 <table class="table">
@@ -16,6 +25,7 @@
     <th>APELLIDOS</th>
     <th>DNI/NIF</th>
     <th>E-MAIL</th>
+    <th>USUARIO</th>
     <th>CARGO</th>
     <th>MATRICULA</th>
 
@@ -37,7 +47,13 @@
                 ${administrador.email_b}
         </td>
         <td>
+                ${administrador.login_usuario_b}
+        </td>
+        <td>
                 ${administrador.cargo_b}
+        </td>
+        <td>
+                ${administrador.matricula_b}
         </td>
 
         <td>
