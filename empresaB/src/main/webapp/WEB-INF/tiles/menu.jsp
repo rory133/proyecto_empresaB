@@ -44,8 +44,8 @@ font-family: 'Century Gothic', sans-serif;
  
 #nav li{
 float:left;
-/* position: relative; */
-width: 125px;
+position: relative; 
+width: 100px;
 font-size: 14px;
 font-variant: small-caps;
 border-top:1px solid #004a80;
@@ -72,12 +72,12 @@ border-top: none;
 width: 124px;
 }
  
-#nav .submenu li a{
+/* #nav .submenu li a{
 color: #FFFFFF;
 background: #004a80 url('fondo_menu_vertical.png') repeat-x 0 0;
 width: 114px;
 height: 16px;
-}
+} */
 </style>
 
 </head>
@@ -101,7 +101,7 @@ height: 16px;
   
   <ul id="nav">
   <c:if  test="${empty pageContext.request.userPrincipal.name}">
-	<li><a href="${pageContext.request.contextPath}/clientes/?new">Crear Cuenta</a>
+	<li><a href="${pageContext.request.contextPath}/clientes/?new">CrearCuenta</a>
 	<!-- 	<ul class="submenu">
 			<li><a href="#">Submenu 1</a></li>
 			<li><a href="#">Submenu 2</a></li>
@@ -132,7 +132,14 @@ height: 16px;
 	</li>
 
 
-	<li><a href="#">CLIENTES</a>
+	<li><a href="${pageContext.request.contextPath}/clientes/admin/listado">CLIENTES</a>
+<!-- 		<ul class="submenu">
+			<li><a href="#">Submenu 1</a></li>
+			<li><a href="#">Submenu 2</a></li>
+			<li><a href="#">Submenu 3</a></li>
+		</ul> -->
+	</li>
+	<li><a href="${pageContext.request.contextPath}/clientes/admin/listado">ADMINS</a>
 <!-- 		<ul class="submenu">
 			<li><a href="#">Submenu 1</a></li>
 			<li><a href="#">Submenu 2</a></li>
@@ -169,18 +176,18 @@ height: 16px;
 			<li><a href="#">Submenu 3</a></li>
 		</ul> -->
 	</li>
-<!-- 	<li><a href="#">Menu 4</a>
-		<ul class="submenu">
+ 	<li><a href="#">MI CUENTA</a>
+	<!--	<ul class="submenu">
 			<li><a href="#">Submenu 1</a></li>
 			<li><a href="#">Submenu 2</a></li>
 			<li><a href="#">Submenu 3</a></li>
-		</ul>
-	</li> -->
+		</ul> -->
+	</li>
 	
 	</sec:authorize>
 	
 	
 </ul>
-  <c:out value="${pagecontext.request.userprincipal.role}"/>
+
 </body>
 </html>

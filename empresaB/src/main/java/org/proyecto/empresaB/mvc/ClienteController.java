@@ -167,7 +167,7 @@ public class ClienteController {
 		cliente_b.setENABLED(true);
 		cliente_BServiceImpl.update(cliente_b);
 
-		return new ModelAndView("redirect:listado");
+		return new ModelAndView("redirect:../admin/listado");
 		
 	
 	

@@ -55,14 +55,14 @@
         </td>
         <td>
         	<c:url var="editUrl" value="/clientes/cliente/edit" />
-			<a href="${editUrl}?id=${cliente.idusuarios_b}"   onclick="return confirm('¿Quieres cambiar datos de este cliente?')"> <img border=0 src="../resources/imagenes/modificar.jpg" height=68 width=53> </a>
+			<a href="${editUrl}?id=${cliente.idusuarios_b}"   onclick="return confirm('¿Quieres cambiar datos de este cliente?')" onmouseover="window.status = 'Pulse para Editar cliente'; return true" onmouseout="window.status=''"><span title='Pulse para Editar datos cliente'> <img border=0 src="../../resources/imagenes/modificar.jpg" height=68 width=53> </a>
 			
 		</td>
 		
 		<td>
 
         	<c:url var="editUrl" value="/clientes/admin/borrar" />
-			<a href="${editUrl}?id=${cliente.idusuarios_b}"   onclick="return confirm('¿Quieres borrar este cliente?')"> <img border=0 src="../resources/imagenes/borrar.jpg" height=68 width=53> </a>
+			<a href="${editUrl}?id=${cliente.idusuarios_b}"   onclick="return confirm('¿Quieres borrar este cliente?')"onmouseover="window.status = 'Pulse para eliminara'; return true" onmouseout="window.status=''"><span title='Pulse para Eliminar cliente'> <img border=0 src="../../resources/imagenes/borrar.jpg" height=68 width=53> </a>
 			
 		</td>
 	
