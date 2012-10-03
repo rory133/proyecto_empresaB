@@ -11,6 +11,9 @@ import org.springframework.stereotype.Repository;
 @Repository("Producto_BSeleccionadoDao")
 public class Producto_BSeleccionadoDaoImpl extends CustomHibernateDaoSupport implements Producto_BSeleccionadoDao{
 	public void save(Producto_BSeleccionado producto_BSeleccionado) {
+		
+		System.out.println("productoBseleccionado a guardar: "+ producto_BSeleccionado.getIdproductob());
+		System.out.println("productoBseleccionado id productob a guardar: "+ producto_BSeleccionado.getIdproductob());
 		getHibernateTemplate().save(producto_BSeleccionado);
 	
 	}

@@ -7,26 +7,34 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.proyecto.empresaB.model.Carro_B;
+import org.proyecto.empresaB.model.Cliente_B;
+import org.proyecto.empresaB.model.Producto_B;
+import org.proyecto.empresaB.model.Producto_BSeleccionado;
+import org.proyecto.empresaB.model.Usuario_B;
 import org.proyecto.empresaB.service.impl.Carro_BServiceImpl;
 import org.proyecto.empresaB.service.impl.Cliente_BServiceImpl;
 import org.proyecto.empresaB.service.impl.Producto_BSeleccionadoServiceImpl;
 import org.proyecto.empresaB.service.impl.Productos_BServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@Scope("request")
+@Scope("session")
 @RequestMapping("/carro")
+@SessionAttributes("carro_B")
 public class CarroController {
 
 	
-/*	@Autowired
-	Carro_B carro_b;*/
+	@Autowired
+	private Carro_B carro_b;
 	
 	@Autowired
 	private Productos_BServiceImpl productos_BServiceImpl;
@@ -49,11 +57,56 @@ public class CarroController {
 	@RequestMapping(value="/sumaProducto", method = RequestMethod.GET)
 	public ModelAndView sumaProducto(@RequestParam(value="cantidad")String cantidad, @RequestParam(value="idProducto")String  idProducto, HttpSession session) throws Exception{
 	//	carro_BService.save(carro_b);
+		logger.info("session.getAttribute('carro_b')-al entrar: " + session.getAttribute("carro_b"));
+		if (session.getAttribute("carro_b")==null){
+			logger.info("if (carro_b.getIdcarro_b()==null)");
+			Carro_B carro_b =new Carro_B();
+			User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			logger.info("usuario user user.getUsername() : "+user.getUsername());
+			Usuario_B usuario= new Usuario_B();
+			usuario= cliente_BServiceImpl.findByCliente_B_login_usuario_b(user.getUsername());
+			Cliente_B cliente= new Cliente_B();
+			cliente=(Cliente_B)usuario;
+			carro_b.setCliente_b(cliente);
+			carro_b.setFecha_b(new Date());			
+			carro_BService.save(carro_b);
+			session.setAttribute("carro_b", carro_b);
+			logger.info("if (carro_b.getIdcarro_b()==null) despues    :  " +carro_b.getIdcarro_b() );
+		}
+		
+		carro_b=(Carro_B)session.getAttribute("carro_b");
+		logger.info("imprimo el id del carro: "+carro_b.getIdcarro_b());
+		logger.info("imprimo la fecha del carro: "+carro_b.getFecha_b());
 		//Carro_B carro_b=new Carro_B(new Date(),)
 		logger.info("session.getAttributeNames().toString()"+session.getAttributeNames().toString());
-		
+		logger.info("session.getAttribute('carro_b'): " + session.getAttribute("carro_b"));
+		logger.info("session Id:"+session.getId());
 		logger.info("cantidad Recibida"+ cantidad);
+		
 		logger.info("idproducto Recibido"+ idProducto);
+		logger.info("usuario de la sesion : "+session.getAttribute("user"));
+		logger.info("carro de la sesion : "+session.getAttribute("carro"));
+		
+		
+		logger.info("datos carro id"+carro_b.getIdcarro_b());
+		
+		
+		
+		
+
+		
+	
+		
+		Producto_B producto=new Producto_B();
+		producto=productos_BServiceImpl.findByProducto_BIdProducto_b(idProducto);
+		Producto_BSeleccionado producto_BSeleccionado=new Producto_BSeleccionado();
+		producto_BSeleccionado.setProducto_B(producto);
+		producto_BSeleccionado.setCarro_b(carro_b);	
+		producto_BSeleccionado.setCantidad(Integer.parseInt(cantidad));
+		producto_BSeleccionado.setIdproductob(producto.getIdproductob());
+		producto_BSeleccionadoService.save(producto_BSeleccionado);
+		
+		
 		//HttpSession session=context.
 		
 		return new ModelAndView("redirect:../../productos/listado");

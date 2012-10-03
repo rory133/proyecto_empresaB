@@ -25,6 +25,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class Carro_BDaoImpl extends CustomHibernateDaoSupport implements Carro_BDao {
 
 	public void save(Carro_B carro_B) {
+		System.out.println("datos carro cliente:"+carro_B.getCliente_b().getNombre_b());
+		System.out.println("datos carro fecha:"+carro_B.getFecha_b());
+		System.out.println("datos carro tamaño productos seleccionado"+carro_B.getProducto_BSeleccionado().size());
+		
 		getHibernateTemplate().save(carro_B);
 	
 	}
