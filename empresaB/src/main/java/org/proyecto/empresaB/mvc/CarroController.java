@@ -99,12 +99,28 @@ public class CarroController {
 		
 		Producto_B producto=new Producto_B();
 		producto=productos_BServiceImpl.findByProducto_BIdProducto_b(idProducto);
+		
 		Producto_BSeleccionado producto_BSeleccionado=new Producto_BSeleccionado();
+		
 		producto_BSeleccionado.setProducto_B(producto);
 		producto_BSeleccionado.setCarro_b(carro_b);	
 		producto_BSeleccionado.setCantidad(Integer.parseInt(cantidad));
 		producto_BSeleccionado.setIdproductob(producto.getIdproductob());
+		logger.info("carro_b.getIdcarro_b():"+carro_b.getIdcarro_b());
+		Producto_BSeleccionado producto_BSeleccionado_test=new Producto_BSeleccionado();
+		producto_BSeleccionado_test=producto_BSeleccionadoService.findByProducto_BSeleccionadoIdProducto_b_y_carro_b(String.valueOf(producto.getIdproductob()),String.valueOf( carro_b.getIdcarro_b()));
+		if (null!=producto_BSeleccionado_test){
+		logger.info("producto_BSeleccionado_test idproducto="+producto_BSeleccionado_test.getIdproductob());
+		logger.info("producto_BSeleccionado_test idcarro="+producto_BSeleccionado_test.getCarro_b().getIdcarro_b());
+		producto_BSeleccionadoService.update(producto_BSeleccionado);
+		
+		}else{
 		producto_BSeleccionadoService.save(producto_BSeleccionado);
+		//producto_BSeleccionadoService.update(producto_BSeleccionado);
+		
+		}
+		carro_b.getProducto_BSeleccionado().add(producto_BSeleccionado);
+		//carro_BService.update(carro_b);
 		
 		
 		//HttpSession session=context.

@@ -27,7 +27,7 @@ public class Producto_BSeleccionado implements Serializable {
 	
 	private static final long serialVersionUID = -5527566206302296042L;
 	
-	
+
 	  private Integer cantidad;
 	  private Integer idproductob;
 	  private Producto_B producto_B;
@@ -103,6 +103,13 @@ public class Producto_BSeleccionado implements Serializable {
 	public void setCarro_b(Carro_B carro_b) {
 		this.carro_b = carro_b;
 	}
+
+
+
+
+
+
+
 	
 	
 	

@@ -37,6 +37,12 @@ public class Producto_BSeleccionadoServiceImpl implements Producto_BSeleccionado
 		producto_BSeleccionadoDao.delete(producto_BSeleccionado);
 		
 	}
+	
+	public Producto_BSeleccionado findByProducto_BSeleccionadoIdProducto_b_y_carro_b(String Producto_BSeleccionadoIdProducto_b, String carro_b){
+		
+		return producto_BSeleccionadoDao.findByProducto_BSeleccionadoIdProducto_b_y_carro_b(Producto_BSeleccionadoIdProducto_b,carro_b);
+		
+	}
 
 	public Producto_BSeleccionado findByProducto_BSeleccionadoIdProducto_b(String Producto_BSeleccionadoIdProducto_b) {
 		

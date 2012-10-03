@@ -14,6 +14,8 @@ public interface Producto_BSeleccionadoService {
 	
 	Producto_BSeleccionado findByProducto_BSeleccionadoIdProducto_b(String Producto_BSeleccionadoIdProducto_b);
 	
+	Producto_BSeleccionado findByProducto_BSeleccionadoIdProducto_b_y_carro_b(String Producto_BSeleccionadoIdProducto_b, String carro_b);
+
 	Producto_BSeleccionado findByProducto_BSeleccionado_nombre(String producto_BSeleccionado_nombre);
 	
 	List<Producto_BSeleccionado> findAll ();
