@@ -15,35 +15,6 @@
 
 
 <!-- <script language="javascript">
-function comprobarCampos() 
-{
-
-var form=document.forms[0];
-var campo=form.elements[0];
-var texto=campo.value;
-var numero=parseInt(texto);
-if (numero==''){
-	document.forms[0].elements[0].value='';
-	document.forms[0].elements[1].select();
-	alert("la cantidad no puede estar vacia");
-	}
-else if (isNaN(numero)){
-		document.forms[0].elements[0].value='';
-		document.forms[0].elements[1].select();
-		alert("la cantidad tiene que ser un numero");
-		}
-else{
-	document.forms[0].elements[0].value=numero;
-}
-}
-
-function activarCampo() 
-{
-document.forms[0].elements[0].select();
-}
-</script> -->
-
-<script language="javascript">
 function comprobarCampos(fila) 
 {
 
@@ -67,11 +38,37 @@ else{
 }
 }
 
-function activarCampo() 
+
+</script>
+ -->
+<script language="javascript">
+function comprobarCampos(fila) 
 {
-	var e=document.forms[0].elements['cantidad'];
-	e.focus();
+
+
+var e=document.forms[fila].elements['cantidad'];
+e.focus();
+var texto=e.value;
+var numero=parseInt(texto);
+if (texto==''){
+	document.forms[fila].elements[0].value='';
+	document.forms[fila].elements[0].select();
+	alert("la cantidad no puede estar vacia");
+	}
+else if (isNaN(numero)){
+		document.forms[fila].elements[0].value='';
+		document.forms[fila].elements[0].select();
+		alert("la cantidad tiene que ser un numero");
+		}
+else{
+	document.forms[fila].elements['cantidad'].value=numero;
+	document.forms[fila].elements['pedido'].value=numero;
+
+
 }
+
+}
+
 </script>
 
 
@@ -202,12 +199,19 @@ alert("este campo no está vacío");
         </td>
         
         
-        <td>	
+        <td> 
 			<form id="form1" name="form1" method="GET" action="${pageContext.request.contextPath}/carro/sumaProducto/" >
 			<label >Cantidad deseada:</label>
-			<input name="cantidad" type="text" id="cantidad" onChange="comprobarCampos()" />
+			<input name="cantidad" type="text" id="cantidad" onChange="comprobarCampos(${fila})"  />
+			<%--  <c:out value="${pedido}" /> --%>
+		
+		
+			
+			 
 			<input type= "hidden" name="idProducto" id="idProducto" value= "${producto.idproductob}"/>
-			<input  type="submit" value="Sumar a Carro" />
+				
+			<input  type="submit" value="Sumar a Carro" onFocus="comprobarCampos(${fila})" />
+			
 			<c:out value="valor producto ${producto.idproductob}" />
 			</form>	
 				
