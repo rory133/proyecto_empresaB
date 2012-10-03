@@ -124,8 +124,10 @@ public class CarroController {
 		
 		
 		//HttpSession session=context.
-		
-		return new ModelAndView("redirect:../../productos/listado");
+		ModelAndView mav = new ModelAndView ("redirect:../../productos/listado");
+		mav.addObject("productosSeleccionados", carro_b.getProducto_BSeleccionado());
+		return mav;
+		//return new ModelAndView("redirect:../../productos/listado");
 	}
 	
 
