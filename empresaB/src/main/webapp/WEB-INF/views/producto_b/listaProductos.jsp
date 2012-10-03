@@ -1,3 +1,4 @@
+<%@ page session="true"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> 
@@ -13,23 +14,69 @@
 <title>LISTA DE PRODUCTOS</title>
 
 
-<script language="javascript">
+<!-- <script language="javascript">
 function comprobarCampos() 
 {
 
 var form=document.forms[0];
 var campo=form.elements[0];
 var texto=campo.value;
-if (texto==''){
-alert("la cantidad no puede estar vacia");
-}
 var numero=parseInt(texto);
-if (isNaN(numero)){
-	alert("la cantidad tiene que ser un numero");
+if (numero==''){
+	document.forms[0].elements[0].value='';
+	document.forms[0].elements[1].select();
+	alert("la cantidad no puede estar vacia");
 	}
-document.forms[0].elements[0].value=numero;
+else if (isNaN(numero)){
+		document.forms[0].elements[0].value='';
+		document.forms[0].elements[1].select();
+		alert("la cantidad tiene que ser un numero");
+		}
+else{
+	document.forms[0].elements[0].value=numero;
+}
+}
+
+function activarCampo() 
+{
+document.forms[0].elements[0].select();
+}
+</script> -->
+
+<script language="javascript">
+function comprobarCampos(fila) 
+{
+
+
+var e=document.forms[fila].elements['cantidad'];
+e.focus();
+var texto=e.value;
+var numero=parseInt(texto);
+if (numero==''){
+	document.forms[fila].elements[0].value='';
+	document.forms[fila].elements[1].select();
+	alert("la cantidad no puede estar vacia");
+	}
+else if (isNaN(numero)){
+		document.forms[fila].elements[0].value='';
+		document.forms[fila].elements[1].select();
+		alert("la cantidad tiene que ser un numero");
+		}
+else{
+	document.forms[fila].elements[0].value=numero;
+}
+}
+
+function activarCampo() 
+{
+	var e=document.forms[0].elements['cantidad'];
+	e.focus();
 }
 </script>
+
+
+
+
 
 <!-- <script language="javascript">
 function comprobarCampos()
@@ -67,6 +114,10 @@ alert("este campo no está vacío");
 		</sec:authorize>
 
 <c:if  test="${!empty productos}">
+
+
+<c:set var="fila" value="${0}" scope="page" />
+
 
 <table class="table">
 <tr>
@@ -146,16 +197,18 @@ alert("este campo no está vacío");
         </td>
         <td>
                 ${producto.cantidad_existencias}
+                
+                
         </td>
         
         
         <td>	
 			<form id="form1" name="form1" method="GET" action="${pageContext.request.contextPath}/carro/sumaProducto/" >
 			<label >Cantidad deseada:</label>
-			<input name="cantidad" type="text" id="cantidad" onblur="comprobarCampos()" >
+			<input name="cantidad" type="text" id="cantidad" onChange="comprobarCampos()" />
 			<input type= "hidden" name="idProducto" id="idProducto" value= "${producto.idproductob}"/>
 			<input  type="submit" value="Sumar a Carro" />
-			<c:out value="valor producto ${producto.idproductob}"/>
+			<c:out value="valor producto ${producto.idproductob}" />
 			</form>	
 				
 			
@@ -188,7 +241,7 @@ alert("este campo no está vacío");
 			
 				<form:errors cssClass="error" element="productoSeleecionadoErroneo"/> --%>
 
-	
+	<c:set var="fila" value="${fila+1}" scope="page" />
     </tr>
 </c:forEach>
 </table>

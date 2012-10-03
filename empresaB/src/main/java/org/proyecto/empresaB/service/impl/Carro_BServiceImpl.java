@@ -7,7 +7,11 @@ import org.proyecto.empresaB.model.Carro_B;
 import org.proyecto.empresaB.model.Producto_BSeleccionado;
 import org.proyecto.empresaB.service.Carro_BService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+
+@Service("carroService")
 public class Carro_BServiceImpl implements Carro_BService {
 
 	@Autowired

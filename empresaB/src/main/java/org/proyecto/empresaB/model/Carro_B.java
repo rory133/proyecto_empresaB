@@ -26,8 +26,8 @@ import javax.persistence.JoinTable;
 
 
 @Entity
-@Component
-@Scope("session")
+/*@Component
+@Scope("session")*/
 @Table(name = "carro_b")
 public class Carro_B implements Serializable{
 	
