@@ -167,6 +167,10 @@ public class CarroController {
 		logger.info("producto_BSeleccionado id " +producto_BSeleccionado.getIdproductoSeleccionado());
 		logger.info("producto_BSeleccionado id " +producto_BSeleccionado.getCarro_b().getIdcarro_b());
 		logger.info("producto_BSeleccionado_test id " +producto_BSeleccionado_test.getIdproductoSeleccionado());
+		//actualizacomos el valor de existencia
+		producto.setCantidad_existencias(producto.getCantidad_existencias()+producto_BSeleccionado_test.getCantidad()-Integer.parseInt(cantidad));
+		productos_BServiceImpl.update(producto);
+		//actualizacomos producto_BSeleccionado
 		producto_BSeleccionado.setIdproductoSeleccionado(producto_BSeleccionado_test.getIdproductoSeleccionado());
 		producto_BSeleccionadoService.update(producto_BSeleccionado);
 		
@@ -183,6 +187,10 @@ public class CarroController {
 				mav.addObject("productoPedido",idProducto);
 				return mav;
 				}
+			//actualizacomos el valor de existencia
+		producto.setCantidad_existencias(producto.getCantidad_existencias()-Integer.parseInt(cantidad));
+		productos_BServiceImpl.update(producto);	
+		//salvamos producto_BSeleccionado
 		producto_BSeleccionadoService.save(producto_BSeleccionado);
 		//producto_BSeleccionadoService.update(producto_BSeleccionado);
 		
