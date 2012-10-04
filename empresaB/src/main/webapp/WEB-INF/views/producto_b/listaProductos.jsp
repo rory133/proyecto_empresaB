@@ -246,8 +246,11 @@ alert("este campo no está vacío");
 			<input type= "hidden" name="idProducto" id="idProducto" value= "${producto.idproductob}"/>
 				
 			<input  type="submit" value="Sumar a Carro" onFocus="comprobarCampos(${fila})" />
-	
-			
+			<c:set var="esteProducto" value="${producto.idproductob}"/>
+			<c:set var="productoPedido" value="${productoPedido}"/>
+			 <c:if  test="${esteProducto==productoPedido}">
+	        	<h4> ${errordeCantidad}	</h4>
+			</c:if>	
 			</form>	
 				
 			

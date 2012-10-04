@@ -14,6 +14,7 @@ import java.util.Set;
 import org.proyecto.empresaB.util.ListaProductosSeleccionados;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.proyecto.empresaB.model.Carro_B;
@@ -30,6 +31,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,7 +70,20 @@ public class CarroController {
 	@RequestMapping(value="/sumaProducto", method = RequestMethod.GET)
 	public ModelAndView sumaProducto(@RequestParam(value="cantidad")String cantidad, @RequestParam(value="idProducto")String  idProducto, HttpSession session) throws Exception{
 	//	carro_BService.save(carro_b);
+		
 		logger.info("session.getAttribute('carro_b')-al entrar: " + session.getAttribute("carro_b"));
+
+		/*
+		result.addError(new ObjectError("loginInvalido", "Este usuario ya existe"));
+		
+		if(result.hasErrors()) {
+			logger.info("addCliente_B_form ------tiene errores----"+result.toString());
+			logger.info("errores: "+result.toString());
+			return new ModelAndView("redirect:../../productos/listado").addAllObjects(result.getModel());
+			// return new ModelAndView("cliente_b/edit", "cliente_b",new Cliente_B()).addAllObjects(result.getModel());
+
+			}*/
+		
 		if (session.getAttribute("carro_b")==null){
 			logger.info("if (carro_b.getIdcarro_b()==null)");
 			Carro_B carro_b =new Carro_B();
@@ -133,6 +149,17 @@ public class CarroController {
 		
 		logger.info("producto_BSeleccionado_test=producto_BSeleccionadoService.findByProducto_BSeleccionadoIdProducto_b_y_carro_b.....");
 		if (null!=producto_BSeleccionado_test){
+			//controlamos que el pedido no exceda la cantidad de existencias. aqui se tiene en cuenta los que se habian pedido antes
+			if ((producto_BSeleccionado_test.getCantidad()+producto.getCantidad_existencias())<(Integer.parseInt(cantidad))){
+		     	List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+				ModelAndView mav= new ModelAndView("producto_b/listaProductos");
+				mav.addObject("productos", lista);
+				mav.addObject("errordeCantidad","no puede pedir mas cantidad que las existencias");
+				mav.addObject("productoPedido",idProducto);
+				return mav;
+				}
+			
+			
 		//logger.info("producto_BSeleccionado_test idproducto="+producto_BSeleccionado_test.getIdproductob());
 		logger.info("producto_BSeleccionado_test idcarro="+producto_BSeleccionado_test.getCarro_b().getIdcarro_b());
 		logger.info("producto_BSeleccionado cantidad" +producto_BSeleccionado.getCantidad());
@@ -144,6 +171,18 @@ public class CarroController {
 		producto_BSeleccionadoService.update(producto_BSeleccionado);
 		
 		}else{
+			//controlamos que el pedido no exceda la cantidad de existencias.
+			
+			logger.info("producto_cantidad de existencias::::::::"+producto.getCantidad_existencias());
+			logger.info("producto_cantidad pedidas::::::::"+Integer.parseInt(cantidad));
+			if (producto.getCantidad_existencias()<(Integer.parseInt(cantidad))){
+		     	List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+				ModelAndView mav= new ModelAndView("producto_b/listaProductos");
+				mav.addObject("productos", lista);
+				mav.addObject("errordeCantidad","no puede pedir mas cantidad que las existencias");
+				mav.addObject("productoPedido",idProducto);
+				return mav;
+				}
 		producto_BSeleccionadoService.save(producto_BSeleccionado);
 		//producto_BSeleccionadoService.update(producto_BSeleccionado);
 		
@@ -158,7 +197,7 @@ public class CarroController {
 		logger.info("tamaño elemento de listaproductos"+listaProductos.size());
 		
 	*/
-		ModelAndView mav= new ModelAndView("producto_b/listaProductos");
+	
 		List<Producto_BSeleccionado> listaProductosRecibida=producto_BSeleccionadoService.findByProducto_BSeleccionadoPorIdcarro_b(String.valueOf( carro_b.getIdcarro_b()));
 		
 		//logger.info("tamaño elemento de listaproductos"+listaProductos.size());
@@ -178,6 +217,7 @@ public class CarroController {
 		
 		
 		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		ModelAndView mav= new ModelAndView("producto_b/listaProductos");
 		mav.addObject("productos", lista);
 		mav.addObject("productosSeleccionados",listaProductos);
 		return mav;
