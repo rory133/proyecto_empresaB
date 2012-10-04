@@ -2,6 +2,10 @@ package org.proyecto.empresaB.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -32,7 +38,23 @@ public class Producto_B implements Serializable{
 	  @GeneratedValue
 	  private Integer idproductob;
 	  
+	/*  
+	  @OneToMany
+	  @JoinColumn(name="IDPRODUCTOB")               
+	  @org.hibernate.annotations.IndexColumn(name="IDPRODUCTOSELECCIONADO")
+	  */
 	  
+	/*  @OneToMany(fetch = FetchType.LAZY, mappedBy = "idproductob")	  */
+	 // @OneToMany(fetch = FetchType.LAZY, mappedBy = "producto_b")
+	  
+/*	  @OneToMany
+	  @JoinColumn(name="IDPRODUCTOB")
+	   private List<Producto_BSeleccionado> productos_b_seleccionados=new ArrayList<Producto_BSeleccionado>(0);
+	     */        
+	  
+	  
+	  @OneToMany(fetch = FetchType.LAZY, mappedBy = "producto_b")
+	  private Set<Producto_BSeleccionado> productos_b_seleccionados=new HashSet<Producto_BSeleccionado>(0);
 
 	  
 	  @Size(min = 1, max = 45, message= "hay que indicar un codigo de producto")
@@ -207,7 +229,35 @@ public class Producto_B implements Serializable{
 	public void setPrecio_b(BigDecimal precio_b) {
 		this.precio_b = precio_b;
 	}
-	
+
+
+
+
+
+
+
+	public Set<Producto_BSeleccionado> getProductos_b_seleccionados() {
+		return productos_b_seleccionados;
+	}
+
+
+
+
+
+
+
+	public void setProductos_b_seleccionados(
+			Set<Producto_BSeleccionado> productos_b_seleccionados) {
+		this.productos_b_seleccionados = productos_b_seleccionados;
+	}
+
+
+
+
+
+
+
+
 	
 	
 

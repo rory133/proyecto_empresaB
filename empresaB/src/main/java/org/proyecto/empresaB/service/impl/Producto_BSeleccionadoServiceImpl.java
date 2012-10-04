@@ -54,6 +54,11 @@ public class Producto_BSeleccionadoServiceImpl implements Producto_BSeleccionado
 		return producto_BSeleccionadoDao.findByProducto_BSeleccionado_nombre(producto_BSeleccionado_nombre);
 	}
 	
+	public List <Producto_BSeleccionado> findByProducto_BSeleccionadoPorIdcarro_b(String carro_b){
+		
+		return producto_BSeleccionadoDao.findByProducto_BSeleccionadoPorIdcarro_b(carro_b);
+	}
+	
 	public List<Producto_BSeleccionado> findAll (){
 		return producto_BSeleccionadoDao.findAll();
 	}

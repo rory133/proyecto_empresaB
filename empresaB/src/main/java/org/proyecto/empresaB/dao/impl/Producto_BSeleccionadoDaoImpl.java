@@ -13,8 +13,8 @@ import org.springframework.stereotype.Repository;
 public class Producto_BSeleccionadoDaoImpl extends CustomHibernateDaoSupport implements Producto_BSeleccionadoDao{
 	public void save(Producto_BSeleccionado producto_BSeleccionado) {
 		
-		System.out.println("productoBseleccionado a guardar en save: "+ producto_BSeleccionado.getIdproductob());
-		System.out.println("productoBseleccionado id productob a guardar en save : "+ producto_BSeleccionado.getIdproductob());
+		//System.out.println("productoBseleccionado a guardar en save: "+ producto_BSeleccionado.getIdproductob());
+		//System.out.println("productoBseleccionado id productob a guardar en save : "+ producto_BSeleccionado.getIdproductob());
 		System.out.println("CANTIDAD productoBseleccionado id productob a guardar en save : "+ producto_BSeleccionado.getCantidad());
 		getHibernateTemplate().save(producto_BSeleccionado);
 		//getHibernateTemplate().merge(producto_BSeleccionado);
@@ -26,8 +26,8 @@ public class Producto_BSeleccionadoDaoImpl extends CustomHibernateDaoSupport imp
 
 	public void update(Producto_BSeleccionado producto_BSeleccionado) {
 		
-		System.out.println("productoBseleccionado a guardar en update: "+ producto_BSeleccionado.getIdproductob());
-		System.out.println("productoBseleccionado id productob a guardar en update: "+ producto_BSeleccionado.getIdproductob());
+		//System.out.println("productoBseleccionado a guardar en update: "+ producto_BSeleccionado.getIdproductob());
+		//System.out.println("productoBseleccionado id productob a guardar en update: "+ producto_BSeleccionado.getIdproductob());
 		System.out.println("CANTIDAD productoBseleccionado id productob a guardar en update : "+ producto_BSeleccionado.getCantidad());
 		//getHibernateTemplate().update(producto_BSeleccionado);
 		getHibernateTemplate().merge(producto_BSeleccionado);
@@ -78,7 +78,7 @@ public class Producto_BSeleccionadoDaoImpl extends CustomHibernateDaoSupport imp
 		Iterator<Producto_BSeleccionado> itr = list.iterator();
 		while (itr.hasNext()) {
 			Producto_BSeleccionado element = itr.next();
-			if(element.getIdproductob()==Integer.parseInt(Producto_BSeleccionadoIdProducto_b)){
+			if(element.getProducto_b().getIdproductob()==Integer.parseInt(Producto_BSeleccionadoIdProducto_b)){
 				return element;
 			}
 		}
@@ -87,6 +87,20 @@ public class Producto_BSeleccionadoDaoImpl extends CustomHibernateDaoSupport imp
 		return null;
 		
 		}
+		
+	}
+	@SuppressWarnings("unchecked")
+	public List <Producto_BSeleccionado> findByProducto_BSeleccionadoPorIdcarro_b(String carro_b){
+		System.out.println("carro_b en find por id carro: "+carro_b);
+		List <Producto_BSeleccionado> list = getHibernateTemplate().find(
+        	"from Producto_BSeleccionado where idcarro_b = ?", Integer.parseInt(carro_b));
+		System.out.println("tamaño lista: "+list.size());
+		if(list.isEmpty()){
+			return null;
+		}		
+		return list;
+		
+	
 		
 	}
 	

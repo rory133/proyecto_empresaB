@@ -44,26 +44,29 @@ public class Carro_BDaoImpl extends CustomHibernateDaoSupport implements Carro_B
 		getHibernateTemplate().delete(carro_B);
 		
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	public Carro_B findByCarro_BIdCarro_b(String carro_BIdCarro_b) {
 		List<Carro_B> list = getHibernateTemplate().find(
                      "from Carro_B where idcarros_b = ?",Integer.parseInt(carro_BIdCarro_b));
 		return (Carro_B)list.get(0);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Producto_BSeleccionado>findByTodosCarro_BIdCarro_b(String carro_BIdCarro_b) {
 		List<Producto_BSeleccionado> list = getHibernateTemplate().find(
                     "from Producto_BSeleccionado where idcarro_b = ?",Integer.parseInt(carro_BIdCarro_b));
 		return list;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Carro_B>findByTodosCarro_BIdCliente_b(String carro_BIdCliente_b) {
 		List<Carro_B> list = getHibernateTemplate().find(
                     "from Carro_B where idcliente = ?",Integer.parseInt(carro_BIdCliente_b) );
 		return list;
 	}
 
-
+	@SuppressWarnings("unchecked")
 	public List<Carro_B> findAll(){
 		List <Carro_B> list = getHibernateTemplate().find("from Carro_B");
 		return list;

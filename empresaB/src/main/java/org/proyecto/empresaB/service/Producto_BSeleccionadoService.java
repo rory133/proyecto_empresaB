@@ -18,6 +18,8 @@ public interface Producto_BSeleccionadoService {
 
 	Producto_BSeleccionado findByProducto_BSeleccionado_nombre(String producto_BSeleccionado_nombre);
 	
+	List <Producto_BSeleccionado> findByProducto_BSeleccionadoPorIdcarro_b(String carro_b);
+	
 	List<Producto_BSeleccionado> findAll ();
 
 }

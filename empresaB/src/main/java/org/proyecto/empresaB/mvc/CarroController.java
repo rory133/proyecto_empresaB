@@ -1,6 +1,13 @@
 package org.proyecto.empresaB.mvc;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -100,18 +107,37 @@ public class CarroController {
 		Producto_B producto=new Producto_B();
 		producto=productos_BServiceImpl.findByProducto_BIdProducto_b(idProducto);
 		
+		
+		
 		Producto_BSeleccionado producto_BSeleccionado=new Producto_BSeleccionado();
 		
-		producto_BSeleccionado.setProducto_B(producto);
+		producto_BSeleccionado.setProducto_b(producto);
 		producto_BSeleccionado.setCarro_b(carro_b);	
 		producto_BSeleccionado.setCantidad(Integer.parseInt(cantidad));
-		producto_BSeleccionado.setIdproductob(producto.getIdproductob());
+		//producto_BSeleccionado.setIdproductob(producto.getIdproductob());
+		
+		
+		/*
+		producto.getProductos_b_seleccionados().add(producto_BSeleccionado);
+		productos_BServiceImpl.update(producto);
+		
+		*/
+		
 		logger.info("carro_b.getIdcarro_b():"+carro_b.getIdcarro_b());
 		Producto_BSeleccionado producto_BSeleccionado_test=new Producto_BSeleccionado();
+		logger.info("Producto_BSeleccionado producto_BSeleccionado_test=new Producto_BSeleccionado();");
 		producto_BSeleccionado_test=producto_BSeleccionadoService.findByProducto_BSeleccionadoIdProducto_b_y_carro_b(String.valueOf(producto.getIdproductob()),String.valueOf( carro_b.getIdcarro_b()));
+		
+		logger.info("producto_BSeleccionado_test=producto_BSeleccionadoService.findByProducto_BSeleccionadoIdProducto_b_y_carro_b.....");
 		if (null!=producto_BSeleccionado_test){
-		logger.info("producto_BSeleccionado_test idproducto="+producto_BSeleccionado_test.getIdproductob());
+		//logger.info("producto_BSeleccionado_test idproducto="+producto_BSeleccionado_test.getIdproductob());
 		logger.info("producto_BSeleccionado_test idcarro="+producto_BSeleccionado_test.getCarro_b().getIdcarro_b());
+		logger.info("producto_BSeleccionado cantidad" +producto_BSeleccionado.getCantidad());
+		logger.info("producto_BSeleccionado id producto" +producto_BSeleccionado.getProducto_b().getIdproductob());
+		logger.info("producto_BSeleccionado id " +producto_BSeleccionado.getIdproductoSeleccionado());
+		logger.info("producto_BSeleccionado id " +producto_BSeleccionado.getCarro_b().getIdcarro_b());
+		logger.info("producto_BSeleccionado_test id " +producto_BSeleccionado_test.getIdproductoSeleccionado());
+		producto_BSeleccionado.setIdproductoSeleccionado(producto_BSeleccionado_test.getIdproductoSeleccionado());
 		producto_BSeleccionadoService.update(producto_BSeleccionado);
 		
 		}else{
@@ -121,11 +147,22 @@ public class CarroController {
 		}
 		carro_b.getProducto_BSeleccionado().add(producto_BSeleccionado);
 		//carro_BService.update(carro_b);
+		logger.info("carro_b.getProducto_BSeleccionado().size()="+carro_b.getProducto_BSeleccionado().size());
 		
+	/*	
+		Set<Producto_BSeleccionado> listaProductos = new HashSet<Producto_BSeleccionado>(0);
+		listaProductos.addAll(carro_b.getProducto_BSeleccionado());
+		logger.info("tamaño elemento de listaproductos"+listaProductos.size());
 		
-		//HttpSession session=context.
-		ModelAndView mav = new ModelAndView ("redirect:../../productos/listado");
-		mav.addObject("productosSeleccionados", carro_b.getProducto_BSeleccionado());
+	*/
+		ModelAndView mav= new ModelAndView("producto_b/listaProductos");
+		//List<Producto_BSeleccionado> listaProductos=producto_BSeleccionadoService.findByProducto_BSeleccionadoPorIdcarro_b(String.valueOf( carro_b.getIdcarro_b()));
+		
+		//logger.info("tamaño elemento de listaproductos"+listaProductos.size());
+	
+		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		mav.addObject("productos", lista);
+	//	mav.addObject("productosSeleccionados",listaProductos);
 		return mav;
 		//return new ModelAndView("redirect:../../productos/listado");
 	}

@@ -90,9 +90,9 @@ alert("este campo no está vacío");
 <h2><c:out value="${bienvenida1}" /></h2>
 <h2><c:out value="${bienvenida2}" /></h2>
 <h2><c:out value="${bienvenida3}" /></h2>
-			<c:if  test="${!empty productosSeleccionados}">
+<%-- 			<c:if  test="${!empty productosSeleccionados}">
 			<c:out value="no esta vacio" /> 
-			</c:if>
+			</c:if> --%>
 
 <!-- <style type="text/css">body{background-color:red;}</style> -->
 <h3> BIENVENIDO A LA PAGINA DE EMPRESAB <c:out value="${pageContext.request.userPrincipal.name}"/></h3>
@@ -205,10 +205,22 @@ alert("este campo no está vacío");
 			<form id="form1" name="form1" method="GET" action="${pageContext.request.contextPath}/carro/sumaProducto/" >
 			<label >Cantidad deseada:</label>
 			<input name="cantidad" type="text" id="cantidad" onChange="comprobarCampos(${fila})"  />
-			<c:if  test="${!empty productosSeleccionados}">
-			<c:out value="no esta vacio" /> 
-			</c:if>
+			
+			
+<%-- 		<c:if  test="${!empty productosSeleccionados}">		
+			<c:forEach items="${productosSeleccionados}" var="productoSelec">
+			  			${productoSelec.idproductoB}
+			</c:forEach>
+		</c:if>  --%>
 		
+		
+		
+<%-- 			<c:if  test="${!empty productosSeleccionados}">
+					<c:forEach items="${productosSeleccionados}" var="productoSelec">
+						${productoSelec.idproductoB}
+					</c:forEach>
+
+			</c:if> --%>
 		
 			
 			 
