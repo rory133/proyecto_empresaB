@@ -149,43 +149,15 @@ alert("este campo no está vacío");
     
         <td>  
               
-          <%--    <c:set var="variable" value= "${pageContext.request.contextPath}/resources/imagenes/${producto.idproductob}.jpg"/>
-             <c:out value="${variable}" />
-              
-               <img  src="${variable}"width="200" height="200" /> --%>
-               
-          <%--   <c:set var="variable" value="${System.Properties("user.home")"}/>
-             <c:out value="${variable}" /> --%>
+
              
              
-             
-     <%--         <c:url var="imageUrl" value="C:\\imagenes\\empresaB\\" /> --%>
-             
-             <%-- <c:out value="${imageUrl}" /> --%>
-             
-             
-         <%--    <c:set var="variable" value="${imageUrl}${producto.idproductob}.jpg"/> --%>
-          <%--    <c:out value="${variable}" /> --%>
-             <%-- 
-              <c:out value="${variable}" />
-              
-              <img  src="${variable}"width="100" height="100" /> 
-              
-              <c:set var="variable" value="/empresaB/imagen/${producto.idproductob}.jpg" />              
-              <img  src="${variable}"width="100" height="100" /> 
-               <c:out value="${variable}" />
-                --%>
+
 
               <c:set var="variable" value="${pageContext.request.contextPath}/imagen/${producto.idproductob}.jpg" />              
               <img  src="${variable}"width="100" height="100" /> 
               
-              
-              
-             <%--   <c:out value="${variable}" /> --%>
-             
-               
-               
-             <%--  <img  src="${producto.imagen_b}" width="200" height="200" />  --%>
+
               
 
 
@@ -211,34 +183,22 @@ alert("este campo no está vacío");
                 
         </td>
         
-        
+        <sec:authorize access="hasRole('ROLE_CLIENTE')">
         <td> 
 			<form id="form1" name="form1" method="GET" action="${pageContext.request.contextPath}/carro/sumaProducto/" >
 			<label >Cantidad deseada:</label>
 			<input name="cantidad" type="text" id="cantidad" onChange="comprobarCampos(${fila})"  />
 
- 
-		
-	
-		
 			<c:if  test="${!empty productosSeleccionados}">
 					<c:forEach items="${productosSeleccionados}" var="productoSelec">
 					<c:set var="esteProducto" value="${producto.idproductob}"/>
 					<c:set var="productoPasado" value="${productoSelec.idproducto_b}"/>
-					 <%-- <c:if  test="${productoSelec.idproducto_b}eq${producto.idproductob}"> --%>
 					  <c:if  test="${esteProducto==productoPasado}">
-					<%-- 	${productoSelec.nombreProducto}
-						${productoSelec.idCarro} 
-						--%>
-			<h4>	Seleccionadas ${productoSelec.cantidad} unidades </h4>
-				<%-- 
-						${productoSelec.idProductoSeleccionado}
-						${productoSelec.idproducto_b}
-						${producto.idproductob}
-						 --%>
+			
+							<h4>Seleccionadas ${productoSelec.cantidad} unidades </h4>
+
 					   </c:if>	
 					</c:forEach>
-
 			</c:if>
 		
 		
@@ -252,10 +212,8 @@ alert("este campo no está vacío");
 	        	<h4> ${errordeCantidad}	</h4>
 			</c:if>	
 			</form>	
-				
-			
 		</td>
-        
+       </sec:authorize> 
         
         <sec:authorize access="hasRole('ROLE_ADMIN')">
         <td>
@@ -273,15 +231,7 @@ alert("este campo no está vacío");
 		</sec:authorize>
 		
 		
-		
-				
-<%-- 				<input type="text" name="cantidad">
-				<c:url var="canti" value="cantidad" />
-				<c:out value="${cantidad}"/>
-			<c:url var="editUrl" value="/carro/sumaProducto/" />
-			<a href="${editUrl}?,idProducto=${producto.idproductob}"   onclick="return confirm('¿Quieres añadir este producto?')" onmouseover="window.status = 'Pulse para Añadir Producto'; return true" onmouseout="window.status=''"> <span title='Pulse para Borrar Producto'> <img border=0 src="../resources/imagenes/borrar.jpg" height=68 width=53> </a>
-			
-				<form:errors cssClass="error" element="productoSeleecionadoErroneo"/> --%>
+
 
 	<c:set var="fila" value="${fila+1}" scope="page" />
     </tr>
