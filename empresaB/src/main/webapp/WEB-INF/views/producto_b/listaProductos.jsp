@@ -13,6 +13,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>LISTA DE PRODUCTOS</title>
 
+<style type="text/css">
+h1 {color:#3B0B0B;}
+p {color:blue;}
+h4 {color:#B40431;}
+</style>
 
 <!-- <script language="javascript">
 function comprobarCampos(fila) 
@@ -60,6 +65,11 @@ else if (isNaN(numero)){
 		document.forms[fila].elements[0].select();
 		alert("la cantidad tiene que ser un numero");
 		}
+else if (numero<0){
+	document.forms[fila].elements[0].value='';
+	document.forms[fila].elements[0].select();
+	alert("la cantidad tiene que ser un numero positivo");
+	}
 else{
 	document.forms[fila].elements['cantidad'].value=numero;
 	document.forms[fila].elements['pedido'].value=numero;
@@ -213,11 +223,20 @@ alert("este campo no está vacío");
 		
 			<c:if  test="${!empty productosSeleccionados}">
 					<c:forEach items="${productosSeleccionados}" var="productoSelec">
-						${productoSelec.nombreProducto}
-						${productoSelec.idCarro}
-						${productoSelec.cantidad}
+					<c:set var="esteProducto" value="${producto.idproductob}"/>
+					<c:set var="productoPasado" value="${productoSelec.idproducto_b}"/>
+					 <%-- <c:if  test="${productoSelec.idproducto_b}eq${producto.idproductob}"> --%>
+					  <c:if  test="${esteProducto==productoPasado}">
+					<%-- 	${productoSelec.nombreProducto}
+						${productoSelec.idCarro} 
+						--%>
+			<h4>	Seleccionadas ${productoSelec.cantidad} unidades </h4>
+				<%-- 
 						${productoSelec.idProductoSeleccionado}
 						${productoSelec.idproducto_b}
+						${producto.idproductob}
+						 --%>
+					   </c:if>	
 					</c:forEach>
 
 			</c:if>
@@ -228,7 +247,7 @@ alert("este campo no está vacío");
 				
 			<input  type="submit" value="Sumar a Carro" onFocus="comprobarCampos(${fila})" />
 	
-			<c:out value="valor producto ${producto.idproductob}" />
+			
 			</form>	
 				
 			
