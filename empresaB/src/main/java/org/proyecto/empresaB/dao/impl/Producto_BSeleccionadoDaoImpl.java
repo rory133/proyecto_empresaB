@@ -94,7 +94,8 @@ public class Producto_BSeleccionadoDaoImpl extends CustomHibernateDaoSupport imp
 		System.out.println("carro_b en find por id carro: "+carro_b);
 		List <Producto_BSeleccionado> list = getHibernateTemplate().find(
         	"from Producto_BSeleccionado where idcarro_b = ?", Integer.parseInt(carro_b));
-		System.out.println("tamaño lista: "+list.size());
+		System.out.println("tamaño lista en findByProducto_BSeleccionadoPorIdcarro_b: "+list.size());
+		
 		if(list.isEmpty()){
 			return null;
 		}		

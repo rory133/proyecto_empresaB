@@ -5,10 +5,13 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
+import org.proyecto.empresaB.util.ListaProductosSeleccionados;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
@@ -156,13 +159,27 @@ public class CarroController {
 		
 	*/
 		ModelAndView mav= new ModelAndView("producto_b/listaProductos");
-		//List<Producto_BSeleccionado> listaProductos=producto_BSeleccionadoService.findByProducto_BSeleccionadoPorIdcarro_b(String.valueOf( carro_b.getIdcarro_b()));
+		List<Producto_BSeleccionado> listaProductosRecibida=producto_BSeleccionadoService.findByProducto_BSeleccionadoPorIdcarro_b(String.valueOf( carro_b.getIdcarro_b()));
 		
 		//logger.info("tamaño elemento de listaproductos"+listaProductos.size());
-	
+		Set<ListaProductosSeleccionados> listaProductos=new HashSet<ListaProductosSeleccionados>(0);
+		Iterator<Producto_BSeleccionado> itr =listaProductosRecibida.iterator();
+		while (itr.hasNext()) {
+			Producto_BSeleccionado element = itr.next();
+			ListaProductosSeleccionados lista = new ListaProductosSeleccionados();
+			lista.setCantidad(element.getCantidad());
+			lista.setIdCarro(element.getCarro_b().getIdcarro_b());
+			lista.setIdproducto_b(element.getProducto_b().getIdproductob());
+			lista.setIdProductoSeleccionado(element.getIdproductoSeleccionado());
+			lista.setNombreProducto(element.getProducto_b().getNombre_productoB());
+			listaProductos.add(lista);
+			
+		}
+		
+		
 		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
 		mav.addObject("productos", lista);
-	//	mav.addObject("productosSeleccionados",listaProductos);
+		mav.addObject("productosSeleccionados",listaProductos);
 		return mav;
 		//return new ModelAndView("redirect:../../productos/listado");
 	}
