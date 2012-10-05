@@ -333,6 +333,8 @@ public class CarroController {
 			listaCarrosPedidos.setLoginCliente(elementoCarro.getCliente_b().getLogin_usuario_b());
 			listaCarrosPedidos.setPagado(elementoCarro.getPagado());
 			listaCarrosPedidos.setEnviado(elementoCarro.getEnviado());
+			listaCarrosPedidos.setIdCarro(elementoCarro.getIdcarro_b());
+			listaCarrosPedidos.setFechaPedido(elementoCarro.getFecha_b());
 			logger.info("iprimo el login del usuario desde listaCarrospedidos: "+listaCarrosPedidos.getLoginCliente());
 			List<Producto_BSeleccionado> listaProductosCarro=producto_BSeleccionadoService.findByProducto_BSeleccionadoPorIdcarro_b(String.valueOf(elementoCarro.getIdcarro_b()));
 			logger.info("iprimo el tamaño de la lista de productos de cada carro: "+listaProductosCarro.size());

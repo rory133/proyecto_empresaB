@@ -19,6 +19,11 @@ p {color:blue;}
 h4 {color:#B40431;}
 </style>
 
+<script language="javascript">
+function abrirVentana() {
+window.open("/verCarro","miventana","width=300,height=200,menubar=no");
+}
+</script>
 
 
 
@@ -35,25 +40,58 @@ h4 {color:#B40431;}
 
 
 <c:if  test="${!empty TodosLosPedidos}">
+<table class="table">
 <tr>
+  <thead>
+  <th>FECHA PEDIDO</th>
+  <th>IDCARRO</th>
 	<th>IDCLIENTE</th>
 	<th>USUARIO</th>
     <th>PAGADO</th>
     <th>ENVIADO</th>
+     <thead>
 </tr>
   
   <c:forEach items="${TodosLosPedidos}" var="carro">
-  <thead>
+
   <tr>
+  
+        <td>  
+     	 ${carro.fechaPedido} 
+   		</td>
+   		
+   		<td>  
+     	 ${carro.idCarro} 
+   		</td>
+   		
+          <td>  
+     	 ${carro.idCliente} 
+   		</td>
    
         <td>  
-           
+      ${carro.loginCliente} 
    		</td>
-  
-  </tr>
-  <thead>
-  </c:forEach>
+   		<td>  
+   		
+        <input  type="submit" name="enviado" value= "${carro.enviado}" >
+   		</td>
+   		<td>  
+      <input  type="submit" name="pagado" value="${carro.pagado}" >
+   		</td>
+		<td>
 
+        	<c:url var="editUrl" value="/productos/admin/borrar" />
+			<a href="${editUrl}?id=#${producto.idproductob}"    onclick="return confirm('¿Quieres borrar este producto?')" onmouseover="window.status = 'Pulse para Borrar Producto'; return true" onmouseout="window.status=''"> <span title='Pulse para Borrar Producto'> <img border=0 src="../resources/imagenes/borrar.jpg" height=34 width=25> </a>
+			
+		</td>
+		
+		   		<td>  
+      <input  type="submit" name="verDetalles" onClick="abrirVentana()" >
+   		</td>
+  </tr>
+ 
+  </c:forEach>
+</table>
 <c:if  test="${!empty carro.listaProductosSeleccionados}">
 
 

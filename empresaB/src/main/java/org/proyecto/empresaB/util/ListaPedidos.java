@@ -1,13 +1,16 @@
 package org.proyecto.empresaB.util;
 
+import java.util.Date;
 import java.util.Set;
 
 public class ListaPedidos {
 	
 	Integer IdCliente;
+	Integer IdCarro;
 	String LoginCliente;
 	Boolean pagado;
 	Boolean enviado;
+	Date fechaPedido;
 	Set<ListaProductosSeleccionados> listaProductosSeleccionados;
 	
 	public ListaPedidos() {
@@ -55,6 +58,22 @@ public class ListaPedidos {
 	public void setListaProductosSeleccionados(
 			Set<ListaProductosSeleccionados> listaProductosSeleccionados) {
 		this.listaProductosSeleccionados = listaProductosSeleccionados;
+	}
+
+	public Date getFechaPedido() {
+		return fechaPedido;
+	}
+
+	public void setFechaPedido(Date fechaPedido) {
+		this.fechaPedido = fechaPedido;
+	}
+
+	public Integer getIdCarro() {
+		return IdCarro;
+	}
+
+	public void setIdCarro(Integer idCarro) {
+		IdCarro = idCarro;
 	}
 
 
