@@ -167,6 +167,7 @@
 
 	
 </form:form>
-
+<c:url var="editUrl" value="../productos/listado" />
+			<a href="${editUrl}"    onmouseover="window.status = 'Pulse para volver al listado de productos'; return true" onmouseout="window.status=''"> <span title='Pulse para volver al listado de productos'> <img border=0 src="../resources/imagenes/listado.jpg" height=68 width=53> </a>
 </body>
 </html>

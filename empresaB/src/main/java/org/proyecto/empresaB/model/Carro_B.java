@@ -39,7 +39,7 @@ public class Carro_B implements Serializable{
 	private Set<Producto_BSeleccionado> producto_BSeleccionado = new HashSet<Producto_BSeleccionado>(0);
 	private Cliente_B cliente_b;
 	private Boolean pagado;
-	
+	private Boolean enviado;
 	
 
 	public Carro_B() {
@@ -128,6 +128,20 @@ public class Carro_B implements Serializable{
 	public void setPagado(Boolean pagado) {
 		this.pagado = pagado;
 	}
+
+	
+	@Column(name = "ENVIADO")
+	public Boolean getEnviado() {
+		return enviado;
+	}
+
+
+	public void setEnviado(Boolean enviado) {
+		this.enviado = enviado;
+	}
+	
+	
+	
 	
 	
 /*	@OneToMany(fetch = FetchType.LAZY, mappedBy = "carro_b")

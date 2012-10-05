@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
+import org.proyecto.empresaB.util.ListaPedidos;
 import org.proyecto.empresaB.util.ListaProductosSeleccionados;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -310,6 +310,53 @@ public class CarroController {
 		return mav;*/
 		
 		return new ModelAndView("redirect: verCarro");
+	}
+	
+	@RequestMapping(value="/verTodosLosPedidos", method = RequestMethod.GET)
+	public ModelAndView verTodosLosPedidos( HttpSession session) throws Exception{
+		
+		logger.info("en /carro/verTodos/LosPedidos");
+		Set<ListaPedidos> listaCarrosAMostrar=new HashSet<ListaPedidos>(0);
+		
+		List<Carro_B> listaCarros =carro_BService.findAll();
+		
+		logger.info("tamaño lista carro: "+listaCarros.size());
+		
+		Iterator<Carro_B> iterCarro =listaCarros.iterator();
+		
+		
+		
+		while (iterCarro.hasNext()) {
+			ListaPedidos listaCarrosPedidos = new ListaPedidos();
+			Carro_B elementoCarro = iterCarro.next();
+			listaCarrosPedidos.setIdCliente(elementoCarro.getCliente_b().getIdusuarios_b());
+			listaCarrosPedidos.setLoginCliente(elementoCarro.getCliente_b().getLogin_usuario_b());
+			listaCarrosPedidos.setPagado(elementoCarro.getPagado());
+			listaCarrosPedidos.setEnviado(elementoCarro.getEnviado());
+			logger.info("iprimo el login del usuario desde listaCarrospedidos: "+listaCarrosPedidos.getLoginCliente());
+			List<Producto_BSeleccionado> listaProductosCarro=producto_BSeleccionadoService.findByProducto_BSeleccionadoPorIdcarro_b(String.valueOf(elementoCarro.getIdcarro_b()));
+			logger.info("iprimo el tamaño de la lista de productos de cada carro: "+listaProductosCarro.size());
+			Iterator<Producto_BSeleccionado> itr =listaProductosCarro.iterator();
+			Set<ListaProductosSeleccionados> listaProductos=new HashSet<ListaProductosSeleccionados>(0);
+			while (itr.hasNext()) {
+				Producto_BSeleccionado element = itr.next();
+				ListaProductosSeleccionados lista = new ListaProductosSeleccionados();
+				lista.setCantidad(element.getCantidad());
+				lista.setIdCarro(element.getCarro_b().getIdcarro_b());
+				lista.setIdproducto_b(element.getProducto_b().getIdproductob());
+				lista.setIdProductoSeleccionado(element.getIdproductoSeleccionado());
+				lista.setNombreProducto(element.getProducto_b().getNombre_productoB());
+				listaProductos.add(lista);			
+			}
+			listaCarrosPedidos.setListaProductosSeleccionados(listaProductos);
+			listaCarrosAMostrar.add(listaCarrosPedidos);
+		}
+		
+		
+		ModelAndView mav= new ModelAndView("carro_b/verPedidos");
+		mav.addObject("TodosLosPedidos", listaCarrosAMostrar);
+		return mav;
+		
 	}
 }
 
