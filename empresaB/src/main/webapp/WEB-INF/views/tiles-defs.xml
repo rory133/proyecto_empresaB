@@ -71,16 +71,18 @@
 		 <put-attribute name="body" value="/WEB-INF/views/administrador_b/modificar.jsp"/>
       </definition>
       
-      <!-- 
-      <definition name="home" extends="base.definition">
-		 <put-attribute name="title" value="LOGIN"/>
-		 <put-attribute name="body" value="/WEB-INF/views/login.jsp"/>
-      </definition>
-       -->
-      
+    
+     
       <definition name="views/login" extends="base.definition">
 		 <put-attribute name="title" value="LOGIN"/>
 		 <put-attribute name="body" value="/WEB-INF/views/login.jsp"/>
+      </definition>
+      
+      
+      
+      <definition name="carro_b/verCarroActual" extends="base.definition">
+		 <put-attribute name="title" value="TU CARRO"/>
+		 <put-attribute name="body" value="/WEB-INF/views/carro_b/verCarroActual.jsp"/>
       </definition>
            
 </tiles-definitions>

@@ -94,19 +94,19 @@ alert("este campo no está vacío");
 }
 </script> -->
 
-<jsp:useBean class="org.proyecto.empresaB.service.impl.Producto_BSeleccionadoServiceImpl" id="listaSeleccionados" scope="session"/>
+
 
 </head>
 <body class="body">
 <h2><c:out value="${bienvenida1}" /></h2>
 <h2><c:out value="${bienvenida2}" /></h2>
 <h2><c:out value="${bienvenida3}" /></h2>
-			<c:if  test="${!empty productosSeleccionados}">
-			<c:out value="no esta vacio" /> 
-			</c:if>
+
 
 <!-- <style type="text/css">body{background-color:red;}</style> -->
 <h3> BIENVENIDO A LA PAGINA DE EMPRESAB <c:out value="${pageContext.request.userPrincipal.name}"/></h3>
+<h4> ${errorCarroVacio}	</h4>
+
 <h1> Lista de productos</h1>
 
 <%-- <c:out value="${pageContext.request.contextPath}"/> --%>

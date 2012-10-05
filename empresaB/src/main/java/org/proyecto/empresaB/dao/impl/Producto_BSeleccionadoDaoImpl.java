@@ -34,6 +34,7 @@ public class Producto_BSeleccionadoDaoImpl extends CustomHibernateDaoSupport imp
 	}
 
 	public void delete(Producto_BSeleccionado producto_BSeleccionado) {
+		System.out.println("en delete productoSeleccionado: "+producto_BSeleccionado.getIdproductoSeleccionado());
 		getHibernateTemplate().delete(producto_BSeleccionado);
 		
 	}
@@ -67,18 +68,23 @@ public class Producto_BSeleccionadoDaoImpl extends CustomHibernateDaoSupport imp
 	
 	@SuppressWarnings("unchecked")
 	public Producto_BSeleccionado findByProducto_BSeleccionadoIdProducto_b_y_carro_b(String Producto_BSeleccionadoIdProducto_b, String carro_b){
-		System.out.println("carro_b en find: "+carro_b);
-		System.out.println("productoseleccionado en find: "+Producto_BSeleccionadoIdProducto_b);
+		System.out.println("carro_b en find-por iddproducto y por idCarro: "+carro_b);
+		System.out.println("productoseleccionado en find-por iddproducto y por idCarro: "+Producto_BSeleccionadoIdProducto_b);
 		List <Producto_BSeleccionado> list = getHibernateTemplate().find(
         	"from Producto_BSeleccionado where IDCARRO_B = ?", Integer.parseInt(carro_b));
+		System.out.println("despues de buscar productos find-por iddproducto y por idCarro");
 		if(list.isEmpty()){
 			return null;
 		}
 		else{
+			
+		System.out.println("hay productos seleccionados con ese carro  en find ");
 		Iterator<Producto_BSeleccionado> itr = list.iterator();
 		while (itr.hasNext()) {
 			Producto_BSeleccionado element = itr.next();
+			System.out.println("en bucle while id del producto actual : "+element.getIdproductoSeleccionado());
 			if(element.getProducto_b().getIdproductob()==Integer.parseInt(Producto_BSeleccionadoIdProducto_b)){
+				System.out.println("Se encontro ese producto en find, esta es su id:"+element.getIdproductoSeleccionado());
 				return element;
 			}
 		}
@@ -96,9 +102,9 @@ public class Producto_BSeleccionadoDaoImpl extends CustomHibernateDaoSupport imp
         	"from Producto_BSeleccionado where idcarro_b = ?", Integer.parseInt(carro_b));
 		System.out.println("tamaño lista en findByProducto_BSeleccionadoPorIdcarro_b: "+list.size());
 		
-		if(list.isEmpty()){
+	/*	if(list.isEmpty()){
 			return null;
-		}		
+		}*/		
 		return list;
 		
 	

@@ -160,7 +160,7 @@ height: 16px;
 	
 		<sec:authorize access="hasRole('ROLE_CLIENTE')">
 	
-	<li><a href="#">VER CARRO</a>
+	<li><a href="${pageContext.request.contextPath}/carro/verCarro">VER CARRO</a>
 <!-- 		<ul class="submenu">
 			<li><a href="#">Submenu 1</a></li>
 			<li><a href="#">Submenu 2</a></li>

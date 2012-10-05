@@ -207,8 +207,7 @@ public class CarroController {
 	*/
 	
 		List<Producto_BSeleccionado> listaProductosRecibida=producto_BSeleccionadoService.findByProducto_BSeleccionadoPorIdcarro_b(String.valueOf( carro_b.getIdcarro_b()));
-		
-		//logger.info("tamaño elemento de listaproductos"+listaProductos.size());
+		logger.info("tamaño lista productosSeleccionados en esteCarro"+listaProductosRecibida.size());
 		Set<ListaProductosSeleccionados> listaProductos=new HashSet<ListaProductosSeleccionados>(0);
 		Iterator<Producto_BSeleccionado> itr =listaProductosRecibida.iterator();
 		while (itr.hasNext()) {
@@ -231,7 +230,88 @@ public class CarroController {
 		return mav;
 		//return new ModelAndView("redirect:../../productos/listado");
 	}
+	@RequestMapping(value="/verCarro", method = RequestMethod.GET)
+	public ModelAndView verCarro( HttpSession session) throws Exception{
+		if (session.getAttribute("carro_b")==null){
+			logger.info("en ver Carro, e carro esta vacio");
+			ModelAndView mav= new ModelAndView("producto_b/listaProductos");
+			List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+			mav.addObject("errorCarroVacio","¡¡¡el carro esta vacio, aun no ha seleccionado ningun producto!!!");
+			mav.addObject("productos", lista);		
+			return mav;
+
+		}
+		
+		Set<ListaProductosSeleccionados> listaProductos=new HashSet<ListaProductosSeleccionados>(0);
+		List<Producto_BSeleccionado> listaProductosRecibida=producto_BSeleccionadoService.findByProducto_BSeleccionadoPorIdcarro_b(String.valueOf( carro_b.getIdcarro_b()));
+		if (!listaProductosRecibida.isEmpty()){
+		//logger.info("tamaño lista productosSeleccionados en esteCarro"+listaProductosRecibida.size());
+		
+		Iterator<Producto_BSeleccionado> itr =listaProductosRecibida.iterator();
+		while (itr.hasNext()) {
+			Producto_BSeleccionado element = itr.next();
+			ListaProductosSeleccionados lista = new ListaProductosSeleccionados();
+			lista.setCantidad(element.getCantidad());
+			lista.setIdCarro(element.getCarro_b().getIdcarro_b());
+			lista.setIdproducto_b(element.getProducto_b().getIdproductob());
+			lista.setIdProductoSeleccionado(element.getIdproductoSeleccionado());
+			lista.setNombreProducto(element.getProducto_b().getNombre_productoB());
+			listaProductos.add(lista);
+			
+		}
+		
+		}else listaProductos=null;
+		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		ModelAndView mav= new ModelAndView("carro_b/verCarroActual");
+		mav.addObject("productos", lista);
+		mav.addObject("productosSeleccionados",listaProductos);
+		return mav;
+	}
 	
+	@RequestMapping(value="/eliminarProductoCarro", method = RequestMethod.GET)
+	public ModelAndView eliminarProductoCarro(@RequestParam(value="idProductoSeleccionado")String  idProductoSeleccionado,@RequestParam(value="idProducto")String  idProducto, @RequestParam(value="cantidad")String cantidad,  HttpSession session) throws Exception{
+		//eliminar el producto
+		Producto_BSeleccionado producto_BSeleccionado=new Producto_BSeleccionado();
+		producto_BSeleccionado=producto_BSeleccionadoService.findByProducto_BSeleccionadoIdProducto_b_y_carro_b(idProducto, String.valueOf(carro_b.getIdcarro_b()));
+		producto_BSeleccionadoService.delete(producto_BSeleccionado);
+		
+		//sumamos cantidad a existencias del producto
+		Producto_B producto=new Producto_B();
+		producto=productos_BServiceImpl.findByProducto_BIdProducto_b(idProducto);
+		producto.setCantidad_existencias(producto.getCantidad_existencias()+Integer.parseInt(cantidad));
+		productos_BServiceImpl.update(producto);
+		
+		
+		
+		//devolvemos vista a verCarroActual
+		
+/*		
+		List<Producto_BSeleccionado> listaProductosRecibida=producto_BSeleccionadoService.findByProducto_BSeleccionadoPorIdcarro_b(String.valueOf( carro_b.getIdcarro_b()));
+		logger.info("tamaño lista productosSeleccionados en esteCarro"+listaProductosRecibida.size());
+		Set<ListaProductosSeleccionados> listaProductos=new HashSet<ListaProductosSeleccionados>(0);
+		Iterator<Producto_BSeleccionado> itr =listaProductosRecibida.iterator();
+		while (itr.hasNext()) {
+			Producto_BSeleccionado element = itr.next();
+			ListaProductosSeleccionados lista = new ListaProductosSeleccionados();
+			lista.setCantidad(element.getCantidad());
+			lista.setIdCarro(element.getCarro_b().getIdcarro_b());
+			lista.setIdproducto_b(element.getProducto_b().getIdproductob());
+			lista.setIdProductoSeleccionado(element.getIdproductoSeleccionado());
+			lista.setNombreProducto(element.getProducto_b().getNombre_productoB());
+			listaProductos.add(lista);
+			
+		}
+		
+		
+		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		ModelAndView mav= new ModelAndView("carro_b/verCarroActual");
+		mav.addObject("productos", lista);
+		mav.addObject("productosSeleccionados",listaProductos);
+		return mav;*/
+		
+		return new ModelAndView("redirect: verCarro");
+	}
+}
 
 	
-}
+
