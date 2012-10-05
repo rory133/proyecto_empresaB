@@ -20,8 +20,9 @@ h4 {color:#B40431;}
 </style>
 
 <script language="javascript">
-function abrirVentana() {
-window.open("/verCarro","miventana","width=300,height=200,menubar=no");
+function abrirVentana(URL) {
+	
+window.open(URL,"miventana","width=600,height=400,menubar=no");
 }
 </script>
 
@@ -86,7 +87,7 @@ window.open("/verCarro","miventana","width=300,height=200,menubar=no");
 		</td>
 		
 		   		<td>  
-      <input  type="submit" name="verDetalles" onClick="abrirVentana()" >
+      <input  type="submit" name="verDetalles" value="verDetalles" onClick="javascript:abrirVentana('verDetallesCarro?idCarro=${carro.idCarro}')" >
    		</td>
   </tr>
  

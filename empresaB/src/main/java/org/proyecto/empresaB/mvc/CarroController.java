@@ -360,6 +360,36 @@ public class CarroController {
 		return mav;
 		
 	}
+	
+	@RequestMapping(value="/verDetallesCarro", method = RequestMethod.GET)
+	public ModelAndView verDetallesCarro( @RequestParam(value="idCarro")String  idCarro) throws Exception{
+		
+		Set<ListaProductosSeleccionados> listaProductos=new HashSet<ListaProductosSeleccionados>(0);
+		List<Producto_BSeleccionado> listaProductosRecibida=producto_BSeleccionadoService.findByProducto_BSeleccionadoPorIdcarro_b(idCarro);
+		if (!listaProductosRecibida.isEmpty()){
+		//logger.info("tamaño lista productosSeleccionados en esteCarro"+listaProductosRecibida.size());
+		
+		Iterator<Producto_BSeleccionado> itr =listaProductosRecibida.iterator();
+		while (itr.hasNext()) {
+			Producto_BSeleccionado element = itr.next();
+			ListaProductosSeleccionados lista = new ListaProductosSeleccionados();
+			lista.setCantidad(element.getCantidad());
+			lista.setIdCarro(element.getCarro_b().getIdcarro_b());
+			lista.setIdproducto_b(element.getProducto_b().getIdproductob());
+			lista.setIdProductoSeleccionado(element.getIdproductoSeleccionado());
+			lista.setNombreProducto(element.getProducto_b().getNombre_productoB());
+			listaProductos.add(lista);
+			
+		}
+		
+		}else listaProductos=null;
+		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
+		ModelAndView mav= new ModelAndView("carro_b/verCarroActual");
+		mav.addObject("productos", lista);
+		mav.addObject("productosSeleccionados",listaProductos);
+		return mav;
+	}
+	
 }
 
 	
