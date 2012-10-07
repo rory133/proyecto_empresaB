@@ -86,27 +86,14 @@ height: 16px;
 
 
 
-<!-- <ul>
-<li> <a href="#">Home</a></li>
-</ul>
-<ul>
-<li><a href="#">Products</a></li>
-<li><a href="#">Services</a></li>
-<li><a href="#">About</a></li> 
-<li><a href="#">Contact</a></li>
-<li><a style="background-image: none;" href="#">Contact</a></li>
-</ul> -->
+
   
 
   
   <ul id="nav">
   <c:if  test="${empty pageContext.request.userPrincipal.name}">
 	<li><a href="${pageContext.request.contextPath}/clientes/?new">CrearCuenta</a>
-	<!-- 	<ul class="submenu">
-			<li><a href="#">Submenu 1</a></li>
-			<li><a href="#">Submenu 2</a></li>
-			<li><a href="#">Submenu 3</a></li>
-		</ul>-->
+
 	</li>  
 	</c:if>
 	
@@ -124,34 +111,18 @@ height: 16px;
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
 	
 	<li><a href="${pageContext.request.contextPath}/productos/listado">PRODUCTOS</a>
-<!-- 		<ul class="submenu">
-			<li><a href="#">Submenu 1</a></li>
-			<li><a href="#">Submenu 2</a></li>
-			<li><a href="#">Submenu 3</a></li>
-		</ul> -->
+
 	</li>
 
 
 	<li><a href="${pageContext.request.contextPath}/clientes/admin/listado">CLIENTES</a>
-<!-- 		<ul class="submenu">
-			<li><a href="#">Submenu 1</a></li>
-			<li><a href="#">Submenu 2</a></li>
-			<li><a href="#">Submenu 3</a></li>
-		</ul> -->
+
 	</li>
 	<li><a href="${pageContext.request.contextPath}/administradores/listado">ADMINS</a>
-<!-- 		<ul class="submenu">
-			<li><a href="#">Submenu 1</a></li>
-			<li><a href="#">Submenu 2</a></li>
-			<li><a href="#">Submenu 3</a></li>
-		</ul> -->
+
 	</li>
 	<li><a href="${pageContext.request.contextPath}/carro/verTodosLosPedidos">PEDIDOS</a>
-<!-- 		<ul class="submenu">
-			<li><a href="#">Submenu 1</a></li>
-			<li><a href="#">Submenu 2</a></li>
-			<li><a href="#">Submenu 3</a></li>
-		</ul> -->
+
 	</li>
 	
 	</sec:authorize>
@@ -161,27 +132,15 @@ height: 16px;
 		<sec:authorize access="hasRole('ROLE_CLIENTE')">
 	
 	<li><a href="${pageContext.request.contextPath}/carro/verCarro">VER CARRO</a>
-<!-- 		<ul class="submenu">
-			<li><a href="#">Submenu 1</a></li>
-			<li><a href="#">Submenu 2</a></li>
-			<li><a href="#">Submenu 3</a></li>
-		</ul> -->
+
 	</li>
 
 
-	<li><a href="#">VER PEDIDOS</a>
-<!-- 		<ul class="submenu">
-			<li><a href="#">Submenu 1</a></li>
-			<li><a href="#">Submenu 2</a></li>
-			<li><a href="#">Submenu 3</a></li>
-		</ul> -->
+		<li><a href="${pageContext.request.contextPath}/carro/verTodosLosPedidos">MIS PEDIDOS</a>
+
 	</li>
  	<li><a href="${pageContext.request.contextPath}/clientes/cliente/modificarMiCuenta_B/?login=${pageContext.request.userPrincipal.name}">MI CUENTA</a>
-	<!--	<ul class="submenu">
-			<li><a href="#">Submenu 1</a></li>
-			<li><a href="#">Submenu 2</a></li>
-			<li><a href="#">Submenu 3</a></li>
-		</ul> -->
+
 	</li>
 	
 	</sec:authorize>

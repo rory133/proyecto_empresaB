@@ -41,6 +41,8 @@ window.open(URL,"miventana","width=900,height=400,menubar=no");
 
 
 <c:if  test="${!empty TodosLosPedidos}">
+
+<sec:authorize access="hasRole('ROLE_ADMIN')">
 <table class="table">
 <tr>
   <thead>
@@ -74,7 +76,7 @@ window.open(URL,"miventana","width=900,height=400,menubar=no");
       
       	</td>
       	
-      <sec:authorize access="hasRole('ROLE_ADMIN')">
+   
        <td>  
    		          <c:set var="carroPagado" value="${carro.pagado}"/>
 	        <c:if  test="${carroPagado==true}">
@@ -109,38 +111,70 @@ window.open(URL,"miventana","width=900,height=400,menubar=no");
 	       
    		</td>
 
+     	<td>  
+     			 <input  type="submit" name="verDetalles" value="verDetalles" onClick="javascript:abrirVentana('verDetallesCarro?idCarro=${carro.idCarro}')" >
+   		</td>
+     
+     
+       </c:forEach>
+</table>
       </sec:authorize> 
       
       
-      <sec:authorize access="hasRole('ROLE_CLIENTE')">
-       <td>  
-   		 ${carro.enviado}
+  <sec:authorize access="hasRole('ROLE_CLIENTE')">
+    <table class="table">
+<tr>
+  <thead>
+  <th>FECHA PEDIDO</th>
+  <th>IDCARRO</th>
+    <th>PAGADO</th>
+    <th>ENVIADO</th>
+     <thead>
+</tr>
+    <c:forEach items="${TodosLosPedidos}" var="carro">
+    
+    
+   <c:set var="loginCliente" value="${carro.loginCliente}"/>  
+   <c:set var="clienteSesion" value="${pageContext.request.userPrincipal.name}"/>
+   <c:out value="${pageContext.request.userPrincipal.name}"/>
+   <c:out value="${loginCliente}"/>
+   <c:out value="${clienteSesion}"/>
+   
+    <c:if  test="${loginCliente==clienteSesion}">
+ <%--   <c:if  test="${true}"> --%>
+	 <tr>
+  
+        <td>  
+     	 ${carro.fechaPedido} 
+   		</td>
+   		
+   		<td>  
+     	 ${carro.idCarro} 
+   		</td>
+    
+     	
+   
+       <td>  ${carro.pagado}
+   		       
    		</td>
    		
    		
    		<td>  
-   		${carro.pagado}
-           
+   		
+   		${carro.enviado}
+      
    		</td>
 
-      </sec:authorize>
-   		
-   		
-		<td>
-		
-
-        	<c:url var="editUrl" value="/carro/borrarCarro" />
-			<a href="${editUrl}?idCarro=${carro.idCarro} "    onclick="return confirm('¿Quieres borrar este Carro?')" onmouseover="window.status = 'Pulse para Borrar Producto'; return true" onmouseout="window.status=''"> <span title='Pulse para Borrar este Carro'> <img border=0 src="../resources/imagenes/borrar.jpg" height=34 width=25> </a>
-			
-		</td>
-		
-		   		<td>  
-      <input  type="submit" name="verDetalles" value="verDetalles" onClick="javascript:abrirVentana('verDetallesCarro?idCarro=${carro.idCarro}')" >
+     	<td>  
+     			 <input  type="submit" name="verDetalles" value="verDetalles" onClick="javascript:abrirVentana('verDetallesCarro?idCarro=${carro.idCarro}')" >
    		</td>
-  </tr>
- 
-  </c:forEach>
-</table>
+     </tr>
+      </c:if>
+    </c:forEach>
+    
+ </sec:authorize> 
+ 		 	
+		</table>
 
 </c:if>
 <c:if  test="${empty TodosLosPedidos}">

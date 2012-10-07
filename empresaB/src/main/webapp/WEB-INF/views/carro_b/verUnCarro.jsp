@@ -48,8 +48,9 @@ h4 {color:#B40431;}
 	<th>IMAGEN</th>
     <th>CODIGO PRODUCTO</th>
     <th>CANTIDAD PEDIDA</th>
+    <sec:authorize access="hasRole('ROLE_ADMIN')">   
     <th>ELIMINAR</th>
-
+    </sec:authorize>
   
 </tr>
 

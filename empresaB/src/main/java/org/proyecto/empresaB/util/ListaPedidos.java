@@ -3,7 +3,7 @@ package org.proyecto.empresaB.util;
 import java.util.Date;
 import java.util.Set;
 
-public class ListaPedidos {
+public class ListaPedidos implements Comparable <ListaPedidos> {
 	
 	Integer IdCliente;
 	Integer IdCarro;
@@ -12,6 +12,12 @@ public class ListaPedidos {
 	Boolean enviado;
 	Date fechaPedido;
 	Set<ListaProductosSeleccionados> listaProductosSeleccionados;
+	
+	//ordenamos la lista por IdCarro
+	  @Override
+	 public int compareTo(ListaPedidos listaPedidos){
+		  return this.IdCarro.compareTo(listaPedidos.IdCarro);
+	    }
 	
 	public ListaPedidos() {
 	

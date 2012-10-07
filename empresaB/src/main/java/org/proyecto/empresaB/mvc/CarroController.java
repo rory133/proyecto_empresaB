@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.proyecto.empresaB.util.ListaPedidos;
 import org.proyecto.empresaB.util.ListaProductosSeleccionados;
@@ -94,7 +96,10 @@ public class CarroController {
 			Cliente_B cliente= new Cliente_B();
 			cliente=(Cliente_B)usuario;
 			carro_b.setCliente_b(cliente);
-			carro_b.setFecha_b(new Date());			
+			carro_b.setFecha_b(new Date());
+			carro_b.setEnviado(false);
+			carro_b.setPagado(false);
+			logger.info("antes de salvar carroooooo ");
 			carro_BService.save(carro_b);
 			session.setAttribute("carro_b", carro_b);
 			logger.info("if (carro_b.getIdcarro_b()==null) despues    :  " +carro_b.getIdcarro_b() );
@@ -316,9 +321,15 @@ public class CarroController {
 	public ModelAndView verTodosLosPedidos( HttpSession session) throws Exception{
 		
 		logger.info("en /carro/verTodos/LosPedidos");
-		Set<ListaPedidos> listaCarrosAMostrar=new HashSet<ListaPedidos>(0);
+		//Set<ListaPedidos> listaCarrosAMostrar=new HashSet<ListaPedidos>(0);
+		//Set<ListaPedidos> listaCarrosAMostrar=new HashSet<ListaPedidos>();
+		//SortedSet<ListaPedidos> listaCarrosAMostrar=new TreeSet<ListaPedidos>();
+		//que sea una lista ordenada
+		Set<ListaPedidos> listaCarrosAMostrar=new TreeSet<ListaPedidos>();
+	
 		
 		List<Carro_B> listaCarros =carro_BService.findAll();
+		
 		
 		logger.info("tamaño lista carro: "+listaCarros.size());
 		

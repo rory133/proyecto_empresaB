@@ -5,6 +5,7 @@ import org.proyecto.empresaB.model.Carro_B;
 import org.proyecto.empresaB.model.Producto_BSeleccionado;
 import org.proyecto.empresaB.util.CustomHibernateDaoSupport;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.hibernate.Query;
@@ -26,10 +27,14 @@ public class Carro_BDaoImpl extends CustomHibernateDaoSupport implements Carro_B
 
 	public void save(Carro_B carro_B) {
 		System.out.println("datos carro cliente:"+carro_B.getCliente_b().getNombre_b());
+		System.out.println("datos carro IdCliente:"+carro_B.getCliente_b().getIdusuarios_b());
 		System.out.println("datos carro fecha:"+carro_B.getFecha_b());
+		System.out.println("datos carro pagado:"+carro_B.getPagado());
+		System.out.println("datos carro enviado:"+carro_B.getEnviado());
 		System.out.println("datos carro tamaño productos seleccionado"+carro_B.getProducto_BSeleccionado().size());
 		
 		getHibernateTemplate().save(carro_B);
+		System.out.println("salvado carro");
 	
 	}
 
@@ -68,7 +73,9 @@ public class Carro_BDaoImpl extends CustomHibernateDaoSupport implements Carro_B
 
 	@SuppressWarnings("unchecked")
 	public List<Carro_B> findAll(){
-		List <Carro_B> list = getHibernateTemplate().find("from Carro_B");
+		System.out.println("en finAll de Carrodaoimpl");
+		List <Carro_B> list = getHibernateTemplate().find("from Carro_B order by idcarro_b");
+	
 		return list;
 	}
 
