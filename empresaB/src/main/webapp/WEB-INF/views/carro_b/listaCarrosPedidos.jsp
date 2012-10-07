@@ -22,7 +22,7 @@ h4 {color:#B40431;}
 <script language="javascript">
 function abrirVentana(URL) {
 	
-window.open(URL,"miventana","width=600,height=400,menubar=no");
+window.open(URL,"miventana","width=900,height=400,menubar=no");
 }
 </script>
 
@@ -71,18 +71,66 @@ window.open(URL,"miventana","width=600,height=400,menubar=no");
    
         <td>  
       ${carro.loginCliente} 
+      
+      	</td>
+      	
+      <sec:authorize access="hasRole('ROLE_ADMIN')">
+       <td>  
+   		          <c:set var="carroPagado" value="${carro.pagado}"/>
+	        <c:if  test="${carroPagado==true}">
+	        <c:url var="editUrl" value="/carro/cambioEstadoCarroPagado" />
+			<a href="${editUrl}?idCarro=${carro.idCarro} "    onclick="return confirm('¿Quieres cabiar el estado del Carro a No Pagago?')" onmouseover="window.status = 'Pulse para cambiar estado a No Pagado'; return true" onmouseout="window.status=''"> <span title='Pulse para Cambiar estado a No Pagado'> <img border=0 src="../resources/imagenes/verdadero.jpg" height=34 width=25> </a>
+	        
+	        </c:if>
+	        
+	       <c:set var="carroPagado" value="${carro.pagado}"/>
+	        <c:if  test="${carroPagado==false}">
+	        <c:url var="editUrl" value="/carro/cambioEstadoCarroPagado" />
+			<a href="${editUrl}?idCarro=${carro.idCarro} "    onclick="return confirm('¿Quieres cabiar el estado del Carro a Pagado?')" onmouseover="window.status = 'Pulse para cambiar estado a Pagado'; return true" onmouseout="window.status=''"> <span title='Pulse para Cambiar estado a Pagado'> <img border=0 src="../resources/imagenes/false.jpg" height=34 width=25> </a>
+	        
+	        </c:if>
    		</td>
-   		<td>  
    		
-        <input  type="submit" name="enviado" value= "${carro.enviado}" >
-   		</td>
+   		
    		<td>  
-      <input  type="submit" name="pagado" value="${carro.pagado}" >
+          <c:set var="carroEnviado" value="${carro.enviado}"/>
+	        <c:if  test="${carroEnviado==true}">
+	        <c:url var="editUrl" value="/carro/cambioEstadoCarroEnviado" />
+			<a href="${editUrl}?idCarro=${carro.idCarro} "    onclick="return confirm('¿Quieres cabiar el estado del Carro a No enviado?')" onmouseover="window.status = 'Pulse para cambiar estado a No enviado'; return true" onmouseout="window.status=''"> <span title='Pulse para Cambiar estado a No enviado'> <img border=0 src="../resources/imagenes/verdadero.jpg" height=34 width=25> </a>
+	        
+	        </c:if>
+	        
+	       <c:set var="carroEnviado" value="${carro.enviado}"/>
+	        <c:if  test="${carroEnviado==false}">
+	        <c:url var="editUrl" value="/carro/cambioEstadoCarroEnviado" />
+			<a href="${editUrl}?idCarro=${carro.idCarro} "    onclick="return confirm('¿Quieres cabiar el estado del Carro a Enviado?')" onmouseover="window.status = 'Pulse para cambiar estado a Enviado'; return true" onmouseout="window.status=''"> <span title='Pulse para Cambiar estado a Enviado'> <img border=0 src="../resources/imagenes/false.jpg" height=34 width=25> </a>
+	        
+	        </c:if>
+	       
    		</td>
-		<td>
 
-        	<c:url var="editUrl" value="/productos/admin/borrar" />
-			<a href="${editUrl}?id=#${producto.idproductob}"    onclick="return confirm('¿Quieres borrar este producto?')" onmouseover="window.status = 'Pulse para Borrar Producto'; return true" onmouseout="window.status=''"> <span title='Pulse para Borrar Producto'> <img border=0 src="../resources/imagenes/borrar.jpg" height=34 width=25> </a>
+      </sec:authorize> 
+      
+      
+      <sec:authorize access="hasRole('ROLE_CLIENTE')">
+       <td>  
+   		 ${carro.enviado}
+   		</td>
+   		
+   		
+   		<td>  
+   		${carro.pagado}
+           
+   		</td>
+
+      </sec:authorize>
+   		
+   		
+		<td>
+		
+
+        	<c:url var="editUrl" value="/carro/borrarCarro" />
+			<a href="${editUrl}?idCarro=${carro.idCarro} "    onclick="return confirm('¿Quieres borrar este Carro?')" onmouseover="window.status = 'Pulse para Borrar Producto'; return true" onmouseout="window.status=''"> <span title='Pulse para Borrar este Carro'> <img border=0 src="../resources/imagenes/borrar.jpg" height=34 width=25> </a>
 			
 		</td>
 		
@@ -93,90 +141,7 @@ window.open(URL,"miventana","width=600,height=400,menubar=no");
  
   </c:forEach>
 </table>
-<c:if  test="${!empty carro.listaProductosSeleccionados}">
 
-
-<c:set var="fila" value="${0}" scope="page" />
-
-
-<table class="table">
-<tr>
-	<th>FILA</th>
-	<th>IMAGEN</th>
-    <th>CODIGO PRODUCTO</th>
-    <th>CANTIDAD PEDIDA</th>
-    <th>ELIMINAR</th>
-
-  
-</tr>
-
-<c:forEach items="${carro.listaProductosSeleccionados}" var="productosSeleccionados">
-    <tr>
-   
-        <td>  
-               ${fila+1} 
-   		</td>
-
-        <td>
-           
-             
-
-
-              <c:set var="variable" value="${pageContext.request.contextPath}/imagen/${productosSeleccionados.idproducto_b}.jpg" />              
-              <img  src="${variable}"width="100" height="100" /> 
-              
-
-              
-
-
-
-
-        </td>
-
-        <td>
-                ${productosSeleccionados.nombreProducto}
-        </td>
-        <td>
-                ${productosSeleccionados.cantidad}
-        </td>
-        <td>
-        <c:url var="editUrl" value="/carro/eliminarProductoCarro" />
-			<a href="${editUrl}?idProductoSeleccionado=${productosSeleccionados.idProductoSeleccionado}&idProducto=${productosSeleccionados.idproducto_b}&cantidad=${productosSeleccionados.cantidad}"    onclick="return confirm('¿Quieres borrar este producto?')" onmouseover="window.status = 'Pulse para eliminar el Producto del carro'; return true" onmouseout="window.status=''"> <span title='Pulse para eliminar el Producto del carro'> <img border=0 src="../resources/imagenes/borrar.jpg" height=68 width=53> </a>
-			
-                ${productosSeleccionados.idProductoSeleccionado}
-        </td>
-
-        
-        <sec:authorize access="hasRole('ROLE_CLIENTE')">
-
-       </sec:authorize> 
-        
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-<%--         <td>
-        	<c:url var="editUrl" value="/productos/admin/edit" />
-			<a href="${editUrl}?id=${producto.idproductob}"   onclick="return confirm('¿Quieres cambiar datos de este producto?')" onmouseover="window.status = 'Pulse para Editar Producto'; return true" onmouseout="window.status=''"> <span title='Pulse para Editar Producto'> <img border=0 src="../resources/imagenes/modificar.jpg" height=68 width=53> </a>
-			
-		</td>
-		
-		<td>
-
-        	<c:url var="editUrl" value="/productos/admin/borrar" />
-			<a href="${editUrl}?id=${producto.idproductob}"    onclick="return confirm('¿Quieres borrar este producto?')" onmouseover="window.status = 'Pulse para Borrar Producto'; return true" onmouseout="window.status=''"> <span title='Pulse para Borrar Producto'> <img border=0 src="../resources/imagenes/borrar.jpg" height=68 width=53> </a>
-			
-		</td> --%>
-		</sec:authorize>
-		
-		
-
-
-	<c:set var="fila" value="${fila+1}" scope="page" />
-    </tr>
-
-
-
-</c:forEach>
-</table>
-</c:if>
 </c:if>
 <c:if  test="${empty TodosLosPedidos}">
 		<h4>no hay pedidos a mostrar</h4>	

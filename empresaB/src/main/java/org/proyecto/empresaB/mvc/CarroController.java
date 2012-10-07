@@ -384,12 +384,57 @@ public class CarroController {
 		
 		}else listaProductos=null;
 		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
-		ModelAndView mav= new ModelAndView("carro_b/verCarroActual");
+		ModelAndView mav= new ModelAndView("carro_b/verDetallesCarro");
 		mav.addObject("productos", lista);
 		mav.addObject("productosSeleccionados",listaProductos);
 		return mav;
 	}
+	@RequestMapping(value="/borrarCarro", method = RequestMethod.GET)
+	public ModelAndView borrarCarro( @RequestParam(value="idCarro")String  idCarro) throws Exception{
+		
+		
+		carro_b=carro_BService.findByCarro_BIdCarro_b(idCarro);
+		carro_BService.delete(carro_b);
+
+
+		ModelAndView mav= new ModelAndView("redirect: verTodosLosPedidos");
 	
+
+		return mav;
+	}
+	
+	@RequestMapping(value="/cambioEstadoCarroPagado", method = RequestMethod.GET)
+	public ModelAndView cambioEstadoCarroPagado( @RequestParam(value="idCarro")String  idCarro) throws Exception{
+		
+		
+		carro_b=carro_BService.findByCarro_BIdCarro_b(idCarro);
+		if(carro_b.getPagado())
+		  carro_b.setPagado(false);
+		else carro_b.setPagado(true);
+		carro_BService.update(carro_b);
+
+
+		ModelAndView mav= new ModelAndView("redirect: verTodosLosPedidos");
+	
+
+		return mav;
+	}
+	@RequestMapping(value="/cambioEstadoCarroEnviado", method = RequestMethod.GET)
+	public ModelAndView cambioEstadoCarroEnviado( @RequestParam(value="idCarro")String  idCarro) throws Exception{
+		
+		
+		carro_b=carro_BService.findByCarro_BIdCarro_b(idCarro);
+		if(carro_b.getEnviado())
+		  carro_b.setEnviado(false);
+		else carro_b.setEnviado(true);
+		carro_BService.update(carro_b);
+
+
+		ModelAndView mav= new ModelAndView("redirect: verTodosLosPedidos");
+	
+
+		return mav;
+	}
 }
 
 	

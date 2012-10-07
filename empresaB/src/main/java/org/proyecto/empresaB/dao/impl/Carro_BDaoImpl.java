@@ -48,7 +48,7 @@ public class Carro_BDaoImpl extends CustomHibernateDaoSupport implements Carro_B
 	@SuppressWarnings("unchecked")
 	public Carro_B findByCarro_BIdCarro_b(String carro_BIdCarro_b) {
 		List<Carro_B> list = getHibernateTemplate().find(
-                     "from Carro_B where idcarros_b = ?",Integer.parseInt(carro_BIdCarro_b));
+                     "from Carro_B where idcarro_b = ?",Integer.parseInt(carro_BIdCarro_b));
 		return (Carro_B)list.get(0);
 	}
 	
