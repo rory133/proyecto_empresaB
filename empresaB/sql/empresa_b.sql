@@ -32,7 +32,7 @@ CREATE TABLE `producto_b` (
   `diametro_b` decimal(10,2) DEFAULT NULL,
   `precio_b` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`idproductoB`)
-) ENGINE=InnoDB AUTO_INCREMENT=906 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=907 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `producto_b` (
 
 LOCK TABLES `producto_b` WRITE;
 /*!40000 ALTER TABLE `producto_b` DISABLE KEYS */;
-INSERT INTO `producto_b` VALUES (903,'sifuncionara34',9000,33.00,333.00,33.00),(904,'otro nuevo',9970,33.00,33.00,33.00),(905,'otro mas',44,33.00,44.00,44.00);
+INSERT INTO `producto_b` VALUES (903,'sifuncionara34',7900,33.00,333.00,33.00),(904,'otro nuevo',9970,33.00,33.00,33.00),(905,'otro mas',50000,33.00,44.00,44.00),(906,'ultimo1',9900,11.00,11.00,11.00);
 /*!40000 ALTER TABLE `producto_b` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +64,7 @@ CREATE TABLE `usuario_b` (
   `ENABLED` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idusuarios_b`),
   UNIQUE KEY `login_usuario_b_UNIQUE` (`login_usuario_b`)
-) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `usuario_b` (
 
 LOCK TABLES `usuario_b` WRITE;
 /*!40000 ALTER TABLE `usuario_b` DISABLE KEYS */;
-INSERT INTO `usuario_b` VALUES (143,'23456789','jefe','jefe','jefon','nofej','jefe@llls.com','ROLE_ADMIN',1),(156,'34234321','otro','otro','otromas','otro','lsl@gl.com','ROLE_CLIENTE',1),(158,'12345678','jefe2','JEFE2','otro jefote','lsls','lsl@glsl.es','ROLE_ADMIN',1),(159,'23455422','muyjefe','muyjefe','JEFE34','LSLS','lslkdj@llss.es','ROLE_ADMIN',1),(160,'12345678','aaaa','aaaa','aaaa','aaaa','aaa@aa.aa','ROLE_CLIENTE',1);
+INSERT INTO `usuario_b` VALUES (143,'23456789','jefe','jefe','jefon','nofej','jefe@llls.com','ROLE_ADMIN',1),(156,'34234321','otro','otro','otromas','otro','lsl@gl.com','ROLE_CLIENTE',1),(158,'12345678','jefe2','JEFE2','otro jefote','lsls','lsl@glsl.es','ROLE_ADMIN',1),(159,'23455422','muyjefe','muyjefe','JEFE34','LSLS','lslkdj@llss.es','ROLE_ADMIN',1),(160,'12345678','aaaa','aaaa','aaaa','aaaa','aaa@aa.aa','ROLE_CLIENTE',1),(161,'12345654G','bbbb','bbbb','bbbb','bbbb','rory@gmail.com','ROLE_CLIENTE',1);
 /*!40000 ALTER TABLE `usuario_b` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +102,7 @@ CREATE TABLE `cliente_b` (
 
 LOCK TABLES `cliente_b` WRITE;
 /*!40000 ALTER TABLE `cliente_b` DISABLE KEYS */;
-INSERT INTO `cliente_b` VALUES (156,'2012-10-04','direccion','Alava','12345'),(160,'2012-10-04','aaaa','Alava','12345');
+INSERT INTO `cliente_b` VALUES (156,'2012-10-07','direccion','Barcelona','12345'),(160,'2012-10-04','aaaa','Alava','12345'),(161,'2012-10-07','ssss','Barcelona','08016');
 /*!40000 ALTER TABLE `cliente_b` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,9 +121,9 @@ CREATE TABLE `producto_bseleccionado` (
   PRIMARY KEY (`idproductoSeleccionado`,`idcarro_b`,`idproductoB`),
   KEY `fk_idproductoB` (`idproductoB`),
   KEY `fk_idcarro_b` (`idcarro_b`),
-  CONSTRAINT `fk_idcarro_b` FOREIGN KEY (`idcarro_b`) REFERENCES `carro_b` (`idcarro_b`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_idproductoB` FOREIGN KEY (`idproductoB`) REFERENCES `producto_b` (`idproductoB`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_idproductoB` FOREIGN KEY (`idproductoB`) REFERENCES `producto_b` (`idproductoB`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_idcarro_b` FOREIGN KEY (`idcarro_b`) REFERENCES `carro_b` (`idcarro_b`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +132,7 @@ CREATE TABLE `producto_bseleccionado` (
 
 LOCK TABLES `producto_bseleccionado` WRITE;
 /*!40000 ALTER TABLE `producto_bseleccionado` DISABLE KEYS */;
-INSERT INTO `producto_bseleccionado` VALUES (903,122,'900',54);
+INSERT INTO `producto_bseleccionado` VALUES (903,122,'900',54),(903,127,'1000',56),(903,128,'100',57),(906,129,'100',59);
 /*!40000 ALTER TABLE `producto_bseleccionado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +171,7 @@ DROP TABLE IF EXISTS `carro_b`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `carro_b` (
-  `idcarro_b` int(15) NOT NULL,
+  `idcarro_b` int(15) NOT NULL AUTO_INCREMENT,
   `fecha` date DEFAULT NULL,
   `pagado` tinyint(1) DEFAULT '0',
   `idcliente` int(15) DEFAULT NULL,
@@ -179,7 +179,7 @@ CREATE TABLE `carro_b` (
   PRIMARY KEY (`idcarro_b`),
   KEY `id_cliente_FK` (`idcliente`),
   CONSTRAINT `id_cliente_FK` FOREIGN KEY (`idcliente`) REFERENCES `cliente_b` (`idusuarios_b`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,7 +188,7 @@ CREATE TABLE `carro_b` (
 
 LOCK TABLES `carro_b` WRITE;
 /*!40000 ALTER TABLE `carro_b` DISABLE KEYS */;
-INSERT INTO `carro_b` VALUES (122,'2012-10-05',0,160,0),(123,'2012-10-05',0,160,0),(124,'2012-10-05',1,160,1),(125,'2012-10-05',1,160,1),(126,'2012-10-05',0,160,1);
+INSERT INTO `carro_b` VALUES (122,'2012-10-05',0,160,0),(123,'2012-10-05',1,160,0),(125,'2012-10-05',0,160,0),(126,'2012-10-05',1,160,1),(127,'2012-10-07',1,160,1),(128,'2012-10-07',0,156,0),(129,'2012-10-07',0,161,0);
 /*!40000 ALTER TABLE `carro_b` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -201,4 +201,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-10-05 19:52:51
+-- Dump completed on 2012-10-07 18:45:39

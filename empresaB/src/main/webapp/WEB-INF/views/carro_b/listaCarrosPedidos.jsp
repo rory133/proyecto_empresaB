@@ -136,9 +136,7 @@ window.open(URL,"miventana","width=900,height=400,menubar=no");
     
    <c:set var="loginCliente" value="${carro.loginCliente}"/>  
    <c:set var="clienteSesion" value="${pageContext.request.userPrincipal.name}"/>
-   <c:out value="${pageContext.request.userPrincipal.name}"/>
-   <c:out value="${loginCliente}"/>
-   <c:out value="${clienteSesion}"/>
+
    
     <c:if  test="${loginCliente==clienteSesion}">
  <%--   <c:if  test="${true}"> --%>
