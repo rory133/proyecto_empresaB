@@ -23,6 +23,7 @@ import org.proyecto.empresaB.model.Carro_B;
 import org.proyecto.empresaB.model.Cliente_B;
 import org.proyecto.empresaB.model.Producto_B;
 import org.proyecto.empresaB.model.Producto_BSeleccionado;
+import org.proyecto.empresaB.model.TarjetaCredito;
 import org.proyecto.empresaB.model.Usuario_B;
 import org.proyecto.empresaB.service.impl.Carro_BServiceImpl;
 import org.proyecto.empresaB.service.impl.Cliente_BServiceImpl;
@@ -63,7 +64,8 @@ public class CarroController {
 	@Autowired
 	Carro_BServiceImpl carro_BService;
 	
-	
+	@Autowired
+	private TarjetaCredito tarjetaCredito;
 	
 	
 	
@@ -442,6 +444,21 @@ public class CarroController {
 
 
 		ModelAndView mav= new ModelAndView("redirect: verTodosLosPedidos");
+	
+
+		return mav;
+	}
+	@RequestMapping(value="/pagarCarro", method = RequestMethod.GET)
+	public ModelAndView pagarCarro( @RequestParam(value="idCarro")String  idCarro) throws Exception{
+		
+		
+		carro_b=carro_BService.findByCarro_BIdCarro_b(idCarro);
+
+
+
+		ModelAndView mav= new ModelAndView("carro_b/datosTarjeta");
+		mav.addObject("tarjetaCredito", tarjetaCredito);
+		mav.addObject("carro", carro_b);
 	
 
 		return mav;

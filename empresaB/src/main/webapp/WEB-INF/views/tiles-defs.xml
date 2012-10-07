@@ -101,5 +101,10 @@
 		 <put-attribute name="title" value="TU CARRO"/>
 		 <put-attribute name="body" value="/WEB-INF/views/carro_b/verUnCarro.jsp"/>
       </definition>
+      
+      <definition name="carro_b/datosTarjeta" extends="base.soloBody">
+		 <put-attribute name="title" value="datos Tarjeta"/>
+		 <put-attribute name="body" value="/WEB-INF/views/carro_b/datosTarjeta.jsp"/>
+      </definition>
            
 </tiles-definitions>
