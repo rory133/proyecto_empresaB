@@ -14,6 +14,8 @@ import java.util.TreeSet;
 
 import org.proyecto.empresaB.util.ListaPedidos;
 import org.proyecto.empresaB.util.ListaProductosSeleccionados;
+import org.proyecto.empresaB.util.Mail;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -66,6 +68,10 @@ public class CarroController {
 	
 	@Autowired
 	private TarjetaCredito tarjetaCredito;
+	
+	
+	@Autowired
+	private Mail mail;
 	
 	
 	
@@ -439,7 +445,12 @@ public class CarroController {
 		carro_b=carro_BService.findByCarro_BIdCarro_b(idCarro);
 		if(carro_b.getEnviado())
 		  carro_b.setEnviado(false);
-		else carro_b.setEnviado(true);
+		else{ carro_b.setEnviado(true);
+		String content="apreciado usuario le informamos que el pago de su pedido numero "+idCarro+" ha sido enviado, en breve recibirá información de la agencia de transportes";
+		String subject="pedido: "+idCarro;		
+		mail.sendMail( carro_b.getCliente_b().getLogin_usuario_b(), content, carro_b.getCliente_b().getEmail_b(), subject);
+		
+		}
 		carro_BService.update(carro_b);
 
 

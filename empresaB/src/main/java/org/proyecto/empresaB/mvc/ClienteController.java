@@ -18,6 +18,7 @@ import org.proyecto.empresaB.model.Usuario_B;
 import org.proyecto.empresaB.service.impl.Cliente_BServiceImpl;
 import org.proyecto.empresaB.service.impl.Productos_BServiceImpl;
 import org.proyecto.empresaB.util.ListaProvincias;
+import org.proyecto.empresaB.util.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -46,6 +47,8 @@ public class ClienteController {
 	@Autowired
 	ServletContext context;
 	
+	@Autowired
+	private Mail mail;
 	
 
 
@@ -92,6 +95,14 @@ public class ClienteController {
 		/*return new ModelAndView("home");*/
 		
 		/*return new ModelAndView("producto_b/listaProductos");*/
+		
+		
+		String content="apreciado usuario gracias por darse de alta en nuestra página ahora pordrá realizar los pedidos que desee";
+		String subject="realizada correctamente alta en empresa_b";		
+		mail.sendMail(cliente_b.getLogin_usuario_b(), content, cliente_b.getEmail_b(), subject);
+		
+		
+		
 		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
 		return new ModelAndView("producto_b/listaProductos","productos", lista);
 		
