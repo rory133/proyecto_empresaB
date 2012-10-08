@@ -231,6 +231,7 @@ public class CarroController {
 			lista.setIdproducto_b(element.getProducto_b().getIdproductob());
 			lista.setIdProductoSeleccionado(element.getIdproductoSeleccionado());
 			lista.setNombreProducto(element.getProducto_b().getNombre_productoB());
+			lista.setPrecio_b(element.getProducto_b().getPrecio_b());
 			listaProductos.add(lista);
 			
 		}
@@ -269,6 +270,7 @@ public class CarroController {
 			lista.setIdproducto_b(element.getProducto_b().getIdproductob());
 			lista.setIdProductoSeleccionado(element.getIdproductoSeleccionado());
 			lista.setNombreProducto(element.getProducto_b().getNombre_productoB());
+			lista.setPrecio_b(element.getProducto_b().getPrecio_b());
 			listaProductos.add(lista);
 			
 		}
@@ -367,6 +369,7 @@ public class CarroController {
 				lista.setIdproducto_b(element.getProducto_b().getIdproductob());
 				lista.setIdProductoSeleccionado(element.getIdproductoSeleccionado());
 				lista.setNombreProducto(element.getProducto_b().getNombre_productoB());
+				lista.setPrecio_b(element.getProducto_b().getPrecio_b());
 				listaProductos.add(lista);			
 			}
 			listaCarrosPedidos.setListaProductosSeleccionados(listaProductos);
@@ -397,6 +400,7 @@ public class CarroController {
 			lista.setIdproducto_b(element.getProducto_b().getIdproductob());
 			lista.setIdProductoSeleccionado(element.getIdproductoSeleccionado());
 			lista.setNombreProducto(element.getProducto_b().getNombre_productoB());
+			lista.setPrecio_b(element.getProducto_b().getPrecio_b());
 			listaProductos.add(lista);
 			
 		}
@@ -460,7 +464,7 @@ public class CarroController {
 		return mav;
 	}
 	@RequestMapping(value="/pagarCarro", method = RequestMethod.GET)
-	public ModelAndView pagarCarro( @RequestParam(value="idCarro")String  idCarro) throws Exception{
+	public ModelAndView pagarCarro( @RequestParam(value="idCarro")String  idCarro,@RequestParam(value="total")String  total) throws Exception{
 		
 		
 		carro_b=carro_BService.findByCarro_BIdCarro_b(idCarro);
@@ -470,6 +474,7 @@ public class CarroController {
 		ModelAndView mav= new ModelAndView("carro_b/datosTarjeta");
 		mav.addObject("tarjetaCredito", tarjetaCredito);
 		mav.addObject("idCarro", carro_b);
+		mav.addObject("total", total);
 		return mav;
 	}
 }

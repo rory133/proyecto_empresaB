@@ -1,5 +1,7 @@
 package org.proyecto.empresaB.util;
 
+import java.math.BigDecimal;
+
 public class ListaProductosSeleccionados {
 	
 	String nombreProducto;
@@ -7,6 +9,8 @@ public class ListaProductosSeleccionados {
 	Integer cantidad;
 	Integer idProductoSeleccionado;
 	Integer idproducto_b;
+	BigDecimal precio_b;
+	
 	
 	
 	
@@ -46,6 +50,12 @@ public class ListaProductosSeleccionados {
 	}
 	public void setIdproducto_b(Integer idproducto_b) {
 		this.idproducto_b = idproducto_b;
+	}
+	public BigDecimal getPrecio_b() {
+		return precio_b;
+	}
+	public void setPrecio_b(BigDecimal precio_b) {
+		this.precio_b = precio_b;
 	}
 	
 

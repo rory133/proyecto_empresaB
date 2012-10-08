@@ -41,7 +41,8 @@ h4 {color:#B40431;}
 
 
 <c:set var="fila" value="${0}" scope="page" />
-
+<c:set var="subtotal" value="${0}" scope="page" />
+<c:set var="total" value="${0}" scope="page" />
 
 <table class="table">
 <tr>
@@ -49,6 +50,8 @@ h4 {color:#B40431;}
 	<th>IMAGEN</th>
     <th>CODIGO PRODUCTO</th>
     <th>CANTIDAD PEDIDA</th>
+    <th>PRECIO</th>
+    <th>SUBTOTAL</th>
     <th>ELIMINAR</th>
 
   
@@ -83,6 +86,17 @@ h4 {color:#B40431;}
         <td>
                 ${productosSeleccionados.cantidad}
         </td>
+         <td>
+                 ${productosSeleccionados.precio_b}
+         
+         </td>
+         
+        <td>
+                 ${productosSeleccionados.precio_b*productosSeleccionados.cantidad}
+                 <c:set var="total" value="${total+(productosSeleccionados.precio_b*productosSeleccionados.cantidad)}" scope="page" />
+         
+         </td>
+        
         <td>
         <c:url var="editUrl" value="/carro/eliminarProductoCarro" />
 			<a href="${editUrl}?idProductoSeleccionado=${productosSeleccionados.idProductoSeleccionado}&idProducto=${productosSeleccionados.idproducto_b}&cantidad=${productosSeleccionados.cantidad}"    onclick="return confirm('¿Quieres borrar este producto?')" onmouseover="window.status = 'Pulse para eliminar el Producto del carro'; return true" onmouseout="window.status=''"> <span title='Pulse para eliminar el Producto del carro'> <img border=0 src="../resources/imagenes/borrar.jpg" height=68 width=53> </a>
@@ -91,9 +105,11 @@ h4 {color:#B40431;}
         </td>
 
         <td>
+        <c:if  test="${fila==0}">
         <c:url var="editUrl" value="/carro/pagarCarro" />
-			<a href="${editUrl}?idCarro=${productosSeleccionados.idCarro}"    onclick="return confirm('¿Quieres realizar pago?')" onmouseover="window.status = 'Pulse para realizar pago'; return true" onmouseout="window.status=''"> <span title='Pulse para realizar pago'> <img border=0 src="../resources/imagenes/pagar.jpg" height=68 width=53> </a>
+			<a href="${editUrl}?idCarro=${productosSeleccionados.idCarro}&total=${total}"    onclick="return confirm('¿Quieres realizar pago?')" onmouseover="window.status = 'Pulse para realizar pago'; return true" onmouseout="window.status=''"> <span title='Pulse para realizar pago'> <img border=0 src="../resources/imagenes/pagar.jpg" height=68 width=53> </a>
 			
+		</c:if>
                
         </td>
 
@@ -124,7 +140,11 @@ h4 {color:#B40431;}
 	<c:set var="fila" value="${fila+1}" scope="page" />
     </tr>
 </c:forEach>
+
 </table>
+
+ <h4>total a pagar:  <c:out value="${total}" /></h4>
+ 
 </c:if>
 <c:if  test="${empty productosSeleccionados}">
 		<h4>el carro esta vacio</h4>	
