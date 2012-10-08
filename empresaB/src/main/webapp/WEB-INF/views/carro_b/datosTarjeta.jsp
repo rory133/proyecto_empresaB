@@ -20,7 +20,8 @@ h4 {color:#B40431;}
 
 </head>
 <body>
-<form:form method="POST" modelAttribute="tarjetaCredito" id="tarjetaCredito" type="producto_b" action="validarTarjeta" enctype="multipart/form-data">
+<%-- <form:form method="POST" modelAttribute="tarjetaCredito" id="tarjetaCredito" type="tarjetaCredito" action="validarTarjeta" enctype="multipart/form-data"> --%>
+<form:form method="POST" modelAttribute="tarjetaCredito" id="tarjetaCredito" type="tarjetaCredito" action="${pageContext.request.contextPath}/tarjeta/validarTarjeta" enctype="multipart/form-data">
 <fieldset>
 <table class="table">
 <h1>introduzca los datos de la tarjeta:</h1>
@@ -55,8 +56,10 @@ h4 {color:#B40431;}
 					<small>xxxx</small>
 				</td>
 		</tr>
+		
+		<td><form:hidden path="idCarro" id="idCarro" value="${idCarro.idcarro_b}"/></td>
 
-
+		<td><input name="tarjetaCredito" type="submit" value="realizar pago" /></td>
 
 
 </table>	

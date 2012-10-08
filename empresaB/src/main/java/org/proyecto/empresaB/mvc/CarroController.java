@@ -458,9 +458,7 @@ public class CarroController {
 
 		ModelAndView mav= new ModelAndView("carro_b/datosTarjeta");
 		mav.addObject("tarjetaCredito", tarjetaCredito);
-		mav.addObject("carro", carro_b);
-	
-
+		mav.addObject("idCarro", carro_b);
 		return mav;
 	}
 }
