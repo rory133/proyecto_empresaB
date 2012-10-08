@@ -1,5 +1,6 @@
 package org.proyecto.empresaB.mvc;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -35,7 +36,7 @@ public class tarjetaController {
 
 	
 	@RequestMapping(value="/validarTarjeta", method = RequestMethod.POST)
-	public ModelAndView validarTarjeta(@Valid @ModelAttribute("tarjetaCredito")TarjetaCredito tarjetaCredito,  BindingResult  result, @RequestParam(value="idCarro")String  idCarro)throws Exception{
+	public ModelAndView validarTarjeta(@Valid @ModelAttribute("tarjetaCredito")TarjetaCredito tarjetaCredito,  BindingResult  result, @RequestParam(value="idCarro")String  idCarro, HttpSession session)throws Exception{
 
 		carro_b=carro_BService.findByCarro_BIdCarro_b(idCarro);
 		
@@ -50,6 +51,7 @@ public class tarjetaController {
 			}
 		carro_b.setPagado(true);
 		carro_BService.update(carro_b);
+		session.removeAttribute("carro_b");
 		ModelAndView mav= new ModelAndView("redirect: ../../../carro/verTodosLosPedidos");
 		return mav;
 		
