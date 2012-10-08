@@ -46,7 +46,7 @@
 		</tr>
 		<tr>
 				<th><label for="email_b">e-mail :</label></th>
-				<td><form:input path="email_b" maxlength="45" id="email_b"/>
+				<td><form:input path="email_b" maxlength="75" id="email_b"/>
 					<form:errors path="email_b" cssClass="error" />
 				</td>
 		</tr>

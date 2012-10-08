@@ -8,6 +8,7 @@ import org.proyecto.empresaB.model.Carro_B;
 import org.proyecto.empresaB.model.Producto_B;
 import org.proyecto.empresaB.model.TarjetaCredito;
 import org.proyecto.empresaB.service.impl.Carro_BServiceImpl;
+import org.proyecto.empresaB.util.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,8 @@ public class tarjetaController {
 	@Autowired
 	Carro_BServiceImpl carro_BService;
 	
+	@Autowired
+	private Mail mail;
 	
 	protected static Logger logger = Logger.getLogger("*en tarjetaController*");
 	
@@ -51,6 +54,12 @@ public class tarjetaController {
 			}
 		carro_b.setPagado(true);
 		carro_BService.update(carro_b);
+		
+		String content="apreciado usuario le informamos que el pago de su pedido numero "+idCarro+" se ha realizado con exito, en breve le informaremos al realziar el envio";
+		String subject="pedido: "+idCarro;		
+		mail.sendMail( carro_b.getCliente_b().getLogin_usuario_b(), content, carro_b.getCliente_b().getEmail_b(), subject);
+		
+		
 		session.removeAttribute("carro_b");
 		ModelAndView mav= new ModelAndView("redirect: ../../../carro/verTodosLosPedidos");
 		return mav;
