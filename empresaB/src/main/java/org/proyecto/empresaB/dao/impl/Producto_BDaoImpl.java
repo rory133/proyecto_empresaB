@@ -44,7 +44,8 @@ public class Producto_BDaoImpl extends CustomHibernateDaoSupport implements Prod
 
 
 	public void update(Producto_B producto_B) {
-		getHibernateTemplate().update(producto_B);
+            this.sessionFactory.getCurrentSession().update(producto_B);
+		//getHibernateTemplate().update(producto_B);
 		System.out.println("en update productoB");
 		System.out.println("nombre productoB productoB: "+ producto_B.getNombre_productoB());
 		//this.sessionFactory.getCurrentSession().update(producto_B);
@@ -52,7 +53,8 @@ public class Producto_BDaoImpl extends CustomHibernateDaoSupport implements Prod
 	}
 
 	public void delete(Producto_B producto_B) {
-		getHibernateTemplate().delete(producto_B);
+            this.sessionFactory.getCurrentSession().delete(producto_B);
+	//	getHibernateTemplate().delete(producto_B);
 		
 	}
 	@SuppressWarnings("unchecked")
@@ -61,8 +63,8 @@ public class Producto_BDaoImpl extends CustomHibernateDaoSupport implements Prod
 /*		List<Producto_B> list = getHibernateTemplate().find(
 				"from Producto_B where IDPRODUCTOB = ?",Integer.parseInt(producto_BIdProducto_b)); 
 		return (Producto_B)list.get(0);*/
-		
-		List<Producto_B> list = this.getSessionFactory().getCurrentSession().createCriteria (Producto_B.class ).add(Restrictions.eq("idproductob",Integer.parseInt(producto_BIdProducto_b))).list();
+		List<Producto_B> list =sessionFactory.getCurrentSession().createCriteria (Producto_B.class ).add(Restrictions.eq("idproductob",Integer.parseInt(producto_BIdProducto_b))).list();
+		//List<Producto_B> list = this.getSessionFactory().getCurrentSession().createCriteria (Producto_B.class ).add(Restrictions.eq("idproductob",Integer.parseInt(producto_BIdProducto_b))).list();
 		return (Producto_B)list.get(0);
 		
 		
@@ -70,17 +72,21 @@ public class Producto_BDaoImpl extends CustomHibernateDaoSupport implements Prod
 	
 	@SuppressWarnings("unchecked")
 	public Producto_B findByProducto_B_nombre(String producto_B_nombre) {
-		List <Producto_B> list = getHibernateTemplate().find(
-                "from Producto_B where NOMBRE_PRODUCTOB = ?",producto_B_nombre);
+		//List <Producto_B> list = getHibernateTemplate().find(
+                List <Producto_B> list = sessionFactory.getCurrentSession().createCriteria (Producto_B.class )
+                        .add(Restrictions.eq("NOMBRE_PRODUCTOB",producto_B_nombre))
+                        .list();
+                //from Producto_B where NOMBRE_PRODUCTOB = ?",producto_B_nombre);
 		return (Producto_B)list.get(0);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Producto_B> findAll (){
 
-		  return (List<Producto_B>) this.getSessionFactory().getCurrentSession().createCriteria (Producto_B.class ).list();
+		//  return (List<Producto_B>) this.getSessionFactory().getCurrentSession().createCriteria (Producto_B.class ).list();
    
-		
+		return sessionFactory.getCurrentSession().createCriteria (Producto_B.class )
+                                     .list();
 	}
 
 }
